@@ -67,6 +67,12 @@
     <Compile Include="Entities\AdCreativeTemplateURLSpec.cs" />
     <Compile Include="Entities\AdCreativeWebData.cs" />
     <Compile Include="Entities\AdCreativeWindowsPhoneData.cs" />
+    <Compile Include="Entities\AdsPixel.cs" />
+    <Compile Include="Entities\CustomAudience.cs" />
+    <Compile Include="Entities\CustomAudienceDataSource.cs" />
+    <Compile Include="Entities\CustomAudiencePermission.cs" />
+    <Compile Include="Entities\CustomAudienceStatus.cs" />
+    <Compile Include="Entities\LookalikeSpec.cs" />
     <Compile Include="Enumerations\Api\AdAccountStatus.cs" />
     <Compile Include="Enumerations\Api\AdAccountStoredBalanceStatus.cs" />
     <Compile Include="Enumerations\Api\AdAccountTaxIdStatus.cs" />
@@ -90,7 +96,10 @@
     <Compile Include="Enumerations\Api\CreativeCallToActionType.cs" />
     <Compile Include="Enumerations\Api\CreativeStatus.cs" />
     <Compile Include="Enumerations\Api\CreativeType.cs" />
+    <Compile Include="Enumerations\Api\CustomAudienceDataSourceSubType.cs" />
+    <Compile Include="Enumerations\Api\CustomAudienceDataSourceType.cs" />
     <Compile Include="Enumerations\Api\GroupPrivacy.cs" />
+    <Compile Include="Enumerations\Api\LookalikeAudienceType.cs" />
     <Compile Include="Enumerations\Api\OptimizationGoal.cs" />
     <Compile Include="Enumerations\Api\PostStatus.cs" />
     <Compile Include="Enumerations\Api\PostType.cs" />
