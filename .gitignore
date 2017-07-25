@@ -1,0 +1,5 @@
+*.suo
+FacebookApi/packages/
+FacebookApi/FacebookApi/bin/
+FacebookApi/FacebookApi/obj/
+*.user
