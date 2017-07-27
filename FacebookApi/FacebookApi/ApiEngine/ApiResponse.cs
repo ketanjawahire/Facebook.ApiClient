@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FacebookApi.Constants;
 using RestSharp;
-using FacebookApi.IApiEngine;
+using FacebookApi.Interfaces.IApiEngine;
 
 namespace FacebookApi.ApiEngine
 {
@@ -45,6 +45,11 @@ namespace FacebookApi.ApiEngine
             tempParameter = headerParameters.FirstOrDefault(e => e.Name.Equals(FacebookApiResponceHeaders.ETAG));
             if (tempParameter != null)
                 ETag = tempParameter.Value.ToString();
+        }
+
+        public TEntity GetApiResult()
+        {
+            return Result;
         }
     }
 }

@@ -13,7 +13,7 @@ namespace FacebookApi.Entities
         /// Ad Label ID
         /// </summary>
         [DeserializeAs(Name = "id")]
-        public long Id { get; set; }
+        public long? Id { get; set; }
 
         /// <summary>
         /// Ad Account
@@ -25,7 +25,7 @@ namespace FacebookApi.Entities
         /// Created time
         /// </summary>
         [DeserializeAs(Name = "created_time")]
-        public DateTime CreatedTime { get; set; }
+        public string CreatedTime { get; set; }
 
         /// <summary>
         /// Ad Label name
@@ -37,6 +37,6 @@ namespace FacebookApi.Entities
         /// Updated time
         /// </summary>
         [DeserializeAs(Name = "updated_time")]
-        public DateTime? UpdatedTime { get; set; }
+        public string UpdatedTime { get; set; }
     }
 }

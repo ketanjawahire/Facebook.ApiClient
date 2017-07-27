@@ -15,7 +15,7 @@ namespace FacebookApi.Entities
         /// The index (zero based) of the image from the additionalimages array to use as the ad image for a dynamic product ad
         /// </summary>
         [DeserializeAs(Name = "additional_image_index")]
-        public int AdditinalImageIndex { get; set; }
+        public int? AdditinalImageIndex { get; set; }
 
         /// <summary>
         /// Native deeplinks attached to the post
@@ -27,7 +27,7 @@ namespace FacebookApi.Entities
         /// The style of the attachment.
         /// </summary>
         [DeserializeAs(Name = "attachment_style")]
-        public AttachmentStyle AttachmentStyle { get; set; }
+        public AttachmentStyle? AttachmentStyle { get; set; }
 
         /// <summary>
         /// The branded content sponsor page id.
@@ -45,7 +45,7 @@ namespace FacebookApi.Entities
         /// Link caption. Overwrites the caption under the title in the link on Facebook.
         /// </summary>
         [DeserializeAs(Name = "caption")]
-        public AdCreativeLinkData Caption { get; set; }
+        public string Caption { get; set; }
 
         /// <summary>
         /// A 2-10 element array of link objects required for carousel ads
@@ -69,7 +69,7 @@ namespace FacebookApi.Entities
         /// Whether to force the post to render in a single link format
         /// </summary>
         [DeserializeAs(Name = "force_single_link")]
-        public bool ForceSingleLink { get; set; }
+        public bool? ForceSingleLink { get; set; }
 
         /// <summary>
         /// How to the image should be cropped. Different placements use different crop specs
@@ -99,13 +99,13 @@ namespace FacebookApi.Entities
         /// If set to false, removes the end card which displays the page icon. Default is true. Used by carousel ads.
         /// </summary>
         [DeserializeAs(Name = "multi_share_end_card")]
-        public bool MultiShareEndCard { get; set; }
+        public bool? MultiShareEndCard { get; set; }
 
         /// <summary>
         /// If set to true, automatically select and order images and links. Default is true. Used by carousel ads.
         /// </summary>
         [DeserializeAs(Name = "multi_share_optimized")]
-        public bool MultiShareOptimized { get; set; }
+        public bool? MultiShareOptimized { get; set; }
 
         /// <summary>
         /// Name of the link. Overwrites the title of the link preview

@@ -51,10 +51,10 @@ namespace FacebookApi.Entities
         public List<string> TargetCountries { get; set; }
 
         /// <summary>
-        /// Type of the lookalike audience: <see cref="LookalikeAudienceType.similarity"/> or <see cref="LookalikeAudienceType.reach"/>
+        /// Type of the lookalike audience
         /// </summary>
         [DeserializeAs(Name = "type")]
-        public LookalikeAudienceType? Type { get; set; }
+        public string Type { get; set; }
 
     }
 }

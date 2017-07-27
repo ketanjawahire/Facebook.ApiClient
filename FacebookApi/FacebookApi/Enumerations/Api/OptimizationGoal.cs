@@ -98,6 +98,9 @@ namespace FacebookApi.Enums.Api
         /// <summary>
         /// Optimize for people more likely to watch videos
         /// </summary>
-        VIDEO_VIEWS
+        VIDEO_VIEWS,
+
+        APP_DOWNLOADS,
+        LANDING_PAGE_VIEWS
     }
 }
