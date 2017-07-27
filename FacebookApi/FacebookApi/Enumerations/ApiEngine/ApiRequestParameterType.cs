@@ -6,6 +6,5 @@
         UrlSegment = 2,
         HttpHeader = 3,
         RequestBody = 4,
-        QueryString = 5
     }
 }

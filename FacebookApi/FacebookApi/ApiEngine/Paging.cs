@@ -1,4 +1,4 @@
-﻿using FacebookApi.IApiEngine;
+﻿using FacebookApi.Interfaces.IApiEngine;
 using RestSharp.Deserializers;
 
 namespace FacebookApi.ApiEngine

@@ -1,4 +1,4 @@
-﻿namespace FacebookApi.IApiEngine
+﻿namespace FacebookApi.Interfaces.IApiEngine
 {
     public interface IPaging
     {

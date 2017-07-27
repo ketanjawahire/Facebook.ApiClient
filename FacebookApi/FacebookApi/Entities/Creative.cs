@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using FacebookApi.Enums;
 using FacebookApi.Enums.Api;
 using RestSharp.Deserializers;
@@ -14,19 +17,19 @@ namespace FacebookApi.Entities
         /// The ID of this creative
         /// </summary>
         [DeserializeAs(Name = "id")]
-        public long Id { get; set; }
+        public long? Id { get; set; }
 
         /// <summary>
         /// Account ID
         /// </summary>
         [DeserializeAs(Name = "account_id")]
-        public long AccountId { get; set; }
+        public long? AccountId { get; set; }
 
         /// <summary>
         /// The actor ID (<see cref="Page.Id"/>) of this creative.
         /// </summary>
         [DeserializeAs(Name = "actor_id")]
-        public long ActorId { get; set; }
+        public long? ActorId { get; set; }
 
         /// <summary>
         /// <see cref="AdLabel"/>s that are associated with this creative
@@ -206,38 +209,11 @@ namespace FacebookApi.Entities
 
         public static IList<string> GetApiSelectors()
         {
-            var apiSelectors = new List<string>()
-            {
-                "id",
-                "adlabels",
-                "applink_treatment",
-                "body",
-                "call_to_action_type",
-                "effective_object_story_id",
-                "image_crops",
-                "image_hash",
-                "image_url",
-                "instagram_actor_id",
-                "instagram_permalink_url",
-                "instagram_story_id",
-                "link_og_id",
-                "link_url",
-                "name",
-                "object_id",
-                "object_story_id",
-                "object_story_spec",
-                "object_type",
-                "object_url",
-                "platform_customizations",
-                "product_set_id",
-                "run_status",
-                "template_url",
-                "thumbnail_url",
-                "title",
-                "url_tags"
-            };
+            var prop = typeof(Creative).GetProperties()
+                .Select(e => e.GetCustomAttributes(typeof(DeserializeAsAttribute), true)).Where(e => e.Length > 0)
+                .Select(e => e.First() as DeserializeAsAttribute).Where(e => e != null).Select(e => e.Name);
 
-            return apiSelectors;
+            return prop.ToList();
         }
     }
 }

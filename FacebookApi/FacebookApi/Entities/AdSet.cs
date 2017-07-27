@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FacebookApi.Enums;
 using FacebookApi.Enums.Api;
 using RestSharp.Deserializers;
@@ -14,10 +15,16 @@ namespace FacebookApi.Entities
     public class AdSet
     {
         /// <summary>
+        /// Ad set ID
+        /// </summary>
+        [DeserializeAs(Name = "id")]
+        public long? Id { get; set; }
+
+        /// <summary>
         /// Ad Account ID
         /// </summary>
         [DeserializeAs(Name = "account_id")]
-        public long AccountId { get; set; }
+        public long? AccountId { get; set; }
 
         /// <summary>
         /// Ad Labels associated with this ad set
@@ -32,6 +39,12 @@ namespace FacebookApi.Entities
         public string AdSetSchedule { get; set; }
 
         /// <summary>
+        /// Conversion attribution spec used for attributing conversions for optimization. Supported window lengths differ by optimization goal and campaign objective
+        /// </summary>
+        [DeserializeAs(Name = "attribution_spec")]
+        public string AttributionSpec { get; set; }
+
+        /// <summary>
         /// Bid amount for this ad set, defined as your true value bid based on <see cref="OptimizationGoal"/>
         /// </summary>
         [DeserializeAs(Name = "bid_amount")]
@@ -41,7 +54,7 @@ namespace FacebookApi.Entities
         /// Map of bid objective to bid value. This field is not available if is_autobid is true.
         /// </summary>
         [DeserializeAs(Name = "bid_info")]
-        public string BidInfo { get; set; }
+        public Dictionary<string, int> BidInfo { get; set; }
 
         /// <summary>
         /// The billing event that this adset is using
@@ -65,25 +78,25 @@ namespace FacebookApi.Entities
         /// Campaign ID
         /// </summary>
         [DeserializeAs(Name = "campaign_id")]
-        public string CampaignId { get; set; }
-
-        /// <summary>
-        /// Created time
-        /// </summary>
-        [DeserializeAs(Name = "created_time")]
-        public DateTime? CreatedTime { get; set; }
+        public long? CampaignId { get; set; }
 
         /// <summary>
         /// The status set at the ad set level. It can be different from the effective status due to its parent campaign. Prefer using 'status' instead of this.
         /// </summary>
         [DeserializeAs(Name = "configured_status")]
-        public AdsetConfiguredStatus ConfiguredStatus { get; set; }
+        public AdsetConfiguredStatus? ConfiguredStatus { get; set; }
+
+        /// <summary>
+        /// Created time
+        /// </summary>
+        [DeserializeAs(Name = "created_time")]
+        public string CreatedTime { get; set; }
 
         /// <summary>
         /// Order of the adgroup sequence to be shown to users
         /// </summary>
         [DeserializeAs(Name = "creative_sequence")]
-        public string CreativeSequence { get; set; }
+        public List<string> CreativeSequence { get; set; }
 
         /// <summary>
         /// The daily budget of the set defined in your account currency.
@@ -101,7 +114,13 @@ namespace FacebookApi.Entities
         /// End time, in UTC UNIX timestamp
         /// </summary>
         [DeserializeAs(Name = "end_time")]
-        public DateTime? EndTime { get; set; }
+        public string EndTime { get; set; }
+
+        /// <summary>
+        /// The number of times this ad will show per day.
+        /// </summary>
+        [DeserializeAs(Name = "frequency_cap")]
+        public int? FrequencyCap { get; set; }
 
         /// <summary>
         /// The number of hours that will pass before resetting the frequency capping.
@@ -113,25 +132,25 @@ namespace FacebookApi.Entities
         /// An array of frequency control specs for this ad set. 
         /// </summary>
         [DeserializeAs(Name = "frequency_control_specs")]
-        public string FrequencyControlSpec { get; set; }
+        public List<AdCampaignFrequencyControlSpecs> FrequencyControlSpec { get; set; }
 
         /// <summary>
-        /// Ad set ID
+        /// The Instagram actor id used for DCO ad on Instagram.
         /// </summary>
-        [DeserializeAs(Name = "id")]
-        public long Id { get; set; }
-
-        /// <summary>
-        /// The number of times this ad will show per day.
-        /// </summary>
-        [DeserializeAs(Name = "frequency_cap")]
-        public int? FrequencyCap { get; set; }
+        [DeserializeAs(Name = "instagram_actor_id")]
+        public long? InstagramActorId { get; set; }
 
         /// <summary>
         /// Whether the advertiser express the intent to bid automatically. This field is not available if <see cref="BidInfo"/> or <see cref="BidAmount"/> is returned.
         /// </summary>
         [DeserializeAs(Name = "is_autobid")]
-        public bool IsAutoBid { get; set; }
+        public bool? IsAutoBid { get; set; }
+
+        /// <summary>
+        /// Whether the advertiser express the intent to use average price pacing,
+        /// </summary>
+        [DeserializeAs(Name = "is_average_price_pacing")]
+        public bool? IsAveragePricePacing { get; set; }
 
         /// <summary>
         /// The lifetime budget of the set defined in your <see cref="AdAccount.Currency"/>.
@@ -167,10 +186,7 @@ namespace FacebookApi.Entities
         /// Defines the pacing type, standard or using ad scheduling
         /// </summary>
         [DeserializeAs(Name = "pacing_type")]
-        public string PacingType { get; set; }
-
-        [DeserializeAs(Name = "product_ad_behavior")]
-        public string ProductAdBehaviour { get; set; }
+        public List<string> PacingType { get; set; }
 
         /// <summary>
         /// The object this ad set is promoting across all its ads
@@ -183,7 +199,13 @@ namespace FacebookApi.Entities
         /// <para>(This field is not included in redownload mode.)</para>
         /// </summary>
         [DeserializeAs(Name = "recommendations")]
-        public string Recommendations { get; set; }
+        public List<AdRecommendation> Recommendations { get; set; }
+
+        /// <summary>
+        /// If this field is true, your daily spend may be more than your daily budget while your weekly spend will not exceed 7 times your daily budget. 
+        /// </summary>
+        [DeserializeAs(Name = "recurring_budget_semantics")]
+        public bool? RecurringBudgetSemantics { get; set; }
 
         /// <summary>
         /// Reach and frequency prediction ID
@@ -201,14 +223,14 @@ namespace FacebookApi.Entities
         /// Start time, in UTC UNIX timestamp
         /// </summary>
         [DeserializeAs(Name = "start_time")]
-        public DateTime? StartTime { get; set; }
+        public string StartTime { get; set; }
 
         /// <summary>
         /// The status set at the ad set level. It can be different from the effective status due to its parent campaign. 
         /// <para>The field returns the same value as 'configured_status', and is the suggested one to use.</para>
         /// </summary>
         [DeserializeAs(Name = "status")]
-        public AdsetStatus Status { get; set; }
+        public AdsetStatus? Status { get; set; }
 
         /// <summary>
         /// Targeting
@@ -242,7 +264,7 @@ namespace FacebookApi.Entities
         /// Updated time
         /// </summary>
         [DeserializeAs(Name = "updated_time")]
-        public DateTime? UpdatedTime { get; set; }
+        public string UpdatedTime { get; set; }
 
         /// <summary>
         /// If set, allows Mobile App Engagement ads to optimize for <see cref="Enums.Api.OptimizationGoal.LINK_CLICKS"/>
@@ -252,50 +274,18 @@ namespace FacebookApi.Entities
 
         public static IList<string> GetApiSelectors(bool isIncludeCampaignFields)
         {
-            var apiSelectors = new List<string>
+            var apiFields = typeof(AdSet).GetProperties()
+                .Select(e => e.GetCustomAttributes(typeof(DeserializeAsAttribute), true)).Where(e => e.Length > 0)
+                .Select(e => e.First() as DeserializeAsAttribute).Where(e => e != null).Select(e => e.Name).ToList();
+
+
+            if (isIncludeCampaignFields)
             {
-                "account_id",
-                "adlabels",
-                "adset_schedule",
-                "bid_amount",
-                "bid_info",
-                "billing_event",
-                "budget_remaining",
-                "campaign_id",
-                "created_time",
-                "configured_status",
-                "creative_sequence",
-                "daily_budget",
-                "effective_status",
-                "end_time",
-                "frequency_cap_reset_period",
-                "frequency_control_specs",
-                "id",
-                "frequency_cap",
-                "is_autobid",
-                "lifetime_budget",
-                "lifetime_frequency_cap",
-                "lifetime_imps",
-                "name",
-                "optimization_goal",
-                "pacing_type",
-                "product_ad_behavior",
-                "promoted_object",
-                "recommendations",
-                "rf_prediction_id",
-                "rtb_flag",
-                "start_time",
-                "status",
-                "targeting",
-                "updated_time",
-                isIncludeCampaignFields
-                    ? $"campaign.fields({string.Join(",", Campaign.GetApiSelectors())})"
-                    : "campaign"
-            };
+                apiFields.Remove("campaign");
+                apiFields.Add($"campaign.fields({string.Join(",", Campaign.GetApiSelectors())})");
+            }
 
-
-            return apiSelectors;
+            return apiFields;
         }
-
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FacebookApi.Enums;
 using FacebookApi.Enums.Api;
 using FacebookApi.Exceptions;
@@ -17,13 +18,13 @@ namespace FacebookApi.Entities
         /// The ID of this ad.
         /// </summary>
         [DeserializeAs(Name = "id")]
-        public long Id { get; set; }
+        public long? Id { get; set; }
 
         /// <summary>
         /// The ID of the ad account that this ad belongs to.
         /// </summary>
         [DeserializeAs(Name = "account_id")]
-        public long AccountId { get; set; }
+        public long? AccountId { get; set; }
 
         /// <summary>
         /// The review feedback for this ad after it is reviewed.
@@ -47,7 +48,7 @@ namespace FacebookApi.Entities
         /// ID of the ad set that contains the ad
         /// </summary>
         [DeserializeAs(Name = "adset_id")]
-        public long AdsetId { get; set; }
+        public long? AdsetId { get; set; }
 
         /// <summary>
         /// Bid amount for this ad which will be used in auction instead of the ad set bid_amount, if specified. Any updates to the ad set bid_amount will overwrite this value with the new ad set value.
@@ -65,7 +66,7 @@ namespace FacebookApi.Entities
         /// <para>bid_type=CPA, bid_info={'ACTIONS':&lt;value&gt;}</para>
         /// </example>
         [DeserializeAs(Name = "bid_info")]
-        public Dictionary<string,int> BidInfo { get; set; }
+        public Dictionary<string, int> BidInfo { get; set; }
 
         /// <summary>
         /// Bid type
@@ -83,13 +84,13 @@ namespace FacebookApi.Entities
         /// ID of the ad campaign that contains this ad
         /// </summary>
         [DeserializeAs(Name = "campaign_id")]
-        public long CampaignId { get; set; }
+        public long? CampaignId { get; set; }
 
         /// <summary>
         /// The configured status of the ad. Prefer using 'status' instead of this.
         /// </summary>
         [DeserializeAs(Name = "configured_status")]
-        public AdConfiguredStatus ConfiguredStatus { get; set; }
+        public AdConfiguredStatus? ConfiguredStatus { get; set; }
 
         /// <summary>
         /// Conversion specs
@@ -102,7 +103,7 @@ namespace FacebookApi.Entities
         /// Created time
         /// </summary>
         [DeserializeAs(Name = "created_time")]
-        public DateTime? CreatedTime { get; set; }
+        public string CreatedTime { get; set; }
 
         /// <summary>
         /// Ad creative
@@ -144,7 +145,7 @@ namespace FacebookApi.Entities
         /// The source ad id that this ad is copied from
         /// </summary>
         [DeserializeAs(Name = "source_ad_id")]
-        public Ad SourceAdId { get; set; }
+        public long? SourceAdId { get; set; }
 
         /// <summary>
         /// The configured status of the ad. The field returns the same value as 'configured_status', and is the suggested one to use.
@@ -156,49 +157,39 @@ namespace FacebookApi.Entities
         /// Tracking specs
         /// </summary>
         [DeserializeAs(Name = "tracking_specs")]
+        public string TrackingSpec { get; set; }
         //public List<ConversionActionQuery> TrackingSpec { get; set; }
-        public List<string> TrackingSpec { get; set; }
 
         /// <summary>
         /// Updated time
         /// </summary>
         [DeserializeAs(Name = "updated_time")]
-        public DateTime? UpdatedTime { get; set; }
+        public string UpdatedTime { get; set; }
 
 
         public static IList<string> GetApiSelectors(bool isIncludeCreativeFields = false,bool isIncludeCampaignFields = false,bool isIncludeAdsetFields = false)
         {
-            var apiFields = new List<string>
+            var apiFields = typeof(Ad).GetProperties()
+                .Select(e => e.GetCustomAttributes(typeof(DeserializeAsAttribute), true)).Where(e => e.Length > 0)
+                .Select(e => e.First() as DeserializeAsAttribute).Where(e => e != null).Select(e => e.Name).ToList();
+
+            if (isIncludeCampaignFields)
             {
-                "id",
-                "account_id",
-                "ad_review_feedback",
-                "adlabels",
-                "adset_id",
-                "bid_amount",
-                "bid_info",
-                "bid_type",
-                "campaign_id",
-                "configured_status",
-                "conversion_specs",
-                "created_time",
-                "effective_status",
-                "last_updated_by_app_id",
-                "name",
-                "recommendations",
-                "status",
-                "tracking_specs",
-                "updated_time",
-                isIncludeCampaignFields
-                    ? $"campaign.fields({string.Join(",", Campaign.GetApiSelectors())})"
-                    : "campaign",
-                isIncludeAdsetFields
-                    ? $"adset.fields({string.Join(",", AdSet.GetApiSelectors(isIncludeCampaignFields))})"
-                    : "adset",
-                isIncludeCreativeFields
-                    ? $"creative.fields({string.Join(",", Creative.GetApiSelectors())})"
-                    : "creative"
-            };
+                apiFields.Remove("campaign");
+                apiFields.Add($"campaign.fields({string.Join(",", Campaign.GetApiSelectors())})");
+            }
+
+            if (isIncludeAdsetFields)
+            {
+                apiFields.Remove("adset");
+                apiFields.Add($"adset.fields({string.Join(",", AdSet.GetApiSelectors(isIncludeCampaignFields))})");
+            }
+
+            if (isIncludeCreativeFields)
+            {
+                apiFields.Remove("creative");
+                apiFields.Add($"creative.fields({string.Join(",", Creative.GetApiSelectors())})");
+            }
 
             return apiFields;
         }

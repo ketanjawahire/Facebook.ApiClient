@@ -14,7 +14,7 @@ namespace FacebookApi.Entities
         /// The type of the action. Not all types can be used for all ads
         /// </summary>
         [DeserializeAs(Name = "type")]
-        public CreativeCallToActionType Type { get; set; }
+        public CreativeCallToActionType? Type { get; set; }
 
         /// <summary>
         /// JSON containing the call to action data.

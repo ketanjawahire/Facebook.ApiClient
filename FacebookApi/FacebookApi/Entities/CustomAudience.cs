@@ -145,5 +145,19 @@ namespace FacebookApi.Entities
         [DeserializeAs(Name = "time_updated")]
         public string TimeUpdated { get; set; }
 
+
+
+        public static string GetSelectors()
+        {
+            var selectors = new string[]
+            {
+                "id", "accoint_id", "approximate_count", "data_source", "delivery_status", "description",
+                "external_event_source", "is_value_based", "lookalike_audience_ids", "lookalike_spec", "name",
+                "operation_status", "opt_out_link", "permission_for_actions", "pixel_id", "retention_days", "rule",
+                "rule_aggregation", "subtype", "time_content_updated", "time_created", "time_updated"
+            };
+
+            return string.Join(",", selectors);
+        }
     }
 }

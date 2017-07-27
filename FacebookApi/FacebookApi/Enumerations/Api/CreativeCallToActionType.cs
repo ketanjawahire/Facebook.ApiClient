@@ -37,6 +37,7 @@ namespace FacebookApi.Enums.Api
         RECORD_NOW,
         VOTE_NOW,
         REGISTER_NOW,
-        OPEN_MOVIES
+        OPEN_MOVIES,
+        APPLY_NOW
     }
 }

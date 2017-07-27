@@ -19,7 +19,7 @@ namespace FacebookApi.Constants
 
         public static bool IsValidVersion(string version)
         {
-            var validVersions = new List<string>() {"v2.8", "v2.9"};
+            var validVersions = new List<string>() {"v2.9", "v2.10"};
             return validVersions.Contains(version);
         }
     }

@@ -1,4 +1,4 @@
-﻿namespace FacebookApi.ApiEngine
+﻿namespace FacebookApi.Interfaces.IApiEngine
 {
     public interface IBatchRequestResponce
     {
