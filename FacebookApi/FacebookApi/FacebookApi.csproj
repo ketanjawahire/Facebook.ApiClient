@@ -63,6 +63,7 @@
     <Compile Include="ApiEngine\BatchRequestResponce.cs" />
     <Compile Include="ApiEngine\BatchResponceHeader.cs" />
     <Compile Include="ApiEngine\PagedApiRequest.cs" />
+    <Compile Include="Entities\AdActionStats.cs" />
     <Compile Include="Entities\AdCampaignFrequencyControlSpecs.cs" />
     <Compile Include="Entities\AdCreativeAndroidData.cs" />
     <Compile Include="Entities\AdCreativeConfigData.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Entities\CustomAudienceDataSource.cs" />
     <Compile Include="Entities\CustomAudiencePermission.cs" />
     <Compile Include="Entities\CustomAudienceStatus.cs" />
+    <Compile Include="Entities\Insight.cs" />
     <Compile Include="Entities\LookalikeSpec.cs" />
     <Compile Include="Enumerations\Api\AdAccountStatus.cs" />
     <Compile Include="Enumerations\Api\AdAccountStoredBalanceStatus.cs" />
@@ -121,7 +123,7 @@
     <Compile Include="Interfaces\IApiEngine\IBatchRequestParameters.cs" />
     <Compile Include="Interfaces\IApiEngine\IBatchRequestResponce.cs" />
     <Compile Include="ApiEngine\PagedResponse.cs" />
-    <Compile Include="ApiEngine\Paging.cs" />
+    <Compile Include="Entities\Paging.cs" />
     <Compile Include="Constants\FacebookApiRequestParameters.cs" />
     <Compile Include="Constants\FacebookApiRequestUrls.cs" />
     <Compile Include="Constants\FacebookApiResponceHeaders.cs" />
