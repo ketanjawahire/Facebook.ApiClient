@@ -4,7 +4,7 @@ namespace FacebookApi.Entities
 {
     /// <summary>
     /// Funding Source Details
-    /// <see cref="https://developers.facebook.com/docs/marketing-api/reference/ad-account/"/>
+    /// <para>https://developers.facebook.com/docs/marketing-api/reference/ad-account/</para>
     /// </summary>
     public class FundingSourceDetails
     {

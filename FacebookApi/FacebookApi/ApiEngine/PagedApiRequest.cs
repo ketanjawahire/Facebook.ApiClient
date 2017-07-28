@@ -10,14 +10,16 @@ using RestSharp;
 
 namespace FacebookApi.ApiEngine
 {
+    /// <summary>
+    /// Represents paged api request
+    /// </summary>
     public class PagedApiRequest : ApiRequestBase
     {
-        private string before;
-        private string after;
-        private string next;
-        private string previous;
-
-
+        /// <summary>
+        /// Initialize new instance of <see cref="PagedApiRequest"/>
+        /// </summary>
+        /// <param name="requestUrl">Request Url</param>
+        /// <param name="apiClient"><see cref="ApiClient"/> used to execute this request</param>
         public PagedApiRequest(string requestUrl, ApiClient apiClient) : base()
         {
             _restClient = new RestClient(FacebookApiRequestUrls.GRAPH_REQUEST_BASE_URL);
@@ -26,26 +28,35 @@ namespace FacebookApi.ApiEngine
             RequestUri = requestUrl;
         }
 
+        /// <summary>
+        /// Specify api response page limit
+        /// </summary>
+        /// <param name="limit">Page limit</param>
         public void AddPageLimit(int limit)
         {
             AddGetOrPostParameter("limit", limit.ToString());
         }
 
+        /// <summary>
+        /// Process <see cref="IRestResponse{TEntity}"/>
+        /// </summary>
+        /// <typeparam name="TEntity">Entity class which can be used to represent received API response</typeparam>
+        /// <param name="response">Input <see cref="IRestResponse{TEntity}"/></param>
+        /// <returns>Processed response of type <see cref="PagedResponse{TApiEntity}"/></returns>
         private PagedResponse<TEntity> _processResponse<TEntity>(IRestResponse<PagedResponse<TEntity>> response) where TEntity : class, new()
         {
             var result = response.Data;
             result.SetApiClient(ApiClient);
             result.SetResponseHeaders(response.Headers);
             result.SetResponseExceptions(GetExceptionsFromApiResponse(response));
-
-            before = response.Data.Paging.Before;
-            after = response.Data.Paging.After;
-            next = response.Data.Paging.Next;
-            previous = response.Data.Paging.Previous;
-
             return result;
         }
 
+        /// <summary>
+        /// Execute paged API request
+        /// </summary>
+        /// <typeparam name="TEntity">Entity class which can be used to represent received API response</typeparam>
+        /// <returns>Processed API response of type <see cref="IPagedResponse{TEntity}"/></returns>
         public IPagedResponse<TEntity> ExecutePage<TEntity>() where TEntity : class, new()
         {
             var request = _prepareRestRequest(ApiRequestHttpMethod.GET, RequestUri, RequestParameters);
@@ -57,6 +68,11 @@ namespace FacebookApi.ApiEngine
             return _processResponse(response);
         }
 
+        /// <summary>
+        /// Execute paged API request
+        /// </summary>
+        /// <typeparam name="TEntity">Entity class which can be used to represent received API response</typeparam>
+        /// <returns>Processed API response of type <see cref="IPagedResponse{TEntity}"/></returns>
         public async Task<IPagedResponse<TEntity>> ExecutePageAsync<TEntity>() where TEntity : class, new()
         {
             var request = _prepareRestRequest(ApiRequestHttpMethod.GET, RequestUri, RequestParameters);

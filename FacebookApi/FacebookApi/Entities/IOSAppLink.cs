@@ -4,7 +4,7 @@ namespace FacebookApi.Entities
 {
     /// <summary>
     /// An app link on the iOS platform.
-    /// <see cref="https://developers.facebook.com/docs/graph-api/reference/ios-app-link/"/>
+    /// <para>https://developers.facebook.com/docs/graph-api/reference/ios-app-link/</para>
     /// </summary>
     public class IOSAppLink
     {

@@ -7,9 +7,9 @@ namespace FacebookApi.Entities
 {
     /// <summary>
     /// A user represents a person on Facebook.
-    /// <see cref="https://developers.facebook.com/docs/graph-api/reference/user/"/>
+    /// <para>https://developers.facebook.com/docs/graph-api/reference/user/</para>
     /// </summary>
-    public class User : IOwner
+    public class User
     {
         /// <summary>
         /// The id of this person's user account. This ID is unique to each app and cannot be used across different apps.

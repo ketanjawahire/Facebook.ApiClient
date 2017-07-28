@@ -4,7 +4,7 @@ namespace FacebookApi.Entities
 {
     /// <summary>
     /// Facebook place
-    /// <see cref="https://developers.facebook.com/docs/graph-api/reference/place/"/>
+    /// <para>https://developers.facebook.com/docs/graph-api/reference/place/</para>
     /// </summary>
     public class Place
     {

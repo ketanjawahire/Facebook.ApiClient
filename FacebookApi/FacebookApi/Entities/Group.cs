@@ -8,9 +8,9 @@ namespace FacebookApi.Entities
 {
     /// <summary>
     /// Represents a Facebook group. 
-    /// <see cref="https://developers.facebook.com/docs/graph-api/reference/v2.5/group"/>
+    /// <para>https://developers.facebook.com/docs/graph-api/reference/v2.5/group</para>
     /// </summary>
-    public class Group : IParent
+    public class Group
     {
         /// <summary>
         /// The group ID
@@ -59,18 +59,6 @@ namespace FacebookApi.Entities
         /// </summary>
         [DeserializeAs(Name = "name")]
         public string Name { get; set; }
-
-        /// <summary>
-        /// The profile that created this group.
-        /// </summary>
-        [DeserializeAs(Name = "owner")]
-        public IOwner Owner { get; set; }
-
-        /// <summary>
-        /// The parent of this group, if it exists.
-        /// </summary>
-        [DeserializeAs(Name = "parent")]
-        public IParent Parent { get; set; }
 
         /// <summary>
         /// The privacy setting of the group. 

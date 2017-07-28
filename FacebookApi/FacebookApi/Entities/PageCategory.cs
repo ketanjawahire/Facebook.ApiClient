@@ -4,7 +4,7 @@ namespace FacebookApi.Entities
 {
     /// <summary>
     /// A category for a Facebook Page
-    /// <see cref="https://developers.facebook.com/docs/graph-api/reference/page-category/"/>
+    /// <para>https://developers.facebook.com/docs/graph-api/reference/page-category/</para>
     /// </summary>
     public class PageCategory
     {

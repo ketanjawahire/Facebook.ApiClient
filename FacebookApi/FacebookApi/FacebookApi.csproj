@@ -21,6 +21,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>true</RunCodeAnalysis>
+    <DocumentationFile>bin\Debug\FacebookApi.xml</DocumentationFile>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -60,8 +62,8 @@
     <Compile Include="ApiEngine\BatchRequestParameters.cs" />
     <Compile Include="ApiEngine\BatchRequestResponce.cs" />
     <Compile Include="ApiEngine\BatchResponceHeader.cs" />
-    <Compile Include="ApiEngine\BatchResponse.cs" />
     <Compile Include="ApiEngine\PagedApiRequest.cs" />
+    <Compile Include="Entities\AdActionStats.cs" />
     <Compile Include="Entities\AdCampaignFrequencyControlSpecs.cs" />
     <Compile Include="Entities\AdCreativeAndroidData.cs" />
     <Compile Include="Entities\AdCreativeConfigData.cs" />
@@ -76,6 +78,7 @@
     <Compile Include="Entities\CustomAudienceDataSource.cs" />
     <Compile Include="Entities\CustomAudiencePermission.cs" />
     <Compile Include="Entities\CustomAudienceStatus.cs" />
+    <Compile Include="Entities\Insight.cs" />
     <Compile Include="Entities\LookalikeSpec.cs" />
     <Compile Include="Enumerations\Api\AdAccountStatus.cs" />
     <Compile Include="Enumerations\Api\AdAccountStoredBalanceStatus.cs" />
@@ -120,7 +123,7 @@
     <Compile Include="Interfaces\IApiEngine\IBatchRequestParameters.cs" />
     <Compile Include="Interfaces\IApiEngine\IBatchRequestResponce.cs" />
     <Compile Include="ApiEngine\PagedResponse.cs" />
-    <Compile Include="ApiEngine\Paging.cs" />
+    <Compile Include="Entities\Paging.cs" />
     <Compile Include="Constants\FacebookApiRequestParameters.cs" />
     <Compile Include="Constants\FacebookApiRequestUrls.cs" />
     <Compile Include="Constants\FacebookApiResponceHeaders.cs" />
@@ -196,18 +199,16 @@
     <Compile Include="Interfaces\IApiEngine\IApiClient.cs" />
     <Compile Include="Interfaces\IApiEngine\IApiResponse.cs" />
     <Compile Include="Interfaces\IApiEngine\IBatchResponceHeader.cs" />
-    <Compile Include="Interfaces\IApiEngine\IBatchResponse.cs" />
     <Compile Include="Interfaces\IApiEngine\IPagedResponse.cs" />
     <Compile Include="Interfaces\IApiEngine\IPaging.cs" />
-    <Compile Include="Interfaces\IOwner.cs" />
-    <Compile Include="Interfaces\IParent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utilities\ApiUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Utilities\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

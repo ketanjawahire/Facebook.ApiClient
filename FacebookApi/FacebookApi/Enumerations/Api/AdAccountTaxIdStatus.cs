@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace FacebookApi.Enums.Api
 {
+    /// <summary>
+    /// VAT status code for the account.
+    /// </summary>
     public enum AdAccountTaxIdStatus
     {
         /// <summary>

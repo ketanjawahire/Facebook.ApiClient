@@ -1,21 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using FacebookApi.Constants;
+﻿using FacebookApi.Constants;
 using FacebookApi.Enums;
-using FacebookApi.Exceptions;
 using FacebookApi.Interfaces.IApiEngine;
 using RestSharp;
-using RestSharp.Newtonsoft.Json;
-using RestRequest = RestSharp.RestRequest;
+using System.Threading.Tasks;
 
 namespace FacebookApi.ApiEngine
 {
+    /// <summary>
+    /// Represents a Facebook API requests
+    /// </summary>
     public class ApiRequest : ApiRequestBase
     {
+        /// <summary>
+        /// Initialize new instance of <see cref="ApiRequest"/> using given Request Url &amp; <see cref="ApiClient"/>
+        /// </summary>
+        /// <param name="requestUrl">Request Url</param>
+        /// <param name="apiClient"><see cref="ApiClient"/></param>
         public ApiRequest( string requestUrl, ApiClient apiClient)
         {
             _restClient = new RestClient(FacebookApiRequestUrls.GRAPH_REQUEST_BASE_URL);
@@ -24,6 +24,12 @@ namespace FacebookApi.ApiEngine
             ApiClient = apiClient;
         }
 
+        /// <summary>
+        /// Execute current API request.
+        /// </summary>
+        /// <typeparam name="TEntity">Entity class which can be used to represent received API response</typeparam>
+        /// <param name="method"><see cref="ApiRequestHttpMethod"/></param>
+        /// <returns><see cref="IApiResponse{TEntity}"/></returns>
         public IApiResponse<TEntity> Execute<TEntity>(ApiRequestHttpMethod method) where TEntity : class, new()
         {
             var request = _prepareRestRequest(method, RequestUri, RequestParameters);
@@ -35,6 +41,12 @@ namespace FacebookApi.ApiEngine
             return new ApiResponse<TEntity>(response.Data, response.Headers, GetExceptionsFromApiResponse(response));
         }
 
+        /// <summary>
+        /// Execute current API request.
+        /// </summary>
+        /// <typeparam name="TEntity">Entity class which can be used to represent received API response</typeparam>
+        /// <param name="method"><see cref="ApiRequestHttpMethod"/></param>
+        /// <returns><see cref="IApiResponse{TEntity}"/></returns>
         public async Task<IApiResponse<TEntity>> ExecuteAsync<TEntity>(ApiRequestHttpMethod method) where TEntity : class, new()
         {
             var request = _prepareRestRequest(method, RequestUri, RequestParameters);

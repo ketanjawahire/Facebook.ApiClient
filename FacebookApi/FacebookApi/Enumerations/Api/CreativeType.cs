@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace FacebookApi.Enums.Api
 {
+    /// <summary>
+    /// The type of object that is being advertised. 
+    /// </summary>
     public enum CreativeType
     {
         /// <summary>

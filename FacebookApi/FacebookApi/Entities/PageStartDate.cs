@@ -4,7 +4,7 @@ namespace FacebookApi.Entities
 {
     /// <summary>
     /// Date about when the entity represented by the Page was started
-    /// <see cref="https://developers.facebook.com/docs/graph-api/reference/page-start-date/"/>
+    /// <para>https://developers.facebook.com/docs/graph-api/reference/page-start-date/</para>
     /// </summary>
     public class PageStartDate
     {

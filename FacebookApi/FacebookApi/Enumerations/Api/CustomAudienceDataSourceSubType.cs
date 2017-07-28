@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace FacebookApi.Enumerations.Api
 {
+    /// <summary>
+    /// Custom Audience subtype
+    /// </summary>
     public enum CustomAudienceDataSourceSubType
     {
         /// <summary>
@@ -48,9 +51,22 @@ namespace FacebookApi.Enumerations.Api
         /// </summary>
         MULTI_HASHES,
 
+        /// <summary>
+        /// TOKENS
+        /// </summary>
         TOKENS,
+
+        /// <summary>
+        /// EXTERNAL_IDS_MIX
+        /// </summary>
         EXTERNAL_IDS_MIX,
+
+        /// <summary>
+        /// HOUSEHOLD_EXPANSION
+        /// </summary>
         HOUSEHOLD_EXPANSION,
+
+
 
         /// <summary>
         /// Events reported by Facebook pixels on websites
@@ -76,8 +92,17 @@ namespace FacebookApi.Enumerations.Api
         /// A composite audience of one or more inclusion and exclusion audiences, e.g. an audience of people who have viewed the homepage but not completed the sign up process.
         /// </summary>
         WEB_PIXEL_COMBINATION_EVENTS,
+        /// <summary>
+        /// PLATFORM
+        /// </summary>
         PLATFORM,
+
+        /// <summary>
+        /// ENGAGEMENT_EVENT_USERS
+        /// </summary>
         ENGAGEMENT_EVENT_USERS,
+
+
 
         /// <summary>
         /// Created from user ids
@@ -103,22 +128,88 @@ namespace FacebookApi.Enumerations.Api
         /// Created from a saved target group
         /// </summary>
         S_EXPR,
+
+        /// <summary>
+        /// DYNAMIC_RULE
+        /// </summary>
         DYNAMIC_RULE,
+
+        /// <summary>
+        /// CAMPAIGN_CONVERSIONS
+        /// </summary>
         CAMPAIGN_CONVERSIONS,
+
+        /// <summary>
+        /// WEB_PIXEL_HITS_CUSTOM_AUDIENCE_USERS
+        /// </summary>
         WEB_PIXEL_HITS_CUSTOM_AUDIENCE_USERS,
+
+        /// <summary>
+        /// MOBILE_APP_CUSTOM_AUDIENCE_USERS
+        /// </summary>
         MOBILE_APP_CUSTOM_AUDIENCE_USERS,
+
+        /// <summary>
+        /// COMBINATION_CUSTOM_AUDIENCE_USERS
+        /// </summary>
         COMBINATION_CUSTOM_AUDIENCE_USERS,
+
+        /// <summary>
+        /// VIDEO_EVENT_USERS
+        /// </summary>
         VIDEO_EVENT_USERS,
+
+        /// <summary>
+        /// FB_PIXEL_HITS
+        /// </summary>
         FB_PIXEL_HITS,
+
+        /// <summary>
+        /// IG_PROMOTED_POST
+        /// </summary>
         IG_PROMOTED_POST,
+
+        /// <summary>
+        /// PLACE_VISITS
+        /// </summary>
         PLACE_VISITS,
+
+        /// <summary>
+        /// OFFLINE_EVENT_USERS
+        /// </summary>
         OFFLINE_EVENT_USERS,
+
+        /// <summary>
+        /// EXPANDED_AUDIENCE
+        /// </summary>
         EXPANDED_AUDIENCE,
+
+        /// <summary>
+        /// SEED_LIST
+        /// </summary>
         SEED_LIST,
+
+        /// <summary>
+        /// PARTNER_CATEGORY_USERS
+        /// </summary>
         PARTNER_CATEGORY_USERS,
+
+        /// <summary>
+        /// PAGE_SMART_AUDIENCE
+        /// </summary>
         PAGE_SMART_AUDIENCE,
+
+        /// <summary>
+        /// MULTICOUNTRY_COMBINATION
+        /// </summary>
         MULTICOUNTRY_COMBINATION,
+
+        /// <summary>
+        /// PLATFORM_USERS
+        /// </summary>
         PLATFORM_USERS,
+
+
 
         /// <summary>
         /// Created from emails imported from Mailchimp

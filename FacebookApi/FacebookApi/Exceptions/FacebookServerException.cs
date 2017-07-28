@@ -9,8 +9,12 @@ namespace FacebookApi.Exceptions
     /// <summary>
     /// Thrown when Graph returns a server error.
     /// </summary>
+    [Serializable]
     public class FacebookServerException : Exception
     {
+        /// <summary>
+        /// Initialize new instance of <see cref="FacebookServerException"/>
+        /// </summary>
         public FacebookServerException() : base()
         {
             

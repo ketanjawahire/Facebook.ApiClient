@@ -7,7 +7,7 @@ namespace FacebookApi.Entities
 {
     /// <summary>
     /// An individual entry in a profile's feed. The profile could be a user, page, app, or group.
-    /// <see cref="https://developers.facebook.com/docs/graph-api/reference/v2.5/post"/>
+    /// <para>https://developers.facebook.com/docs/graph-api/reference/v2.5/post</para>
     /// </summary>
     public class Post
     {

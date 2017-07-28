@@ -6,7 +6,7 @@ namespace FacebookApi.Entities
 {
     /// <summary>
     /// Status attributes of video
-    /// <see cref="https://developers.facebook.com/docs/graph-api/reference/video-status/"/>
+    /// <para>https://developers.facebook.com/docs/graph-api/reference/video-status/</para>
     /// </summary>
     public class VideoStatus
     {

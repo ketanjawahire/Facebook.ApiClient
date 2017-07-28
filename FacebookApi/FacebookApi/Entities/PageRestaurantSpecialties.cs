@@ -4,7 +4,7 @@ namespace FacebookApi.Entities
 {
     /// <summary>
     /// Specialties of a restaurant that is represented by a Facebook Page
-    /// <see cref="https://developers.facebook.com/docs/graph-api/reference/page-restaurant-specialties/"/>
+    /// <para>https://developers.facebook.com/docs/graph-api/reference/page-restaurant-specialties/</para>
     /// </summary>
     public class PageRestaurantSpecialties
     {

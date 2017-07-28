@@ -17,6 +17,11 @@ namespace FacebookApi.Constants
         /// </summary>
         public static string V2_9 = "v2.9";
 
+        /// <summary>
+        /// Check if given version is a valid FB api version or not
+        /// </summary>
+        /// <param name="version">API version to check</param>
+        /// <returns>True if api version is valid</returns>
         public static bool IsValidVersion(string version)
         {
             var validVersions = new List<string>() {"v2.9", "v2.10"};

@@ -147,6 +147,10 @@ namespace FacebookApi.Entities
 
 
 
+        /// <summary>
+        /// Get api field selectors for <see cref="CustomAudience"/>
+        /// </summary>
+        /// <returns>Comma seperated fields</returns>
         public static string GetSelectors()
         {
             var selectors = new string[]

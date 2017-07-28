@@ -1,9 +1,25 @@
 ﻿namespace FacebookApi.Enums
 {
+    /// <summary>
+    /// Request method
+    /// </summary>
     public enum ApiRequestHttpMethod
     {
+        /// <summary>
+        /// GET
+        /// </summary>
         GET,
+
+        /// <summary>
+        /// POST
+        /// </summary>
         POST,
-        DELETE
+
+        /// <summary>
+        /// DELETE
+        /// </summary>
+        DELETE,
+
+
     }
 }

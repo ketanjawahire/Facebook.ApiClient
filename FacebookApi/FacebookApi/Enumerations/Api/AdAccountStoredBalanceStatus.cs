@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace FacebookApi.Enums.Api
 {
+    /// <summary>
+    /// Stored balance status for the ad account
+    /// </summary>
     public enum AdAccountStoredBalanceStatus
     {
         /// <summary>
