@@ -15,16 +15,34 @@ using RestRequest = RestSharp.RestRequest;
 
 namespace FacebookApi.ApiEngine
 {
+    /// <summary>
+    /// Base class for API request
+    /// </summary>
     public class ApiRequestBase
     {
+        /// <summary>
+        /// Instance of <see cref="RestClient"/> for this request
+        /// </summary>
         protected IRestClient _restClient;
 
+        /// <summary>
+        /// API request uri
+        /// </summary>
         public string RequestUri { get; protected set; }
 
+        /// <summary>
+        /// Collection of request parameters
+        /// </summary>
         public IList<ApiRequestParameter> RequestParameters { get; protected set; }
 
+        /// <summary>
+        /// <see cref="ApiEngine.ApiClient"/> to use to execute API request
+        /// </summary>
         public ApiClient ApiClient { get; protected set; }
 
+        /// <summary>
+        /// Initialize instance of <see cref="ApiRequestBase"/>
+        /// </summary>
         protected ApiRequestBase()
         {
             RequestParameters = new List<ApiRequestParameter>();
@@ -55,6 +73,13 @@ namespace FacebookApi.ApiEngine
             return request;
         }
 
+        /// <summary>
+        /// Prepare <see cref="RestRequest"/>
+        /// </summary>
+        /// <param name="requestMethod">One of <see cref="ApiRequestHttpMethod"/></param>
+        /// <param name="requestUri">Request Uri</param>
+        /// <param name="parameters">Collection of request parameters</param>
+        /// <returns></returns>
         protected IRestRequest _prepareRestRequest(ApiRequestHttpMethod requestMethod, string requestUri,
             IEnumerable<ApiRequestParameter> parameters = null)
         {
@@ -66,6 +91,11 @@ namespace FacebookApi.ApiEngine
             return request;
         }
 
+        /// <summary>
+        /// Add request parameter of type <see cref="ApiRequestParameterType.GetOrPost"/>
+        /// </summary>
+        /// <param name="parameterName">Parameter name</param>
+        /// <param name="parameterValue">Parameter value</param>
         public void AddGetOrPostParameter(string parameterName, string parameterValue)
         {
             RequestParameters.Add(new ApiRequestParameter()
@@ -76,6 +106,11 @@ namespace FacebookApi.ApiEngine
             });
         }
 
+        /// <summary>
+        /// Add request parameter of type <see cref="ApiRequestParameterType.UrlSegment"/>
+        /// </summary>
+        /// <param name="parameterName">Parameter name</param>
+        /// <param name="parameterValue">Parameter value</param>
         public void AddUrlSegmentParameter(string parameterName, string parameterValue)
         {
             RequestParameters.Add(new ApiRequestParameter()
@@ -86,6 +121,11 @@ namespace FacebookApi.ApiEngine
             });
         }
 
+        /// <summary>
+        /// Add request parameter of type <see cref="ApiRequestParameterType.HttpHeader"/>
+        /// </summary>
+        /// <param name="parameterName">Parameter name</param>
+        /// <param name="parameterValue">Parameter value</param>
         public void AddHttpHeader(string parameterName, string parameterValue)
         {
             RequestParameters.Add(new ApiRequestParameter()
@@ -96,6 +136,11 @@ namespace FacebookApi.ApiEngine
             });
         }
 
+        /// <summary>
+        /// Check if there is any api exception in received resonse. If yes then return list of api exceptions
+        /// </summary>
+        /// <param name="apiResponse">Received api response</param>
+        /// <returns>List of api exceptions from received response</returns>
         protected static IEnumerable<Exception> GetExceptionsFromApiResponse(IRestResponse apiResponse)
         {
             IList<Exception> exceptions = new List<Exception>();

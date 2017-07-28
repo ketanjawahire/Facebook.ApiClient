@@ -4,7 +4,7 @@ namespace FacebookApi.Entities
 {
     /// <summary>
     /// Social context for Graph API objects.
-    /// <see cref="https://developers.facebook.com/docs/graph-api/reference/open-graph-context/"/>
+    /// <para>https://developers.facebook.com/docs/graph-api/reference/open-graph-context/</para>
     /// </summary>
     public class OpenGraphContext
     {

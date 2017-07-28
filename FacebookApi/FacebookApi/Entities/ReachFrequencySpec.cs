@@ -5,7 +5,7 @@ namespace FacebookApi.Entities
 {
     /// <summary>
     /// Reach and Frequency Spec
-    /// <see cref="https://developers.facebook.com/docs/marketing-api/reachandfrequency/v2.5"/>
+    /// <para>https://developers.facebook.com/docs/marketing-api/reachandfrequency/v2.5</para>
     /// </summary>
     public class ReachFrequencySpec
     {

@@ -7,9 +7,9 @@ namespace FacebookApi.Entities
 {
     /// <summary>
     /// This represents a Facebook Page.
-    /// <see cref="https://developers.facebook.com/docs/graph-api/reference/page/"/>
+    /// <para>https://developers.facebook.com/docs/graph-api/reference/page/</para>
     /// </summary>
-    public class Page : IParent, IOwner
+    public class Page
     {
         /// <summary>
         /// Page ID. No access token is required to access this field

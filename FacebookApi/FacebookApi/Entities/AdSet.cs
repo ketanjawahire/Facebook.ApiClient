@@ -272,6 +272,11 @@ namespace FacebookApi.Entities
         [DeserializeAs(Name = "use_new_app_click")]
         public bool? IsUseNewAppClick { get; set; }
 
+        /// <summary>
+        /// Get api field selectors for <see cref="AdSet"/>
+        /// </summary>
+        /// <param name="isIncludeCampaignFields">Set true if you wan to fetch campaign details as well</param>
+        /// <returns>Comma seperated fields</returns>
         public static IList<string> GetApiSelectors(bool isIncludeCampaignFields)
         {
             var apiFields = typeof(AdSet).GetProperties()
@@ -279,11 +284,10 @@ namespace FacebookApi.Entities
                 .Select(e => e.First() as DeserializeAsAttribute).Where(e => e != null).Select(e => e.Name).ToList();
 
 
-            if (isIncludeCampaignFields)
-            {
-                apiFields.Remove("campaign");
-                apiFields.Add($"campaign.fields({string.Join(",", Campaign.GetApiSelectors())})");
-            }
+            if (!isIncludeCampaignFields) return apiFields;
+
+            apiFields.Remove("campaign");
+            apiFields.Add($"campaign.fields({string.Join(",", Campaign.GetApiSelectors())})");
 
             return apiFields;
         }

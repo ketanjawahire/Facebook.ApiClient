@@ -4,7 +4,7 @@ namespace FacebookApi.Entities
 {
     /// <summary>
     /// The Privacy node is returned as part of a number of different types of nodes as a privacy field.
-    /// <see cref="https://developers.facebook.com/docs/graph-api/reference/privacy/"/>
+    /// <para>https://developers.facebook.com/docs/graph-api/reference/privacy/</para>
     /// </summary>
     public class Privacy
     {

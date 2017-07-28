@@ -4,7 +4,7 @@ namespace FacebookApi.Entities
 {
     /// <summary>
     /// Location node used with other objects in the Graph API.
-    /// <see cref="https://developers.facebook.com/docs/graph-api/reference/location/"/>
+    /// <para>https://developers.facebook.com/docs/graph-api/reference/location/</para>
     /// </summary>
     public class Location
     {

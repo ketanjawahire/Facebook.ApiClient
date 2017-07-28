@@ -4,10 +4,13 @@ namespace FacebookApi.Entities
 {
     /// <summary>
     /// A mailing address
-    /// <see cref="https://developers.facebook.com/docs/graph-api/reference/mailing-address/"/>
+    /// <para>https://developers.facebook.com/docs/graph-api/reference/mailing-address/</para>
     /// </summary>
     public class MailingAddress
     {
+        /// <summary>
+        /// Id
+        /// </summary>
         [DeserializeAs(Name = "id")]
         public long Id { get; set; }
 

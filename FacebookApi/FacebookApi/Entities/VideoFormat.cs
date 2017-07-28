@@ -4,7 +4,7 @@ namespace FacebookApi.Entities
 {
     /// <summary>
     /// A Video Format
-    /// <see cref="https://developers.facebook.com/docs/graph-api/reference/video-format/"/>
+    /// <para>https://developers.facebook.com/docs/graph-api/reference/video-format/</para>
     /// </summary>
     public class VideoFormat
     {

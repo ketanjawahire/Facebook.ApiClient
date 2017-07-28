@@ -4,7 +4,7 @@ namespace FacebookApi.Entities
 {
     /// <summary>
     /// Parking options for a Page.
-    /// <see cref="https://developers.facebook.com/docs/graph-api/reference/page-parking/"/>
+    /// <para>https://developers.facebook.com/docs/graph-api/reference/page-parking/</para>
     /// </summary>
     public class PageParking
     {

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace FacebookApi.Enums.Api
 {
+    /// <summary>
+    /// The billing event that this adset is using
+    /// </summary>
     public enum BillingEvent
     {
         /// <summary>
@@ -47,6 +50,12 @@ namespace FacebookApi.Enums.Api
         /// Pay when people watch videos.
         /// </summary>
         VIDEO_VIEWS,
-        VIDEO_VIEWS_15S
+
+        /// <summary>
+        /// VIDEO_VIEWS_15S
+        /// </summary>
+        VIDEO_VIEWS_15S,
+
+
     }
 }

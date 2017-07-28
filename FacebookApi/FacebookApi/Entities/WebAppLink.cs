@@ -4,7 +4,7 @@ namespace FacebookApi.Entities
 {
     /// <summary>
     /// The web metadata for an app link
-    /// <see cref="https://developers.facebook.com/docs/graph-api/reference/web-app-link/"/>
+    /// <para>https://developers.facebook.com/docs/graph-api/reference/web-app-link/</para>
     /// </summary>
     public class WebAppLink
     {

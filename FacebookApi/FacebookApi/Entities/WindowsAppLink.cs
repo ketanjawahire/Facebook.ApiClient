@@ -4,7 +4,7 @@ namespace FacebookApi.Entities
 {
     /// <summary>
     /// An app link on the Windows or Windows Universal platform.
-    /// <see cref="https://developers.facebook.com/docs/graph-api/reference/windows-app-link/"/>
+    /// <para>https://developers.facebook.com/docs/graph-api/reference/windows-app-link/</para>
     /// </summary>
     public class WindowsAppLink
     {

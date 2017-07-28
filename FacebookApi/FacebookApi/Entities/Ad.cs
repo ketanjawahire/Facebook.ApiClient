@@ -166,7 +166,13 @@ namespace FacebookApi.Entities
         [DeserializeAs(Name = "updated_time")]
         public string UpdatedTime { get; set; }
 
-
+        /// <summary>
+        /// Get api field selectors for <see cref="Ad"/>
+        /// </summary>
+        /// <param name="isIncludeCreativeFields">Set true if you wan to fetch <see cref="Creative"/> details as well</param>
+        /// <param name="isIncludeCampaignFields">Set true if you wan to fetch <see cref="Campaign"/> details as well</param>
+        /// <param name="isIncludeAdsetFields">Set true if you wan to fetch <see cref="AdSet"/> details as well</param>
+        /// <returns>Comma seperated fields</returns>
         public static IList<string> GetApiSelectors(bool isIncludeCreativeFields = false,bool isIncludeCampaignFields = false,bool isIncludeAdsetFields = false)
         {
             var apiFields = typeof(Ad).GetProperties()

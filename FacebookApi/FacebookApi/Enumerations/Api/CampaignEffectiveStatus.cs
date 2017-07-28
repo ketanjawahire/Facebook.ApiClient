@@ -6,17 +6,61 @@ using System.Threading.Tasks;
 
 namespace FacebookApi.Enums.Api
 {
+    /// <summary>
+    /// The effective status of this campaign.
+    /// </summary>
     public enum CampaignEffectiveStatus
     {
+        /// <summary>
+        /// ACTIVE
+        /// </summary>
         ACTIVE,
+
+        /// <summary>
+        /// PAUSED
+        /// </summary>
         PAUSED,
+
+        /// <summary>
+        /// DELETED
+        /// </summary>
         DELETED,
+
+        /// <summary>
+        /// PENDING_REVIEW
+        /// </summary>
         PENDING_REVIEW,
+
+        /// <summary>
+        /// DISAPPROVED
+        /// </summary>
         DISAPPROVED,
+
+        /// <summary>
+        /// PREAPPROVED
+        /// </summary>
         PREAPPROVED,
+
+        /// <summary>
+        /// PENDING_BILLING_INFO
+        /// </summary>
         PENDING_BILLING_INFO,
+
+        /// <summary>
+        /// CAMPAIGN_PAUSED
+        /// </summary>
         CAMPAIGN_PAUSED,
+
+        /// <summary>
+        /// ARCHIVED
+        /// </summary>
         ARCHIVED,
-        ADSET_PAUSED
+
+        /// <summary>
+        /// ADSET_PAUSED
+        /// </summary>
+        ADSET_PAUSED,
+
+
     }
 }

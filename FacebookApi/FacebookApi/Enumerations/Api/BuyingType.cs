@@ -6,10 +6,26 @@ using System.Threading.Tasks;
 
 namespace FacebookApi.Enums.Api
 {
+    /// <summary>
+    /// Buying type
+    /// </summary>
     public enum BuyingType
     {
+        /// <summary>
+        /// AUCTION
+        /// </summary>
         AUCTION,
+
+        /// <summary>
+        /// FIXED_CPM
+        /// </summary>
         FIXED_CPM,
-        RESERVED
+
+        /// <summary>
+        /// RESERVED
+        /// </summary>
+        RESERVED,
+
+
     }
 }

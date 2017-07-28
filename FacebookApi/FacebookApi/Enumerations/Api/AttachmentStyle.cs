@@ -6,9 +6,21 @@ using System.Threading.Tasks;
 
 namespace FacebookApi.Enums.Api
 {
+    /// <summary>
+    /// The style of the attachment.
+    /// </summary>
     public enum AttachmentStyle
     {
+        /// <summary>
+        /// link
+        /// </summary>
         link,
-        @default
+
+        /// <summary>
+        /// @default
+        /// </summary>
+        @default,
+
+
     }
 }

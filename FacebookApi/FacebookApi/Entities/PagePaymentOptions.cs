@@ -4,7 +4,7 @@ namespace FacebookApi.Entities
 {
     /// <summary>
     /// Page payment options in the Graph API.
-    /// <see cref="https://developers.facebook.com/docs/graph-api/reference/page-payment-options/"/>
+    /// <para>https://developers.facebook.com/docs/graph-api/reference/page-payment-options/</para>
     /// </summary>
     public class PagePaymentOptions
     {

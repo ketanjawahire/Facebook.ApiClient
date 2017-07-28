@@ -5,7 +5,7 @@ namespace FacebookApi.Entities
 {
     /// <summary>
     /// Represents a Facebook event.
-    /// <see cref="https://developers.facebook.com/docs/graph-api/reference/event/"/>
+    /// <para>https://developers.facebook.com/docs/graph-api/reference/event/</para>
     /// </summary>
     public class Event
     {

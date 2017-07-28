@@ -6,7 +6,7 @@ namespace FacebookApi.Entities
 {
     /// <summary>
     /// Represents an individual video on Facebook.
-    /// <see cref="https://developers.facebook.com/docs/graph-api/reference/video/"/>
+    /// <para>https://developers.facebook.com/docs/graph-api/reference/video/</para>
     /// </summary>
     public class Video
     {

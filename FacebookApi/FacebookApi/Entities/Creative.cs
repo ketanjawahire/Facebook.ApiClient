@@ -10,6 +10,7 @@ namespace FacebookApi.Entities
 {
     /// <summary>
     /// An ad creative object is an instance of a specific creative which is being used to define the <see cref="Ad.Creative"/> field of one or more <see cref="Ad"/>s.
+    /// <para>https://developers.facebook.com/docs/marketing-api/reference/ad-creative/</para>
     /// </summary>
     public class Creative
     {
@@ -207,6 +208,10 @@ namespace FacebookApi.Entities
         public string UrlTags { get; set; }
 
 
+        /// <summary>
+        /// Get api field selectors for <see cref="Creative"/>
+        /// </summary>
+        /// <returns>Comma seperated fields</returns>
         public static IList<string> GetApiSelectors()
         {
             var prop = typeof(Creative).GetProperties()

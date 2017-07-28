@@ -109,6 +109,10 @@ namespace FacebookApi.Entities
         [DeserializeAs(Name = "updated_time")]
         public string UpdatedTime { get; set; }
 
+        /// <summary>
+        /// Get api field selectors for <see cref="Campaign"/>
+        /// </summary>
+        /// <returns>Comma seperated fields</returns>
         public static IList<string> GetApiSelectors()
         {
             var apiFields = typeof(Campaign).GetProperties()

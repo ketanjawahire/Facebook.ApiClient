@@ -6,7 +6,7 @@ namespace FacebookApi.Entities
 {
     /// <summary>
     /// Information about a user's work
-    /// <see cref="https://developers.facebook.com/docs/graph-api/reference/work-experience/"/>
+    /// <para>https://developers.facebook.com/docs/graph-api/reference/work-experience/</para>
     /// </summary>
     public class WorkExperience
     {

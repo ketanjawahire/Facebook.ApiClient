@@ -1,45 +1,61 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using FacebookApi.Constants;
-using FacebookApi.Enums;
+﻿using FacebookApi.Constants;
 using FacebookApi.Exceptions;
 using FacebookApi.Interfaces.IApiEngine;
-using RestSharp;
-using RestSharp.Extensions.MonoHttp;
-using RestSharp.Newtonsoft.Json;
-using RestRequest = RestSharp.RestRequest;
 
 namespace FacebookApi.ApiEngine
 {
+    /// <summary>
+    /// Represents Facebook api client. It contains information required for doing api calls
+    /// </summary>
     public class ApiClient : IApiClient
     {
-        
+        /// <summary>
+        /// An access token is an opaque string that identifies a user, app, or Page and can be used by the app to make graph API calls.
+        /// </summary>
         public string AccessToken { get; private set; }
 
+        /// <summary>
+        /// Facebook api version to use while making api calls
+        /// </summary>
         public string ApiVersion { get; private set; }
 
+        /// <summary>
+        /// Facebook Application Id
+        /// </summary>
         public string AppId { get; private set; }
 
+        /// <summary>
+        /// Facebook Application secret key
+        /// </summary>
         public string AppSecret { get; private set; }
 
-
+        /// <summary>
+        /// Create new instance of <see cref="ApiClient"/> using given <see cref="AccessToken"/>
+        /// </summary>
+        /// <param name="accessToken">Access token</param>
         public ApiClient(string accessToken)
         {
             _setAccessToken(accessToken);
             _setApiVersion(FacebookApiVersions.DEFAULT);
         }
 
+        /// <summary>
+        /// Create new instance of <see cref="ApiClient"/> using given <see cref="AccessToken"/> &amp; <see cref="ApiVersion"/>
+        /// </summary>
+        /// <param name="accessToken"><see cref="AccessToken"/></param>
+        /// <param name="apiVersion"><see cref="ApiVersion"/></param>
         public ApiClient(string accessToken, string apiVersion)
         {
             _setApiVersion(apiVersion);
             _setAccessToken(accessToken);
         }
 
+        /// <summary>
+        /// Create new instance of <see cref="ApiClient"/> using given <see cref="AppId"/>, <see cref="AppSecret"/>, <see cref="AccessToken"/>
+        /// </summary>
+        /// <param name="appId"><see cref="AppId"/></param>
+        /// <param name="appSecret"><see cref="AppSecret"/></param>
+        /// <param name="accessToken"><see cref="AccessToken"/></param>
         public ApiClient(string appId, string appSecret, string accessToken)
         {
             _setApiVersion(FacebookApiVersions.DEFAULT);
@@ -47,6 +63,13 @@ namespace FacebookApi.ApiEngine
             _setAppId(appId, appSecret);
         }
 
+        /// <summary>
+        /// Create new instance of <see cref="ApiClient"/> using given <see cref="AppId"/>, <see cref="AppSecret"/>, <see cref="AccessToken"/> &amp; <see cref="ApiVersion"/>
+        /// </summary>
+        /// <param name="appId"><see cref="AppId"/></param>
+        /// <param name="appSecret"><see cref="AppSecret"/></param>
+        /// <param name="accessToken"><see cref="AccessToken"/></param>
+        /// <param name="apiVersion"><see cref="ApiVersion"/></param>
         public ApiClient(string appId, string appSecret, string accessToken, string apiVersion)
         {
             _setApiVersion(apiVersion);
@@ -71,7 +94,7 @@ namespace FacebookApi.ApiEngine
             this.AccessToken = accessToken;
         }
 
-        public void _setAppId(string appId, string appSecret)
+        private void _setAppId(string appId, string appSecret)
         {
             AppId = appId;
             AppSecret = appSecret;

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.Serialization;
 
 namespace FacebookApi.Exceptions
 {
@@ -6,6 +8,7 @@ namespace FacebookApi.Exceptions
     /// <para>If no subcode is present, this means that the login status or access token has expired, been revoked, or is otherwise invalid. </para>
     /// <para>Get a new access token. If a subcode is present, see the subcode.</para>
     /// </summary>
+    [SuppressMessage("Microsoft.Usage", "CA2240:ImplementISerializableCorrectly")]
     [Serializable]
     public class FacebookOAuthException : Exception
     {
@@ -34,12 +37,26 @@ namespace FacebookApi.Exceptions
         /// </summary>
         public string ErrorUserMessage { get; set; }
 
+        /// <summary>
+        /// FBRev
+        /// </summary>
         public string FBRev { get; set; }
 
+        /// <summary>
+        /// Type
+        /// </summary>
         public string Type { get; set; }
 
+        /// <summary>
+        /// FBDebug
+        /// </summary>
         public string FBDebug { get; set; }
 
+        /// <summary>
+        /// Initialize new instance of <see cref="FacebookOAuthException"/>
+        /// </summary>
+        /// <param name="exceptionCode">API Exception code</param>
+        /// <param name="message">Exception message</param>
         public FacebookOAuthException(int exceptionCode, string message) : base(message)
         {
             Code = exceptionCode;

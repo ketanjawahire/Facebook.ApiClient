@@ -4,7 +4,7 @@ namespace FacebookApi.Entities
 {
     /// <summary>
     /// Information about a person's VOIP status
-    /// <see cref="https://developers.facebook.com/docs/graph-api/reference/voip-info/"/>
+    /// <para>https://developers.facebook.com/docs/graph-api/reference/voip-info/</para>
     /// </summary>
     public class VoipInfo
     {

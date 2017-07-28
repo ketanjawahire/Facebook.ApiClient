@@ -7,20 +7,48 @@ using FacebookApi.Interfaces.IApiEngine;
 
 namespace FacebookApi.ApiEngine
 {
+    /// <summary>
+    /// Represents response received from api
+    /// </summary>
+    /// <typeparam name="TEntity">Entity class which can be used to represent received API response</typeparam>
     public class ApiResponse<TEntity> : IApiResponse<TEntity> where TEntity : class 
     {
+        /// <summary>
+        /// Api result in format of TEntity 
+        /// </summary>
         public TEntity Result { get; private set; }
 
+        /// <summary>
+        /// ETag response header value
+        /// </summary>
         public string ETag { get; private set; }
 
+        /// <summary>
+        /// FBTrace response header value
+        /// </summary>
         public string FBTraceId { get; private set; }
 
+        /// <summary>
+        /// FBApiVersion response header value
+        /// </summary>
         public string FBApiVersion { get; private set; }
 
+        /// <summary>
+        /// FBDebug response header value
+        /// </summary>
         public string FBDebug { get; private set; }
 
+        /// <summary>
+        /// List of exceptions from api response
+        /// </summary>
         public IEnumerable<Exception> Exceptions { get; set; }
 
+        /// <summary>
+        /// Initialize instance of <see cref="ApiResponse{TEntity}"/>
+        /// </summary>
+        /// <param name="responce">Api Response of type TEntity</param>
+        /// <param name="headerParameters">Response headers</param>
+        /// <param name="exceptions">API response exceptions</param>
         public ApiResponse(TEntity responce, IList<Parameter> headerParameters, IEnumerable<Exception> exceptions)
         {
             Result = responce;
@@ -47,6 +75,10 @@ namespace FacebookApi.ApiEngine
                 ETag = tempParameter.Value.ToString();
         }
 
+        /// <summary>
+        /// Returns <see cref="Result"/>
+        /// </summary>
+        /// <returns><see cref="Result"/></returns>
         public TEntity GetApiResult()
         {
             return Result;

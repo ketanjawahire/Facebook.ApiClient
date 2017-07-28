@@ -10,40 +10,83 @@ using RestSharp.Deserializers;
 
 namespace FacebookApi.ApiEngine
 {
+    /// <summary>
+    /// Represents paged API response
+    /// </summary>
+    /// <typeparam name="TApiEntity">Entity class which can be used to represent received API response</typeparam>
     public class PagedResponse<TApiEntity> : IPagedResponse<TApiEntity> where TApiEntity : class, new()
     {
+        /// <summary>
+        /// <see cref="ApiClient"/> used to execute <see cref="PagedApiRequest"/>
+        /// </summary>
         public ApiClient ApiClient { get; private set; }
 
+        /// <summary>
+        /// Data from paged API response
+        /// </summary>
         [DeserializeAs(Name = "data")]
         public List<TApiEntity> Data { get; set; }
 
+        /// <summary>
+        /// Paging information from API response
+        /// </summary>
         [DeserializeAs(Name = "paging")]
         public Paging Paging { get; set; }
 
+        /// <summary>
+        /// ETag response header
+        /// </summary>
         public string ETag { get; private set; }
 
+        /// <summary>
+        /// FBTrace response header
+        /// </summary>
         public string FBTraceId { get; private set; }
 
+        /// <summary>
+        /// FBApiVersion response header
+        /// </summary>
         public string FBApiVersion { get; private set; }
 
+        /// <summary>
+        /// FBDebug response header
+        /// </summary>
         public string FBDebug { get; private set; }
 
+        /// <summary>
+        /// API response exceptions
+        /// </summary>
         public IEnumerable<Exception> Exceptions { get; set; }
 
+        /// <summary>
+        /// Initialize new instance of <see cref="PagedResponse{TApiEntity}"/>
+        /// </summary>
         public PagedResponse()
         {
         }
 
+        /// <summary>
+        /// Set response headers
+        /// </summary>
+        /// <param name="headers"></param>
         public void SetResponseHeaders(IEnumerable<Parameter> headers)
         {
             
         }
 
+        /// <summary>
+        /// Set response excecptions
+        /// </summary>
+        /// <param name="exceptions"></param>
         public void SetResponseExceptions(IEnumerable<Exception> exceptions)
         {
 
         }
 
+        /// <summary>
+        /// Set <see cref="ApiClient"/> value
+        /// </summary>
+        /// <param name="apiClient"></param>
         public void SetApiClient(ApiClient apiClient)
         {
             this.ApiClient = apiClient;
@@ -84,62 +127,90 @@ namespace FacebookApi.ApiEngine
             return previousPageRequest;
         }
 
+        /// <summary>
+        /// Get next page data from API
+        /// </summary>
+        /// <returns>Next page data</returns>
         public IPagedResponse<TApiEntity> GetNextPageData()
         {
             var nextPageRequest = _getNextPageRequest();
             return nextPageRequest.ExecutePage<TApiEntity>();
         }
 
+        /// <summary>
+        /// Get next page data from API
+        /// </summary>
+        /// <returns>Next page data</returns>
         public async Task<IPagedResponse<TApiEntity>> GetNextPageDataAsync()
         {
             var nextPageRequest = _getNextPageRequest();
             return await nextPageRequest.ExecutePageAsync<TApiEntity>();
         }
 
+        /// <summary>
+        /// Get previous page data.
+        /// </summary>
+        /// <returns>Previous page data</returns>
         public IPagedResponse<TApiEntity> GetPreviousPageData()
         {
             var previousPageRequest = _getPreviousPageRequest();
             return previousPageRequest.ExecutePage<TApiEntity>();
         }
 
+        /// <summary>
+        /// Get previous page data.
+        /// </summary>
+        /// <returns>Previous page data</returns>
         public async Task<IPagedResponse<TApiEntity>> GetPreviousPageDataAsync()
         {
             var previousPageRequest = _getPreviousPageRequest();
             return await previousPageRequest.ExecutePageAsync<TApiEntity>();
         }
 
+        /// <summary>
+        /// Get API response data
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<TApiEntity> GetResultData()
         {
             return this.Data;
         }
 
+        /// <summary>
+        /// Check if next page data is available or not
+        /// </summary>
+        /// <returns>True of <see cref="Paging.Next"/> is not null</returns>
         public bool IsNextPageDataAvailable()
         {
             return !string.IsNullOrEmpty(Paging?.Next);
         }
 
+        /// <summary>
+        /// Check if previous page data is available or not
+        /// </summary>
+        /// <returns>True of <see cref="Paging.Previous"/> is not null</returns>
         public bool IsPreviousPageDataAvailable()
         {
             return !string.IsNullOrEmpty(Paging?.Previous);
         }
 
-        private void SetValuesFromResponceHeaders(IList<Parameter> headerParameters)
-        {
-            var tempParameter = headerParameters.FirstOrDefault(e => e.Name.Equals(FacebookApiResponceHeaders.X_FB_TRACE_ID));
-            if (tempParameter != null)
-                FBTraceId = tempParameter.Value.ToString();
+        //private void SetValuesFromResponceHeaders(IList<Parameter> headerParameters)
+        //{
+        //    var tempParameter = headerParameters.FirstOrDefault(e => e.Name.Equals(FacebookApiResponceHeaders.X_FB_TRACE_ID));
+        //    if (tempParameter != null)
+        //        FBTraceId = tempParameter.Value.ToString();
 
-            tempParameter = headerParameters.FirstOrDefault(e => e.Name.Equals(FacebookApiResponceHeaders.FACEBOOK_API_VERSION));
-            if (tempParameter != null)
-                FBApiVersion = tempParameter.Value.ToString();
+        //    tempParameter = headerParameters.FirstOrDefault(e => e.Name.Equals(FacebookApiResponceHeaders.FACEBOOK_API_VERSION));
+        //    if (tempParameter != null)
+        //        FBApiVersion = tempParameter.Value.ToString();
 
-            tempParameter = headerParameters.FirstOrDefault(e => e.Name.Equals(FacebookApiResponceHeaders.X_FB_DEBUG));
-            if (tempParameter != null)
-                FBDebug = tempParameter.Value.ToString();
+        //    tempParameter = headerParameters.FirstOrDefault(e => e.Name.Equals(FacebookApiResponceHeaders.X_FB_DEBUG));
+        //    if (tempParameter != null)
+        //        FBDebug = tempParameter.Value.ToString();
 
-            tempParameter = headerParameters.FirstOrDefault(e => e.Name.Equals(FacebookApiResponceHeaders.ETAG));
-            if (tempParameter != null)
-                ETag = tempParameter.Value.ToString();
-        }
+        //    tempParameter = headerParameters.FirstOrDefault(e => e.Name.Equals(FacebookApiResponceHeaders.ETAG));
+        //    if (tempParameter != null)
+        //        ETag = tempParameter.Value.ToString();
+        //}
     }
 }

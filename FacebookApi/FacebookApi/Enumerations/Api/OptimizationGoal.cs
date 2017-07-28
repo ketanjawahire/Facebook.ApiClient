@@ -7,6 +7,10 @@ using FacebookApi.Entities;
 
 namespace FacebookApi.Enums.Api
 {
+
+    /// <summary>
+    /// Which optimization goal this ad set is using
+    /// </summary>
     public enum OptimizationGoal
     {
         /// <summary>
@@ -100,7 +104,16 @@ namespace FacebookApi.Enums.Api
         /// </summary>
         VIDEO_VIEWS,
 
+        /// <summary>
+        /// APP_DOWNLOADS
+        /// </summary>
         APP_DOWNLOADS,
-        LANDING_PAGE_VIEWS
+
+        /// <summary>
+        /// LANDING_PAGE_VIEWS
+        /// </summary>
+        LANDING_PAGE_VIEWS,
+
+
     }
 }

@@ -6,9 +6,21 @@ using System.Threading.Tasks;
 
 namespace FacebookApi.Enums.Api
 {
+    /// <summary>
+    /// The status of this creative.
+    /// </summary>
     public enum CreativeStatus
     {
+        /// <summary>
+        /// ACTIVE
+        /// </summary>
         ACTIVE,
-        DELETED
+
+        /// <summary>
+        /// DELETED
+        /// </summary>
+        DELETED,
+
+
     }
 }

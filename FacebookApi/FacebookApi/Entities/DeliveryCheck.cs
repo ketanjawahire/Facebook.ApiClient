@@ -4,7 +4,7 @@ namespace FacebookApi.Entities
 {
     /// <summary>
     /// Delivery checks are a set of tests which can help find out potential issues related to ad delivery.
-    /// <see cref="https://developers.facebook.com/docs/marketing-api/adgroup/deliverychecks/v2.5"/>
+    /// <para>https://developers.facebook.com/docs/marketing-api/adgroup/deliverychecks/v2.5</para>
     /// </summary>
     public class DeliveryCheck
     {

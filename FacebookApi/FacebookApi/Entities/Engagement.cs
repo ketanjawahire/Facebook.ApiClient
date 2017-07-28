@@ -4,7 +4,7 @@ namespace FacebookApi.Entities
 {
     /// <summary>
     /// This is an API that can deliver the same data as what's used to render social information contained in a like button
-    /// <see cref="https://developers.facebook.com/docs/graph-api/reference/engagement/"/>
+    /// <para>https://developers.facebook.com/docs/graph-api/reference/engagement/</para>
     /// </summary>
     public class Engagement
     {

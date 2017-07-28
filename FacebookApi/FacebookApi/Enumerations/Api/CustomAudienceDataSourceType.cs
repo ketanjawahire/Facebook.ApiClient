@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace FacebookApi.Enumerations.Api
 {
+    /// <summary>
+    /// Custom Audience type
+    /// </summary>
     public enum CustomAudienceDataSourceType
     {
         /// <summary>
@@ -43,6 +46,11 @@ namespace FacebookApi.Enumerations.Api
         /// </summary>
         CONTACT_IMPORTER,
 
-        HOUSEHOLD_AUDIENCE
+        /// <summary>
+        /// HOUSEHOLD_AUDIENCE
+        /// </summary>
+        HOUSEHOLD_AUDIENCE,
+
+
     }
 }

@@ -7,7 +7,9 @@ namespace FacebookApi.Entities
     /// </summary>
     public class AdCreativePlatformCustomization
     {
-        //Media used on Instagram
+        /// <summary>
+        /// Media used on Instagram
+        /// </summary>
         [DeserializeAs(Name = "instagram")]
         public AdCreativePlatformCustomizationOverride Instagram { get; set; }
     }
