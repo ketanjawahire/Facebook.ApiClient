@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
@@ -24,6 +25,11 @@ namespace FacebookApi.ApiEngine
         /// Instance of <see cref="RestClient"/> for this request
         /// </summary>
         protected IRestClient _restClient;
+
+        /// <summary>
+        /// Stopwatch timer to measure api call timings
+        /// </summary>
+        private Stopwatch _apiTimer;
 
         /// <summary>
         /// API request uri
@@ -134,6 +140,40 @@ namespace FacebookApi.ApiEngine
                 Type = ApiRequestParameterType.HttpHeader,
                 Value = parameterValue
             });
+        }
+
+        /// <summary>
+        /// Initialize &amp; start <see cref="_apiTimer"/>
+        /// </summary>
+        protected void StartApiTimer()
+        {
+            if(_apiTimer == null)
+                _apiTimer = new Stopwatch();
+
+            if (_apiTimer.IsRunning)
+            {
+                _apiTimer.Stop();
+                _apiTimer.Reset();
+            }
+
+            _apiTimer.Start();
+        }
+
+        /// <summary>
+        /// Stop <see cref="_apiTimer"/>
+        /// </summary>
+        protected void StopApiTimer()
+        {
+            _apiTimer.Stop();
+        }
+
+        /// <summary>
+        /// Get elapsed timespan from <see cref="_apiTimer"/>
+        /// </summary>
+        /// <returns></returns>
+        public TimeSpan GetElapsedApiTime()
+        {
+            return _apiTimer.Elapsed;
         }
 
         /// <summary>

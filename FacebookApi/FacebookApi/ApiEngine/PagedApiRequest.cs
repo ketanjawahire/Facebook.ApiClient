@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FacebookApi.Constants;
 using FacebookApi.Enums;
+using FacebookApi.Exceptions;
 using FacebookApi.Interfaces.IApiEngine;
 using RestSharp;
 
@@ -60,10 +61,13 @@ namespace FacebookApi.ApiEngine
         public IPagedResponse<TEntity> ExecutePage<TEntity>() where TEntity : class, new()
         {
             var request = _prepareRestRequest(ApiRequestHttpMethod.GET, RequestUri, RequestParameters);
+
+            StartApiTimer();
             var response = _restClient.Execute<PagedResponse<TEntity>>(request);
+            StopApiTimer();
 
             if (response.ErrorException != null)
-                throw response.ErrorException;
+                throw new SDKException(response.Content, response.ErrorException);
 
             return _processResponse(response);
         }
@@ -76,10 +80,13 @@ namespace FacebookApi.ApiEngine
         public async Task<IPagedResponse<TEntity>> ExecutePageAsync<TEntity>() where TEntity : class, new()
         {
             var request = _prepareRestRequest(ApiRequestHttpMethod.GET, RequestUri, RequestParameters);
+
+            StartApiTimer();
             var response = await _restClient.ExecuteTaskAsync<PagedResponse<TEntity>>(request);
+            StopApiTimer();
 
             if (response.ErrorException != null)
-                throw response.ErrorException;
+                throw new SDKException(response.Content, response.ErrorException);
 
             return _processResponse(response);
         }
