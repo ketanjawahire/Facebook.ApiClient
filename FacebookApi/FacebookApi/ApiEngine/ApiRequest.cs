@@ -58,11 +58,32 @@ namespace FacebookApi.ApiEngine
             return new ApiResponse<TEntity>(response.Data, response.Headers, GetExceptionsFromApiResponse(response));
         }
 
+        /// <summary>
+        /// Execute current API request.
+        /// </summary>
+        /// <param name="method"><see cref="ApiRequestHttpMethod"/></param>
+        /// <returns>Returns API response as string</returns>
+        public IApiResponse<string> Execute(ApiRequestHttpMethod method)
+        {
+            var request = _prepareRestRequest(method, RequestUri, RequestParameters);
+            var response = _restClient.Execute(request);
 
-        //public TEntity Get<TEntity>() where TEntity : class, new()
+            if (response.ErrorException != null)
+                throw response.ErrorException;
+
+            return new ApiResponse<string>(response.Content, response.Headers, GetExceptionsFromApiResponse(response));
+        }
+
+        //public async Task<IApiResponse<string>> ExecuteAsync(ApiRequestHttpMethod method)
         //{
-        //    var apiResponse = Execute<TEntity>(ApiRequestHttpMethod.GET);
-        //    return apiResponse.GetApiResult();
+        //    var request = _prepareRestRequest(method, RequestUri, RequestParameters);
+        //    var response = _restClient.ExecuteAsync(request);
+
+        //    if (response.ErrorException != null)
+        //        throw response.ErrorException;
+
+        //    return new ApiResponse<string>(response.Content, response.Headers, GetExceptionsFromApiResponse(response));
         //}
+
     }
 }
