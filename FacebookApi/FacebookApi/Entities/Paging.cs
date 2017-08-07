@@ -8,6 +8,25 @@ namespace FacebookApi.ApiEngine
     /// </summary>
     public class Paging : IPaging
     {
+        
+        /// <summary>
+        /// Next page url
+        /// </summary>
+        [DeserializeAs(Name = "next")]
+        public string Next { get; set; }
+
+        /// <summary>
+        /// Previous page url
+        /// </summary>
+        [DeserializeAs(Name = "previous")]
+        public string Previous { get; set; }
+
+        [DeserializeAs(Name = "cursors")]
+        public Cursors Cursors { get; set; }
+    }
+
+    public class Cursors
+    {
         /// <summary>
         /// Cursor for previous page
         /// </summary>
@@ -20,16 +39,5 @@ namespace FacebookApi.ApiEngine
         [DeserializeAs(Name = "after")]
         public string After { get; set; }
 
-        /// <summary>
-        /// Next page url
-        /// </summary>
-        [DeserializeAs(Name = "next")]
-        public string Next { get; set; }
-
-        /// <summary>
-        /// Previous page url
-        /// </summary>
-        [DeserializeAs(Name = "previous")]
-        public string Previous { get; set; }
     }
 }
