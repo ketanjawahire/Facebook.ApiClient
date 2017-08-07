@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,8 @@ namespace FacebookApi.Exceptions
     /// <summary>
     /// Represents error in SDK while deserializing api responce
     /// </summary>
+    [Serializable]
+    [SuppressMessage("Microsoft.Usage", "CA2240:ImplementISerializableCorrectly")]
     public class SDKException : Exception
     {
         /// <summary>
