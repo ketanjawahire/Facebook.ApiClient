@@ -12,6 +12,7 @@ using FacebookApi.Enums;
 using FacebookApi.Exceptions;
 using RestSharp;
 using RestSharp.Newtonsoft.Json;
+using RestSharp.Serializers;
 using RestRequest = RestSharp.RestRequest;
 
 namespace FacebookApi.ApiEngine
@@ -30,6 +31,8 @@ namespace FacebookApi.ApiEngine
         /// Stopwatch timer to measure api call timings
         /// </summary>
         private Stopwatch _apiTimer;
+
+        private ISerializer _jsonSerializer;
 
         /// <summary>
         /// API request uri
@@ -54,9 +57,23 @@ namespace FacebookApi.ApiEngine
             RequestParameters = new List<ApiRequestParameter>();
         }
 
-        private static void _setJsonSerializer(IRestRequest restRequest)
+        private void _setJsonSerializer(IRestRequest restRequest)
         {
-            restRequest.JsonSerializer = new NewtonsoftJsonSerializer();
+            restRequest.JsonSerializer = _getJsonSerializer();
+        }
+
+        private ISerializer _getJsonSerializer()
+        {
+            return _jsonSerializer ?? new NewtonsoftJsonSerializer();
+        }
+
+        /// <summary>
+        /// Set JSON serializer of type <see cref="NewtonsoftJsonSerializer"/>
+        /// </summary>
+        /// <param name="jsonSerializer">Object of type <see cref="NewtonsoftJsonSerializer "/></param>
+        public void SetJsonSerializer(NewtonsoftJsonSerializer jsonSerializer)
+        {
+            _jsonSerializer = jsonSerializer;
         }
 
         private void _setFBRequestParameters(IRestRequest restRequest)
