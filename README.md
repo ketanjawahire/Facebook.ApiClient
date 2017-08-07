@@ -29,8 +29,8 @@ The Facebook SDK for .NET helps developers build applications interacting with F
 
 	while (testRequest2Response.IsNextPageDataAvailable())
 	{
-		var pagedData = testRequest2Response.GetNextPageData();
-		result.AddRange(pagedData.GetResultData());
+		testRequest2Response = testRequest2Response.GetNextPageData();
+		result.AddRange(testRequest2Response.GetResultData());
 	}
 ```	
 
