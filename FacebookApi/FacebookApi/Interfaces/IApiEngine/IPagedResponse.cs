@@ -51,5 +51,7 @@ namespace FacebookApi.Interfaces.IApiEngine
         /// </summary>
         /// <returns>True of <see cref="Paging.Previous"/> is not null</returns>
         bool IsPreviousPageDataAvailable();
+
+        string GetNextPageUrl();
     }
 }

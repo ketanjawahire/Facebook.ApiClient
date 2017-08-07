@@ -24,13 +24,13 @@ namespace FacebookApi.Entities
         /// Custom Audience type
         /// </summary>
         [DeserializeAs(Name = "type")]
-        public CustomAudienceDataSourceType? Type { get; set; }
+        public string Type { get; set; }
 
         /// <summary>
         /// Custom Audience subtype
         /// </summary>
         [DeserializeAs(Name = "sub_type")]
-        public CustomAudienceDataSourceSubType? SubType { get; set; }
+        public string SubType { get; set; }
 
 
     }

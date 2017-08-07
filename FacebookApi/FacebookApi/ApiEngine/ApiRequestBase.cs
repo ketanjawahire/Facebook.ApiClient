@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
@@ -11,6 +12,7 @@ using FacebookApi.Enums;
 using FacebookApi.Exceptions;
 using RestSharp;
 using RestSharp.Newtonsoft.Json;
+using RestSharp.Serializers;
 using RestRequest = RestSharp.RestRequest;
 
 namespace FacebookApi.ApiEngine
@@ -24,6 +26,13 @@ namespace FacebookApi.ApiEngine
         /// Instance of <see cref="RestClient"/> for this request
         /// </summary>
         protected IRestClient _restClient;
+
+        /// <summary>
+        /// Stopwatch timer to measure api call timings
+        /// </summary>
+        private Stopwatch _apiTimer;
+
+        private ISerializer _jsonSerializer;
 
         /// <summary>
         /// API request uri
@@ -48,9 +57,23 @@ namespace FacebookApi.ApiEngine
             RequestParameters = new List<ApiRequestParameter>();
         }
 
-        private static void _setJsonSerializer(IRestRequest restRequest)
+        private void _setJsonSerializer(IRestRequest restRequest)
         {
-            restRequest.JsonSerializer = new NewtonsoftJsonSerializer();
+            restRequest.JsonSerializer = _getJsonSerializer();
+        }
+
+        private ISerializer _getJsonSerializer()
+        {
+            return _jsonSerializer ?? new NewtonsoftJsonSerializer();
+        }
+
+        /// <summary>
+        /// Set JSON serializer of type <see cref="NewtonsoftJsonSerializer"/>
+        /// </summary>
+        /// <param name="jsonSerializer">Object of type <see cref="NewtonsoftJsonSerializer "/></param>
+        public void SetJsonSerializer(NewtonsoftJsonSerializer jsonSerializer)
+        {
+            _jsonSerializer = jsonSerializer;
         }
 
         private void _setFBRequestParameters(IRestRequest restRequest)
@@ -134,6 +157,40 @@ namespace FacebookApi.ApiEngine
                 Type = ApiRequestParameterType.HttpHeader,
                 Value = parameterValue
             });
+        }
+
+        /// <summary>
+        /// Initialize &amp; start <see cref="_apiTimer"/>
+        /// </summary>
+        protected void StartApiTimer()
+        {
+            if(_apiTimer == null)
+                _apiTimer = new Stopwatch();
+
+            if (_apiTimer.IsRunning)
+            {
+                _apiTimer.Stop();
+                _apiTimer.Reset();
+            }
+
+            _apiTimer.Start();
+        }
+
+        /// <summary>
+        /// Stop <see cref="_apiTimer"/>
+        /// </summary>
+        protected void StopApiTimer()
+        {
+            _apiTimer.Stop();
+        }
+
+        /// <summary>
+        /// Get elapsed timespan from <see cref="_apiTimer"/>
+        /// </summary>
+        /// <returns></returns>
+        public TimeSpan GetElapsedApiTime()
+        {
+            return _apiTimer.Elapsed;
         }
 
         /// <summary>

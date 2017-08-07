@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using RestSharp.Deserializers;
 
 namespace FacebookApi.Entities
@@ -151,17 +153,14 @@ namespace FacebookApi.Entities
         /// Get api field selectors for <see cref="CustomAudience"/>
         /// </summary>
         /// <returns>Comma seperated fields</returns>
-        public static string GetSelectors()
+        public static IList<string> GetSelectors()
         {
-            var selectors = new string[]
-            {
-                "id", "accoint_id", "approximate_count", "data_source", "delivery_status", "description",
-                "external_event_source", "is_value_based", "lookalike_audience_ids", "lookalike_spec", "name",
-                "operation_status", "opt_out_link", "permission_for_actions", "pixel_id", "retention_days", "rule",
-                "rule_aggregation", "subtype", "time_content_updated", "time_created", "time_updated"
-            };
 
-            return string.Join(",", selectors);
+            var apiFields = typeof(CustomAudience).GetProperties()
+                .Select(e => e.GetCustomAttributes(typeof(DeserializeAsAttribute), true)).Where(e => e.Length > 0)
+                .Select(e => e.First() as DeserializeAsAttribute).Where(e => e != null).Select(e => e.Name).ToList();
+
+            return apiFields;
         }
     }
 }

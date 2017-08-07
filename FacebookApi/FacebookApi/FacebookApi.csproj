@@ -117,6 +117,7 @@
     <Compile Include="Exceptions\FacebookOtherException.cs" />
     <Compile Include="Exceptions\FacebookServerException.cs" />
     <Compile Include="Exceptions\FacebookThrottleException.cs" />
+    <Compile Include="Exceptions\SDKException.cs" />
     <Compile Include="Interfaces\IApiEngine\IApiRequestParameter.cs" />
     <Compile Include="Interfaces\IApiEngine\IBatchRequest.cs" />
     <Compile Include="Interfaces\IApiEngine\IBatchRequestBodyParameter.cs" />

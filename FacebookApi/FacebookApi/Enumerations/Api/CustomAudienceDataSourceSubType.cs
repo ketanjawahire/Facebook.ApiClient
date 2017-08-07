@@ -229,6 +229,16 @@ namespace FacebookApi.Enumerations.Api
         /// <summary>
         /// Get in touch with the importer
         /// </summary>
-        CONTACT_IMPORTER
+        CONTACT_IMPORTER,
+
+        /// <summary>
+        /// CUSTOM
+        /// </summary>
+        CUSTOM,
+
+        /// <summary>
+        /// 
+        /// </summary>
+        LOOKALIKE
     }
 }

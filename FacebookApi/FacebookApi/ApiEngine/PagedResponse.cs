@@ -194,6 +194,11 @@ namespace FacebookApi.ApiEngine
             return !string.IsNullOrEmpty(Paging?.Previous);
         }
 
+        public string GetNextPageUrl()
+        {
+            return this.Paging.Next;
+        }
+
         //private void SetValuesFromResponceHeaders(IList<Parameter> headerParameters)
         //{
         //    var tempParameter = headerParameters.FirstOrDefault(e => e.Name.Equals(FacebookApiResponceHeaders.X_FB_TRACE_ID));
