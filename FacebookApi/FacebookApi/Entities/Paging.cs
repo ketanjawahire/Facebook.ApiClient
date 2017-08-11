@@ -21,23 +21,10 @@ namespace FacebookApi.ApiEngine
         [DeserializeAs(Name = "previous")]
         public string Previous { get; set; }
 
+        /// <summary>
+        /// Cursors
+        /// </summary>
         [DeserializeAs(Name = "cursors")]
         public Cursors Cursors { get; set; }
-    }
-
-    public class Cursors
-    {
-        /// <summary>
-        /// Cursor for previous page
-        /// </summary>
-        [DeserializeAs(Name = "before")]
-        public string Before { get; set; }
-
-        /// <summary>
-        /// Cursor for next page
-        /// </summary>
-        [DeserializeAs(Name = "after")]
-        public string After { get; set; }
-
     }
 }

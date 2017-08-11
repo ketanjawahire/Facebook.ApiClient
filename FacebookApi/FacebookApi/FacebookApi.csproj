@@ -40,7 +40,7 @@
       <HintPath>..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp.Newtonsoft.Json, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RestSharp.Newtonsoft.Json.1.0.0\lib\net45\RestSharp.Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\SampleConsoleApplication\packages\RestSharp.Newtonsoft.Json.1.0.0\lib\net45\RestSharp.Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -62,6 +62,7 @@
     <Compile Include="ApiEngine\BatchRequestParameters.cs" />
     <Compile Include="ApiEngine\BatchRequestResponce.cs" />
     <Compile Include="ApiEngine\BatchResponceHeader.cs" />
+    <Compile Include="ApiEngine\Cursors.cs" />
     <Compile Include="ApiEngine\PagedApiRequest.cs" />
     <Compile Include="Entities\AdActionStats.cs" />
     <Compile Include="Entities\AdCampaignFrequencyControlSpecs.cs" />

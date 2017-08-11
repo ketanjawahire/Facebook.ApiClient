@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FacebookApi.Constants;
 using FacebookApi.Enums;
+using FacebookApi.Exceptions;
 using FacebookApi.Interfaces.IApiEngine;
 using RestSharp;
 using RestSharp.Deserializers;
@@ -34,29 +35,14 @@ namespace FacebookApi.ApiEngine
         public Paging Paging { get; set; }
 
         /// <summary>
-        /// ETag response header
+        /// API Response headers collection
         /// </summary>
-        public string ETag { get; private set; }
-
-        /// <summary>
-        /// FBTrace response header
-        /// </summary>
-        public string FBTraceId { get; private set; }
-
-        /// <summary>
-        /// FBApiVersion response header
-        /// </summary>
-        public string FBApiVersion { get; private set; }
-
-        /// <summary>
-        /// FBDebug response header
-        /// </summary>
-        public string FBDebug { get; private set; }
+        public IDictionary<string,string> ResponseHeaders { get; set; }
 
         /// <summary>
         /// API response exceptions
         /// </summary>
-        public IEnumerable<Exception> Exceptions { get; set; }
+        public IEnumerable<FacebookOAuthException> Exceptions { get; set; }
 
         /// <summary>
         /// Initialize new instance of <see cref="PagedResponse{TApiEntity}"/>
@@ -69,25 +55,26 @@ namespace FacebookApi.ApiEngine
         /// Set response headers
         /// </summary>
         /// <param name="headers"></param>
-        public void SetResponseHeaders(IEnumerable<Parameter> headers)
+        internal void SetResponseHeaders(IEnumerable<Parameter> headers)
         {
-            
+            var parameters = headers as IList<Parameter> ?? headers.ToList();
+            ResponseHeaders = parameters.ToDictionary(parameter => parameter.Name, parameter => parameter.Value.ToString());
         }
 
         /// <summary>
         /// Set response excecptions
         /// </summary>
         /// <param name="exceptions"></param>
-        public void SetResponseExceptions(IEnumerable<Exception> exceptions)
+        internal void SetResponseExceptions(IEnumerable<FacebookOAuthException> exceptions)
         {
-
+            Exceptions = exceptions;
         }
 
         /// <summary>
         /// Set <see cref="ApiClient"/> value
         /// </summary>
         /// <param name="apiClient"></param>
-        public void SetApiClient(ApiClient apiClient)
+        internal void SetApiClient(ApiClient apiClient)
         {
             this.ApiClient = apiClient;
         }
@@ -194,28 +181,31 @@ namespace FacebookApi.ApiEngine
             return !string.IsNullOrEmpty(Paging?.Previous);
         }
 
+        /// <summary>
+        /// Get next page url
+        /// </summary>
+        /// <returns>Next data page url</returns>
         public string GetNextPageUrl()
         {
             return this.Paging.Next;
         }
 
-        //private void SetValuesFromResponceHeaders(IList<Parameter> headerParameters)
-        //{
-        //    var tempParameter = headerParameters.FirstOrDefault(e => e.Name.Equals(FacebookApiResponceHeaders.X_FB_TRACE_ID));
-        //    if (tempParameter != null)
-        //        FBTraceId = tempParameter.Value.ToString();
+        /// <summary>
+        /// Checks if API has returned any data or not
+        /// </summary>
+        /// <returns>True if data is available</returns>
+        public bool IsDataAvailable()
+        {
+            return Data != null;
+        }
 
-        //    tempParameter = headerParameters.FirstOrDefault(e => e.Name.Equals(FacebookApiResponceHeaders.FACEBOOK_API_VERSION));
-        //    if (tempParameter != null)
-        //        FBApiVersion = tempParameter.Value.ToString();
-
-        //    tempParameter = headerParameters.FirstOrDefault(e => e.Name.Equals(FacebookApiResponceHeaders.X_FB_DEBUG));
-        //    if (tempParameter != null)
-        //        FBDebug = tempParameter.Value.ToString();
-
-        //    tempParameter = headerParameters.FirstOrDefault(e => e.Name.Equals(FacebookApiResponceHeaders.ETAG));
-        //    if (tempParameter != null)
-        //        ETag = tempParameter.Value.ToString();
-        //}
+        /// <summary>
+        /// Get list of exceptions from API response.
+        /// </summary>
+        /// <returns>List of exceptions</returns>
+        public IEnumerable<Exception> GetApiExceptions()
+        {
+            return Exceptions;
+        }
     }
 }
