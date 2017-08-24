@@ -2,10 +2,11 @@
 using System.ComponentModel;
 using System.Dynamic;
 using FacebookApi.Constants;
-using FacebookApi.Enums;
 using FacebookApi.Interfaces.IApiEngine;
 using RestSharp;
 using System.Threading.Tasks;
+using FacebookApi.Entities.ApiEngine;
+using FacebookApi.Enumerations.ApiEngine;
 using FacebookApi.Exceptions;
 
 namespace FacebookApi.ApiEngine

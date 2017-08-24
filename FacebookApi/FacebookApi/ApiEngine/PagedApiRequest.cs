@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FacebookApi.Constants;
-using FacebookApi.Enums;
+using FacebookApi.Enumerations.ApiEngine;
 using FacebookApi.Exceptions;
 using FacebookApi.Interfaces.IApiEngine;
 using RestSharp;
@@ -24,6 +24,8 @@ namespace FacebookApi.ApiEngine
         public PagedApiRequest(string requestUrl, ApiClient apiClient) : base()
         {
             _restClient = new RestClient(FacebookApiRequestUrls.GRAPH_REQUEST_BASE_URL);
+            _restClient.UserAgent =
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36";
 
             ApiClient = apiClient;
             RequestUri = requestUrl;

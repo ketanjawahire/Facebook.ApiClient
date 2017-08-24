@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using FacebookApi.ApiEngine;
+using FacebookApi.Entities.ApiEngine;
 
 namespace FacebookApi.Interfaces.IApiEngine
 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FacebookApi.Constants;
-using FacebookApi.Enums;
+using FacebookApi.Entities.ApiEngine;
 using FacebookApi.Exceptions;
 using FacebookApi.Interfaces.IApiEngine;
 using RestSharp;
