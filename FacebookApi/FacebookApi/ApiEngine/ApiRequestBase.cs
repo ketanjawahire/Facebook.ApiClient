@@ -8,8 +8,10 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using FacebookApi.Constants;
-using FacebookApi.Enums;
+using FacebookApi.Entities.ApiEngine;
+using FacebookApi.Enumerations.ApiEngine;
 using FacebookApi.Exceptions;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 using RestSharp.Newtonsoft.Json;
 using RestSharp.Serializers;
@@ -198,16 +200,20 @@ namespace FacebookApi.ApiEngine
         /// </summary>
         /// <param name="apiResponse">Received api response</param>
         /// <returns>List of api exceptions from received response</returns>
-        protected static IEnumerable<Exception> GetExceptionsFromApiResponse(IRestResponse apiResponse)
+        protected static IEnumerable<FacebookOAuthException> GetExceptionsFromApiResponse(IRestResponse apiResponse)
         {
-            IList<Exception> exceptions = new List<Exception>();
+            IList<FacebookOAuthException> exceptions = new List<FacebookOAuthException>();
 
             if (apiResponse.StatusCode != HttpStatusCode.BadRequest) return exceptions;
 
             var responseHeaders =
                 apiResponse.Headers.ToDictionary(e => e.Name);
 
-            exceptions.Add(new FacebookOAuthException(200, apiResponse.Content)
+            var parsedException = JObject.Parse(apiResponse.Content);
+            var exceptionCode = parsedException["error"]?["code"] != null ? int.Parse(parsedException["error"]["code"].ToString()) : 200;
+
+
+            exceptions.Add(new FacebookOAuthException(exceptionCode, parsedException["error"]?["message"].ToString())
             {
                 FBTraceId =
                     responseHeaders.ContainsKey(FacebookApiResponceHeaders.X_FB_TRACE_ID)
@@ -220,7 +226,13 @@ namespace FacebookApi.ApiEngine
                 FBDebug =
                     responseHeaders.ContainsKey(FacebookApiResponceHeaders.X_FB_DEBUG)
                         ? responseHeaders[FacebookApiResponceHeaders.X_FB_DEBUG].Value.ToString()
-                        : string.Empty
+                        : string.Empty,
+                RawExceptionString = apiResponse.Content,
+                ErrorUserMessage = parsedException["error"]?["error_user_message"]?.ToString(),
+                ErrorUserTitle = parsedException["error"]?["error_user_title"]?.ToString(),
+                SubCode = parsedException["error"]?["subcode"] != null
+                    ? int.Parse(parsedException["error"]["subcode"].ToString())
+                    : 0
             });
 
             return exceptions;

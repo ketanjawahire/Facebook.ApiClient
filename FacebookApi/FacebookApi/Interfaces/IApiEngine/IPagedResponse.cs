@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using FacebookApi.ApiEngine;
+using FacebookApi.Entities.ApiEngine;
 
 namespace FacebookApi.Interfaces.IApiEngine
 {
@@ -52,6 +54,22 @@ namespace FacebookApi.Interfaces.IApiEngine
         /// <returns>True of <see cref="Paging.Previous"/> is not null</returns>
         bool IsPreviousPageDataAvailable();
 
+        /// <summary>
+        /// Get next page url
+        /// </summary>
+        /// <returns>Next data page url</returns>
         string GetNextPageUrl();
+
+        /// <summary>
+        /// Checks if API has returned any data or not
+        /// </summary>
+        /// <returns>True if data is available</returns>
+        bool IsDataAvailable();
+
+        /// <summary>
+        /// Get list of exceptions from API response.
+        /// </summary>
+        /// <returns>List of exceptions</returns>
+        IEnumerable<Exception> GetApiExceptions();
     }
 }

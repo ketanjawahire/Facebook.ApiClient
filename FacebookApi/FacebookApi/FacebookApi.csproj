@@ -23,6 +23,7 @@
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <DocumentationFile>bin\Debug\FacebookApi.xml</DocumentationFile>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,6 +32,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <DocumentationFile>bin\Release\FacebookApi.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -40,7 +44,7 @@
       <HintPath>..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp.Newtonsoft.Json, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RestSharp.Newtonsoft.Json.1.0.0\lib\net45\RestSharp.Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\SampleConsoleApplication\packages\RestSharp.Newtonsoft.Json.1.0.0\lib\net45\RestSharp.Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -55,62 +59,16 @@
     <Compile Include="ApiEngine\ApiClient.cs" />
     <Compile Include="ApiEngine\ApiRequest.cs" />
     <Compile Include="ApiEngine\ApiRequestBase.cs" />
-    <Compile Include="ApiEngine\ApiRequestParameter.cs" />
-    <Compile Include="ApiEngine\ApiResponse.cs" />
-    <Compile Include="ApiEngine\BatchRequest.cs" />
-    <Compile Include="ApiEngine\BatchRequestBodyParameter.cs" />
-    <Compile Include="ApiEngine\BatchRequestParameters.cs" />
-    <Compile Include="ApiEngine\BatchRequestResponce.cs" />
-    <Compile Include="ApiEngine\BatchResponceHeader.cs" />
+    <Compile Include="Entities\ApiEngine\ApiRequestParameter.cs" />
+    <Compile Include="Entities\ApiEngine\ApiResponse.cs" />
+    <Compile Include="Entities\ApiEngine\BatchRequest.cs" />
+    <Compile Include="Entities\ApiEngine\BatchRequestBodyParameter.cs" />
+    <Compile Include="Entities\ApiEngine\BatchRequestParameters.cs" />
+    <Compile Include="Entities\ApiEngine\BatchRequestResponce.cs" />
+    <Compile Include="Entities\ApiEngine\BatchResponceHeader.cs" />
+    <Compile Include="Entities\ApiEngine\Cursors.cs" />
     <Compile Include="ApiEngine\PagedApiRequest.cs" />
-    <Compile Include="Entities\AdActionStats.cs" />
-    <Compile Include="Entities\AdCampaignFrequencyControlSpecs.cs" />
-    <Compile Include="Entities\AdCreativeAndroidData.cs" />
-    <Compile Include="Entities\AdCreativeConfigData.cs" />
-    <Compile Include="Entities\AdCreativeIosData.cs" />
-    <Compile Include="Entities\AdCreativeIpadData.cs" />
-    <Compile Include="Entities\AdCreativeIphoneData.cs" />
-    <Compile Include="Entities\AdCreativeTemplateURLSpec.cs" />
-    <Compile Include="Entities\AdCreativeWebData.cs" />
-    <Compile Include="Entities\AdCreativeWindowsPhoneData.cs" />
-    <Compile Include="Entities\AdsPixel.cs" />
-    <Compile Include="Entities\CustomAudience.cs" />
-    <Compile Include="Entities\CustomAudienceDataSource.cs" />
-    <Compile Include="Entities\CustomAudiencePermission.cs" />
-    <Compile Include="Entities\CustomAudienceStatus.cs" />
-    <Compile Include="Entities\Insight.cs" />
-    <Compile Include="Entities\LookalikeSpec.cs" />
-    <Compile Include="Enumerations\Api\AdAccountStatus.cs" />
-    <Compile Include="Enumerations\Api\AdAccountStoredBalanceStatus.cs" />
-    <Compile Include="Enumerations\Api\AdAccountTaxIdStatus.cs" />
-    <Compile Include="Enumerations\Api\AdConfiguredStatus.cs" />
-    <Compile Include="Enumerations\Api\AddAccountDisableReason.cs" />
-    <Compile Include="Enumerations\Api\AdEffectiveStatus.cs" />
-    <Compile Include="Enumerations\Api\AdRecommendationConfidence.cs" />
-    <Compile Include="Enumerations\Api\AdRecommendationImportance.cs" />
-    <Compile Include="Enumerations\Api\AdsetConfiguredStatus.cs" />
-    <Compile Include="Enumerations\Api\AdsetEffectiveStatus.cs" />
-    <Compile Include="Enumerations\Api\AdsetStatus.cs" />
-    <Compile Include="Enumerations\Api\ApplinkTreatment.cs" />
-    <Compile Include="Enumerations\Api\AttachmentStyle.cs" />
-    <Compile Include="Enumerations\Api\BidType.cs" />
-    <Compile Include="Enumerations\Api\BillingEvent.cs" />
-    <Compile Include="Enumerations\Api\BuyingType.cs" />
-    <Compile Include="Enumerations\Api\CampaignConfiguredStatus.cs" />
-    <Compile Include="Enumerations\Api\CampaignEffectiveStatus.cs" />
-    <Compile Include="Enumerations\Api\CampaignObjective.cs" />
-    <Compile Include="Enumerations\Api\CampaignStatus.cs" />
-    <Compile Include="Enumerations\Api\CreativeCallToActionType.cs" />
-    <Compile Include="Enumerations\Api\CreativeStatus.cs" />
-    <Compile Include="Enumerations\Api\CreativeType.cs" />
-    <Compile Include="Enumerations\Api\CustomAudienceDataSourceSubType.cs" />
-    <Compile Include="Enumerations\Api\CustomAudienceDataSourceType.cs" />
-    <Compile Include="Enumerations\Api\GroupPrivacy.cs" />
-    <Compile Include="Enumerations\Api\OptimizationGoal.cs" />
-    <Compile Include="Enumerations\Api\PostStatus.cs" />
-    <Compile Include="Enumerations\Api\PostType.cs" />
-    <Compile Include="Enumerations\Api\ProductAdBehaviour.cs" />
-    <Compile Include="Enumerations\Api\VideoProcessingStatus.cs" />
+    <Compile Include="Entities\ApiEngine\Paging.cs" />
     <Compile Include="Exceptions\FacebookAuthenticationException.cs" />
     <Compile Include="Exceptions\FacebookAuthorizationException.cs" />
     <Compile Include="Exceptions\FacebookClientException.cs" />
@@ -124,75 +82,10 @@
     <Compile Include="Interfaces\IApiEngine\IBatchRequestParameters.cs" />
     <Compile Include="Interfaces\IApiEngine\IBatchRequestResponce.cs" />
     <Compile Include="ApiEngine\PagedResponse.cs" />
-    <Compile Include="Entities\Paging.cs" />
     <Compile Include="Constants\FacebookApiRequestParameters.cs" />
     <Compile Include="Constants\FacebookApiRequestUrls.cs" />
     <Compile Include="Constants\FacebookApiResponceHeaders.cs" />
     <Compile Include="Constants\FacebookApiVersions.cs" />
-    <Compile Include="Entities\Ad.cs" />
-    <Compile Include="Entities\AdAccount.cs" />
-    <Compile Include="Entities\AdAccountGroupResult.cs" />
-    <Compile Include="Entities\AdAccountGroupUsers.cs" />
-    <Compile Include="Entities\AdCreativeLinkData.cs" />
-    <Compile Include="Entities\AdCreativeLinkDataAppLinkSpec.cs" />
-    <Compile Include="Entities\AdCreativeLinkDataCallToAction.cs" />
-    <Compile Include="Entities\AdCreativeLinkDataCallToActionValue.cs" />
-    <Compile Include="Entities\AdCreativeLinkDataChildAttachment.cs" />
-    <Compile Include="Entities\AdCreativeOfferData.cs" />
-    <Compile Include="Entities\AdCreativePhotoData.cs" />
-    <Compile Include="Entities\AdCreativePlatformCustomization.cs" />
-    <Compile Include="Entities\AdCreativePlatformCustomizationOverride.cs" />
-    <Compile Include="Entities\AdCreativeTextData.cs" />
-    <Compile Include="Entities\AdCreativeVideoData.cs" />
-    <Compile Include="Entities\AdgroupPlacementSpecificReviewFeedback.cs" />
-    <Compile Include="Entities\AdgroupReviewFeedback.cs" />
-    <Compile Include="Entities\AdLabel.cs" />
-    <Compile Include="Entities\AdRecommendation.cs" />
-    <Compile Include="Entities\AdSet.cs" />
-    <Compile Include="Entities\AdsImageCrops.cs" />
-    <Compile Include="Entities\AgencyClientDeclaration.cs" />
-    <Compile Include="Entities\AndroidAppLink.cs" />
-    <Compile Include="Entities\AppLinks.cs" />
-    <Compile Include="Entities\Business.cs" />
-    <Compile Include="Entities\Campaign.cs" />
-    <Compile Include="Entities\ConversionActionQuery.cs" />
-    <Compile Include="Entities\CoverPhoto.cs" />
-    <Compile Include="Entities\Creative.cs" />
-    <Compile Include="Entities\DeliveryCheck.cs" />
-    <Compile Include="Entities\Engagement.cs" />
-    <Compile Include="Entities\Event.cs" />
-    <Compile Include="Entities\FundingSourceDetails.cs" />
-    <Compile Include="Entities\Group.cs" />
-    <Compile Include="Entities\IOSAppLink.cs" />
-    <Compile Include="Entities\Location.cs" />
-    <Compile Include="Entities\MailingAddress.cs" />
-    <Compile Include="Entities\ObjectStorySpec.cs" />
-    <Compile Include="Entities\OpenGraphContext.cs" />
-    <Compile Include="Entities\Page.cs" />
-    <Compile Include="Entities\PageCategory.cs" />
-    <Compile Include="Entities\PageParking.cs" />
-    <Compile Include="Entities\PagePaymentOptions.cs" />
-    <Compile Include="Entities\PageRestaurantServices.cs" />
-    <Compile Include="Entities\PageRestaurantSpecialties.cs" />
-    <Compile Include="Entities\PageStartDate.cs" />
-    <Compile Include="Entities\PageStartInfo.cs" />
-    <Compile Include="Entities\Place.cs" />
-    <Compile Include="Entities\Post.cs" />
-    <Compile Include="Entities\PostCallToAction.cs" />
-    <Compile Include="Entities\PostCallToActionValue.cs" />
-    <Compile Include="Entities\Privacy.cs" />
-    <Compile Include="Entities\ProjectExperience.cs" />
-    <Compile Include="Entities\ReachFrequencySpec.cs" />
-    <Compile Include="Entities\Targeting.cs" />
-    <Compile Include="Entities\User.cs" />
-    <Compile Include="Entities\Video.cs" />
-    <Compile Include="Entities\VideoFormat.cs" />
-    <Compile Include="Entities\VideoStatus.cs" />
-    <Compile Include="Entities\VoipInfo.cs" />
-    <Compile Include="Entities\WebAppLink.cs" />
-    <Compile Include="Entities\WindowsAppLink.cs" />
-    <Compile Include="Entities\WindowsPhoneAppLink.cs" />
-    <Compile Include="Entities\WorkExperience.cs" />
     <Compile Include="Enumerations\ApiEngine\ApiRequestHttpMethod.cs" />
     <Compile Include="Enumerations\ApiEngine\ApiRequestParameterType.cs" />
     <Compile Include="Exceptions\FacebookOAuthException.cs" />

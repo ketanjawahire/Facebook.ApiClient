@@ -45,12 +45,17 @@ namespace FacebookApi.Exceptions
         /// <summary>
         /// Type
         /// </summary>
-        public string Type { get; set; }
+        public string Type = "OAuthException";
 
         /// <summary>
         /// FBDebug
         /// </summary>
         public string FBDebug { get; set; }
+
+        /// <summary>
+        /// Excecption message as it is received from API
+        /// </summary>
+        public string RawExceptionString { get; set; }
 
         /// <summary>
         /// Initialize new instance of <see cref="FacebookOAuthException"/>

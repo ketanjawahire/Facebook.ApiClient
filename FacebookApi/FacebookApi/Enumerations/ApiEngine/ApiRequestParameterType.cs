@@ -1,4 +1,4 @@
-﻿namespace FacebookApi.Enums
+﻿namespace FacebookApi.Enumerations.ApiEngine
 {
     /// <summary>
     /// Type of request parameter
