@@ -12,6 +12,6 @@ namespace FacebookApi.Interfaces.IApiEngine
         /// Get Api result data
         /// </summary>
         /// <returns>Api result data</returns>
-        TEntity GetApiResult();
+        TEntity GetResult();
     }
 }

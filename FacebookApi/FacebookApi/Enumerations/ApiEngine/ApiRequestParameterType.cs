@@ -24,7 +24,5 @@
         /// RequestBody
         /// </summary>
         RequestBody = 4,
-
-
     }
 }

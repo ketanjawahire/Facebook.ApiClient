@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
+using System.Security.Permissions;
 
 namespace FacebookApi.Exceptions
 {
@@ -8,7 +9,6 @@ namespace FacebookApi.Exceptions
     /// <para>If no subcode is present, this means that the login status or access token has expired, been revoked, or is otherwise invalid. </para>
     /// <para>Get a new access token. If a subcode is present, see the subcode.</para>
     /// </summary>
-    [SuppressMessage("Microsoft.Usage", "CA2240:ImplementISerializableCorrectly")]
     [Serializable]
     public class FacebookOAuthException : Exception
     {
@@ -43,11 +43,6 @@ namespace FacebookApi.Exceptions
         public string FBRev { get; set; }
 
         /// <summary>
-        /// Type
-        /// </summary>
-        public string Type = "OAuthException";
-
-        /// <summary>
         /// FBDebug
         /// </summary>
         public string FBDebug { get; set; }
@@ -65,6 +60,37 @@ namespace FacebookApi.Exceptions
         public FacebookOAuthException(int exceptionCode, string message) : base(message)
         {
             Code = exceptionCode;
+        }
+
+        /// <summary>
+        /// Initialize new instance of <see cref="FacebookOAuthException"/>
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        protected FacebookOAuthException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
+
+        /// <summary>
+        /// Populates a SerializationInfo with the data needed to serialize the target object.
+        /// </summary>
+        /// <param name="info">The SerializationInfo to populate with data.</param>
+        /// <param name="context">The destination for this serialization.</param>
+        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            if (info == null) throw new ArgumentNullException(nameof(info));
+
+            info.AddValue("Code", Code);
+            info.AddValue("SubCode", SubCode);
+            info.AddValue("FBTraceId", FBTraceId);
+            info.AddValue("ErrorUserTitle", ErrorUserTitle);
+            info.AddValue("ErrorUserMessage", ErrorUserMessage);
+            info.AddValue("FBRev", FBRev);
+            info.AddValue("FBDebug", FBDebug);
+            info.AddValue("RawExceptionString", RawExceptionString);
+
+            base.GetObjectData(info, context);
         }
     }
 }

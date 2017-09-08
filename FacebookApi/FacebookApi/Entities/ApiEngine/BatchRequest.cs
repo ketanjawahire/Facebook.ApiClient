@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FacebookApi.ApiEngine;
 using FacebookApi.Enumerations.ApiEngine;
 using FacebookApi.Interfaces.IApiEngine;
@@ -8,46 +9,48 @@ namespace FacebookApi.Entities.ApiEngine
     /// <summary>
     /// Represents Facebook Batch Request
     /// </summary>
-    public class BatchRequest : IBatchRequest
+    public class BatchRequest
     {
-        /// <summary>
-        /// Batch parameters
-        /// </summary>
-        public IList<ApiRequestParameter> BatchParameters { get; set; }
+        ///// <summary>
+        ///// Batch parameters
+        ///// </summary>
+        //public IList<ApiRequestParameter> BatchParameters { get; }
 
-        /// <summary>
-        /// List of request inside batch
-        /// </summary>
-        public IList<BatchRequestParameters> Requests { get; set; }
+        ///// <summary>
+        ///// List of request inside batch
+        ///// </summary>
+        //public IList<BatchRequestParameters> Requests { get; }
 
-        /// <summary>
-        /// Request method
-        /// </summary>
-        public ApiRequestHttpMethod Method { get; private set; }
+        ///// <summary>
+        ///// Request method
+        ///// </summary>
+        //public ApiRequestHttpMethod Method { get;}
 
-        /// <summary>
-        /// Request Uri
-        /// </summary>
-        public string RequestUri { get; private set; }
+        ///// <summary>
+        ///// Request Uri
+        ///// </summary>
+        //public Uri RequestUri { get; private set; }
 
-        /// <summary>
-        /// Batch request parameters
-        /// </summary>
-        public IList<ApiRequestParameter> RequestParameters { get; private set; }
+        ///// <summary>
+        ///// Batch request parameters
+        ///// </summary>
+        //public IList<ApiRequestParameter> RequestParameters { get; private set; }
 
-        /// <summary>
-        /// <see cref="FacebookApi.ApiEngine.ApiClient"/> to use to execute API request
-        /// </summary>
-        public ApiClient ApiClient { get; private set; }
+        ///// <summary>
+        ///// <see cref="FacebookApi.ApiEngine.ApiClient"/> to use to execute API request
+        ///// </summary>
+        //public ApiClient Client { get; }
 
-        /// <summary>
-        /// Initialize new instance of <see cref="BatchRequest"/>
-        /// </summary>
-        public BatchRequest()
-        {
-            BatchParameters = new List<ApiRequestParameter>();
-            Requests = new List<BatchRequestParameters>();
-        }
+        ///// <summary>
+        ///// Initialize new instance of <see cref="BatchRequest"/>
+        ///// </summary>
+        //public BatchRequest(ApiClient client, ApiRequestHttpMethod method)
+        //{
+        //    Client = client;
+        //    Method = method;
+        //    BatchParameters = new List<ApiRequestParameter>();
+        //    Requests = new List<BatchRequestParameters>();
+        //}
 
 
         ////still half baked

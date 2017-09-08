@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using FacebookApi.Constants;
@@ -20,13 +21,13 @@ namespace FacebookApi.ApiEngine
         /// <summary>
         /// <see cref="ApiClient"/> used to execute <see cref="PagedApiRequest"/>
         /// </summary>
-        public ApiClient ApiClient { get; private set; }
+        public ApiClient Client { get; private set; }
 
         /// <summary>
         /// Data from paged API response
         /// </summary>
         [DeserializeAs(Name = "data")]
-        public List<TApiEntity> Data { get; set; }
+        public Collection<TApiEntity> Data { get; set; }
 
         /// <summary>
         /// Paging information from API response
@@ -37,12 +38,12 @@ namespace FacebookApi.ApiEngine
         /// <summary>
         /// API Response headers collection
         /// </summary>
-        public IDictionary<string,string> ResponseHeaders { get; set; }
+        public IDictionary<string,string> ResponseHeaders { get; private set; }
 
         /// <summary>
         /// API response exceptions
         /// </summary>
-        public IEnumerable<FacebookOAuthException> Exceptions { get; set; }
+        private IEnumerable<FacebookOAuthException> _exceptions;
 
         /// <summary>
         /// Initialize new instance of <see cref="PagedResponse{TApiEntity}"/>
@@ -67,7 +68,7 @@ namespace FacebookApi.ApiEngine
         /// <param name="exceptions"></param>
         internal void SetResponseExceptions(IEnumerable<FacebookOAuthException> exceptions)
         {
-            Exceptions = exceptions;
+            _exceptions = exceptions;
         }
 
         /// <summary>
@@ -76,7 +77,7 @@ namespace FacebookApi.ApiEngine
         /// <param name="apiClient"></param>
         internal void SetApiClient(ApiClient apiClient)
         {
-            this.ApiClient = apiClient;
+            Client = apiClient;
         }
 
         private PagedApiRequest _getNextPageRequest()
@@ -92,7 +93,7 @@ namespace FacebookApi.ApiEngine
             //stupid logic :(
             var url = $"{string.Join(string.Empty, nextPageUri.Segments.Skip(2))}{nextPageUri.Query}";
 
-            var nextPageRequest = new PagedApiRequest(url, ApiClient);
+            var nextPageRequest = new PagedApiRequest(url, Client);
 
             return nextPageRequest;
         }
@@ -110,7 +111,7 @@ namespace FacebookApi.ApiEngine
             //stupid logic :(
             var url = $"{previousPageUri.Segments.Skip(0).Skip(1)}{previousPageUri.Query}";
 
-            var previousPageRequest = new PagedApiRequest(url, ApiClient);
+            var previousPageRequest = new PagedApiRequest(url, Client);
             return previousPageRequest;
         }
 
@@ -203,9 +204,9 @@ namespace FacebookApi.ApiEngine
         /// Get list of exceptions from API response.
         /// </summary>
         /// <returns>List of exceptions</returns>
-        public IEnumerable<Exception> GetApiExceptions()
+        public IEnumerable<Exception> GetExceptions()
         {
-            return Exceptions;
+            return _exceptions;
         }
     }
 }

@@ -6,7 +6,7 @@ namespace FacebookApi.Entities.ApiEngine
     /// <summary>
     /// Represents batch response header
     /// </summary>
-    public class BatchResponceHeader : IBatchResponceHeader
+    public class BatchResponseHeader
     {
         /// <summary>
         /// Name of header key

@@ -104,6 +104,12 @@
     <Compile Include="Api\Group.cs" />
     <Compile Include="Api\Insight.cs" />
     <Compile Include="Api\IOSAppLink.cs" />
+    <Compile Include="Api\LeadgenContextCard.cs" />
+    <Compile Include="Api\LeadgenForm.cs" />
+    <Compile Include="Api\LeadgenFormDependentConditionalQuestion.cs" />
+    <Compile Include="Api\LeadgenFormLead.cs" />
+    <Compile Include="Api\LeadgenFormQuestionOption.cs" />
+    <Compile Include="Api\LeadgenFormQuestions.cs" />
     <Compile Include="Api\Location.cs" />
     <Compile Include="Api\LookalikeSpec.cs" />
     <Compile Include="Api\MailingAddress.cs" />

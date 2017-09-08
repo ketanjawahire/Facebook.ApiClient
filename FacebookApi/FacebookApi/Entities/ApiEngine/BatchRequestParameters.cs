@@ -7,7 +7,7 @@ namespace FacebookApi.Entities.ApiEngine
     /// <summary>
     /// Represents Batch request parameter
     /// </summary>
-    public class BatchRequestParameters : IBatchRequestParameters
+    public class BatchRequestParameters
     {
         /// <summary>
         /// Name of the request. Used to identify request within batch.
@@ -27,7 +27,7 @@ namespace FacebookApi.Entities.ApiEngine
         /// <summary>
         /// Collection of request body parameters
         /// </summary>
-        public IList<BatchRequestBodyParameter> Body { get; set; }
+        public IList<BatchRequestBodyParameter> Body { get; }
 
         /// <summary>
         /// If its a dependent request then specify dependent request

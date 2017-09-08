@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,7 +18,32 @@ namespace FacebookApi.Exceptions
         /// </summary>
         public FacebookAuthorizationException() : base()
         {
-            
+        }
+
+        /// <summary>
+        /// Initialize new instance of <see cref="FacebookAuthorizationException"/>
+        /// </summary>
+        /// <param name="message">Exception message</param>
+        public FacebookAuthorizationException(string message) : base(message)
+        {
+        }
+
+        /// <summary>
+        /// Initialize new instance of <see cref="FacebookAuthorizationException"/>
+        /// </summary>
+        /// <param name="message">Exception message</param>
+        /// <param name="innerException">Inner exception</param>
+        public FacebookAuthorizationException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+
+        /// <summary>
+        /// Initialize new instance of <see cref="FacebookAuthorizationException"/>
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        protected FacebookAuthorizationException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
         }
     }
 }

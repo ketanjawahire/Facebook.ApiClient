@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,7 +13,6 @@ namespace FacebookApi.Exceptions
     /// Represents error in SDK while deserializing api responce
     /// </summary>
     [Serializable]
-    [SuppressMessage("Microsoft.Usage", "CA2240:ImplementISerializableCorrectly")]
     public class SDKException : Exception
     {
         /// <summary>
@@ -27,6 +28,30 @@ namespace FacebookApi.Exceptions
         public SDKException(string apiResponseContent, Exception ex) : base(ex.Message, ex)
         {
             ApiResponseContent = apiResponseContent;
+        }
+
+        /// <summary>
+        /// Initialize new instance of <see cref="SDKException"/>
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        protected SDKException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
+
+        /// <summary>
+        /// Populates a SerializationInfo with the data needed to serialize the target object.
+        /// </summary>
+        /// <param name="info">The SerializationInfo to populate with data.</param>
+        /// <param name="context">The destination for this serialization.</param>
+        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            if (info == null) throw new ArgumentNullException(nameof(info));
+
+            info.AddValue("ApiResponseContent", ApiResponseContent);
+
+            base.GetObjectData(info, context);
         }
     }
 }

@@ -70,6 +70,6 @@ namespace FacebookApi.Interfaces.IApiEngine
         /// Get list of exceptions from API response.
         /// </summary>
         /// <returns>List of exceptions</returns>
-        IEnumerable<Exception> GetApiExceptions();
+        IEnumerable<Exception> GetExceptions();
     }
 }

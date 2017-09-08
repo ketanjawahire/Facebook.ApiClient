@@ -7,7 +7,7 @@ namespace FacebookApi.Entities.ApiEngine
     /// <summary>
     /// Represents batch API request response
     /// </summary>
-    public class BatchRequestResponce : IBatchRequestResponce
+    public class BatchRequestResponse
     {
         /// <summary>
         /// Response code
