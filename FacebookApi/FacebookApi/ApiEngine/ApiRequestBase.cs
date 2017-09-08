@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
@@ -27,7 +28,7 @@ namespace FacebookApi.ApiEngine
         /// <summary>
         /// Instance of <see cref="RestClient"/> for this request
         /// </summary>
-        protected IRestClient _restClient;
+        protected IRestClient RestClient { get; set; }
 
         /// <summary>
         /// Stopwatch timer to measure api call timings
@@ -39,17 +40,17 @@ namespace FacebookApi.ApiEngine
         /// <summary>
         /// API request uri
         /// </summary>
-        public string RequestUri { get; protected set; }
+        public string RequestUrl { get; protected set; }
 
         /// <summary>
         /// Collection of request parameters
         /// </summary>
-        public IList<ApiRequestParameter> RequestParameters { get; protected set; }
+        public IList<ApiRequestParameter> RequestParameters { get; }
 
         /// <summary>
         /// <see cref="ApiEngine.ApiClient"/> to use to execute API request
         /// </summary>
-        public ApiClient ApiClient { get; protected set; }
+        public ApiClient Client { get; protected set; }
 
         /// <summary>
         /// Initialize instance of <see cref="ApiRequestBase"/>
@@ -73,18 +74,18 @@ namespace FacebookApi.ApiEngine
         /// Set JSON serializer of type <see cref="NewtonsoftJsonSerializer"/>
         /// </summary>
         /// <param name="jsonSerializer">Object of type <see cref="NewtonsoftJsonSerializer "/></param>
-        public void SetJsonSerializer(NewtonsoftJsonSerializer jsonSerializer)
+        internal void SetJsonSerializer(NewtonsoftJsonSerializer jsonSerializer)
         {
             _jsonSerializer = jsonSerializer;
         }
 
         private void _setFBRequestParameters(IRestRequest restRequest)
         {
-            restRequest.AddParameter(FacebookApiRequestParameters.API_VERSION, ApiClient.ApiVersion, ParameterType.UrlSegment);
-            restRequest.AddParameter(FacebookApiRequestParameters.ACCESS_TOKEN, ApiClient.AccessToken, ParameterType.QueryString);
+            restRequest.AddParameter(FacebookApiRequestParameters.API_VERSION, Client.Version, ParameterType.UrlSegment);
+            restRequest.AddParameter(FacebookApiRequestParameters.ACCESS_TOKEN, Client.AccessToken, ParameterType.QueryString);
         }
 
-        private IRestRequest _getRestRequest(ApiRequestHttpMethod requestMethod, string requestUri, IEnumerable<ApiRequestParameter> parameters)
+        private IRestRequest _getRestRequest(ApiRequestHttpMethod requestMethod, Uri requestUri, IEnumerable<ApiRequestParameter> parameters)
         {
             var request = new RestRequest(requestUri, (Method)requestMethod);
 
@@ -92,10 +93,21 @@ namespace FacebookApi.ApiEngine
 
             foreach (var parameter in parameters)
             {
-                request.AddParameter(parameter.Name, parameter.Value, (ParameterType)((int)parameter.Type));
+                request.AddParameter(parameter.Name, parameter.Value, (ParameterType)((int)parameter.ParameterType));
             }
 
             return request;
+        }
+
+        private IRestRequest _getRestRequest(ApiRequestHttpMethod requestMethod, string requestUri,
+            IEnumerable<ApiRequestParameter> parameters)
+        {
+            if (Uri.TryCreate(requestUri, UriKind.RelativeOrAbsolute, out Uri parsedUri))
+            {
+                return _getRestRequest(requestMethod, parsedUri, parameters);
+            }
+
+            throw new Exception($"Invalid Uri. {requestUri}");
         }
 
         /// <summary>
@@ -105,7 +117,7 @@ namespace FacebookApi.ApiEngine
         /// <param name="requestUri">Request Uri</param>
         /// <param name="parameters">Collection of request parameters</param>
         /// <returns></returns>
-        protected IRestRequest _prepareRestRequest(ApiRequestHttpMethod requestMethod, string requestUri,
+        protected IRestRequest PrepareRestRequest(ApiRequestHttpMethod requestMethod, string requestUri,
             IEnumerable<ApiRequestParameter> parameters = null)
         {
             var request = _getRestRequest(requestMethod, requestUri, parameters);
@@ -115,7 +127,7 @@ namespace FacebookApi.ApiEngine
 
             return request;
         }
-
+        
         /// <summary>
         /// Add request parameter of type <see cref="ApiRequestParameterType.GetOrPost"/>
         /// </summary>
@@ -126,7 +138,7 @@ namespace FacebookApi.ApiEngine
             RequestParameters.Add(new ApiRequestParameter()
             {
                 Name = parameterName,
-                Type = ApiRequestParameterType.GetOrPost,
+                ParameterType = ApiRequestParameterType.GetOrPost,
                 Value = parameterValue
             });
         }
@@ -141,7 +153,7 @@ namespace FacebookApi.ApiEngine
             RequestParameters.Add(new ApiRequestParameter()
             {
                 Name = parameterName,
-                Type = ApiRequestParameterType.UrlSegment,
+                ParameterType = ApiRequestParameterType.UrlSegment,
                 Value = parameterValue
             });
         }
@@ -156,7 +168,7 @@ namespace FacebookApi.ApiEngine
             RequestParameters.Add(new ApiRequestParameter()
             {
                 Name = parameterName,
-                Type = ApiRequestParameterType.HttpHeader,
+                ParameterType = ApiRequestParameterType.HttpHeader,
                 Value = parameterValue
             });
         }
@@ -164,7 +176,7 @@ namespace FacebookApi.ApiEngine
         /// <summary>
         /// Initialize &amp; start <see cref="_apiTimer"/>
         /// </summary>
-        protected void StartApiTimer()
+        protected void StartTimer()
         {
             if(_apiTimer == null)
                 _apiTimer = new Stopwatch();
@@ -181,7 +193,7 @@ namespace FacebookApi.ApiEngine
         /// <summary>
         /// Stop <see cref="_apiTimer"/>
         /// </summary>
-        protected void StopApiTimer()
+        protected void StopTimer()
         {
             _apiTimer.Stop();
         }
@@ -190,7 +202,7 @@ namespace FacebookApi.ApiEngine
         /// Get elapsed timespan from <see cref="_apiTimer"/>
         /// </summary>
         /// <returns></returns>
-        public TimeSpan GetElapsedApiTime()
+        public TimeSpan GetElapsedTime()
         {
             return _apiTimer.Elapsed;
         }
@@ -200,7 +212,7 @@ namespace FacebookApi.ApiEngine
         /// </summary>
         /// <param name="apiResponse">Received api response</param>
         /// <returns>List of api exceptions from received response</returns>
-        protected static IEnumerable<FacebookOAuthException> GetExceptionsFromApiResponse(IRestResponse apiResponse)
+        protected static IEnumerable<FacebookOAuthException> GetExceptionsFromResponse(IRestResponse apiResponse)
         {
             IList<FacebookOAuthException> exceptions = new List<FacebookOAuthException>();
 
@@ -210,22 +222,24 @@ namespace FacebookApi.ApiEngine
                 apiResponse.Headers.ToDictionary(e => e.Name);
 
             var parsedException = JObject.Parse(apiResponse.Content);
-            var exceptionCode = parsedException["error"]?["code"] != null ? int.Parse(parsedException["error"]["code"].ToString()) : 200;
+            var exceptionCode = parsedException["error"]?["code"] != null
+                ? int.Parse(parsedException["error"]["code"].ToString(), CultureInfo.CurrentCulture)
+                : 200;
 
 
             exceptions.Add(new FacebookOAuthException(exceptionCode, parsedException["error"]?["message"].ToString())
             {
                 FBTraceId =
-                    responseHeaders.ContainsKey(FacebookApiResponceHeaders.X_FB_TRACE_ID)
-                        ? responseHeaders[FacebookApiResponceHeaders.X_FB_TRACE_ID].Value.ToString()
+                    responseHeaders.ContainsKey(FacebookApiResponseHeaders.X_FB_TRACE_ID)
+                        ? responseHeaders[FacebookApiResponseHeaders.X_FB_TRACE_ID].Value.ToString()
                         : string.Empty,
                 FBRev =
-                    responseHeaders.ContainsKey(FacebookApiResponceHeaders.X_FB_REV)
-                        ? responseHeaders[FacebookApiResponceHeaders.X_FB_REV].Value.ToString()
+                    responseHeaders.ContainsKey(FacebookApiResponseHeaders.X_FB_REV)
+                        ? responseHeaders[FacebookApiResponseHeaders.X_FB_REV].Value.ToString()
                         : string.Empty,
                 FBDebug =
-                    responseHeaders.ContainsKey(FacebookApiResponceHeaders.X_FB_DEBUG)
-                        ? responseHeaders[FacebookApiResponceHeaders.X_FB_DEBUG].Value.ToString()
+                    responseHeaders.ContainsKey(FacebookApiResponseHeaders.X_FB_DEBUG)
+                        ? responseHeaders[FacebookApiResponseHeaders.X_FB_DEBUG].Value.ToString()
                         : string.Empty,
                 RawExceptionString = apiResponse.Content,
                 ErrorUserMessage = parsedException["error"]?["error_user_message"]?.ToString(),

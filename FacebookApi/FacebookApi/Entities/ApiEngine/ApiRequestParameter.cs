@@ -6,7 +6,7 @@ namespace FacebookApi.Entities.ApiEngine
     /// <summary>
     /// Represents request parameter in api call
     /// </summary>
-    public class ApiRequestParameter : IApiRequestParameter
+    public class ApiRequestParameter
     {
         /// <summary>
         /// Name of the request parameterS
@@ -21,6 +21,6 @@ namespace FacebookApi.Entities.ApiEngine
         /// <summary>
         /// Type of request parameter
         /// </summary>
-        public ApiRequestParameterType Type { get; set; }
+        public ApiRequestParameterType ParameterType { get; set; }
     }
 }

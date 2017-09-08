@@ -5,7 +5,7 @@ namespace FacebookApi.Entities.ApiEngine
     /// <summary>
     /// Represents batch request body parameter
     /// </summary>
-    public class BatchRequestBodyParameter : IBatchRequestBodyParameter
+    public class BatchRequestBodyParameter
     {
         /// <summary>
         /// Name of the parameter

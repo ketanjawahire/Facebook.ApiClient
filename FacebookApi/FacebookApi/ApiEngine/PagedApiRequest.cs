@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,15 +21,17 @@ namespace FacebookApi.ApiEngine
         /// Initialize new instance of <see cref="PagedApiRequest"/>
         /// </summary>
         /// <param name="requestUrl">Request Url</param>
-        /// <param name="apiClient"><see cref="ApiClient"/> used to execute this request</param>
-        public PagedApiRequest(string requestUrl, ApiClient apiClient) : base()
+        /// <param name="client"><see cref="ApiClient"/> used to execute this request</param>
+        public PagedApiRequest(string requestUrl, ApiClient client) : base()
         {
-            _restClient = new RestClient(FacebookApiRequestUrls.GRAPH_REQUEST_BASE_URL);
-            _restClient.UserAgent =
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36";
+            RestClient = new RestClient(FacebookApiRequestUrls.GRAPH_REQUEST_BASE_URL)
+            {
+                UserAgent =
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36"
+            };
 
-            ApiClient = apiClient;
-            RequestUri = requestUrl;
+            Client = client;
+            RequestUrl = requestUrl;
         }
 
         /// <summary>
@@ -37,7 +40,7 @@ namespace FacebookApi.ApiEngine
         /// <param name="limit">Page limit</param>
         public void AddPageLimit(int limit)
         {
-            AddGetOrPostParameter("limit", limit.ToString());
+            AddGetOrPostParameter("limit", limit.ToString(CultureInfo.CurrentCulture));
         }
 
         /// <summary>
@@ -49,9 +52,9 @@ namespace FacebookApi.ApiEngine
         private PagedResponse<TEntity> _processResponse<TEntity>(IRestResponse<PagedResponse<TEntity>> response) where TEntity : class, new()
         {
             var result = response.Data;
-            result.SetApiClient(ApiClient);
+            result.SetApiClient(Client);
             result.SetResponseHeaders(response.Headers);
-            result.SetResponseExceptions(GetExceptionsFromApiResponse(response));
+            result.SetResponseExceptions(GetExceptionsFromResponse(response));
             return result;
         }
 
@@ -62,11 +65,11 @@ namespace FacebookApi.ApiEngine
         /// <returns>Processed API response of type <see cref="IPagedResponse{TEntity}"/></returns>
         public IPagedResponse<TEntity> ExecutePage<TEntity>() where TEntity : class, new()
         {
-            var request = _prepareRestRequest(ApiRequestHttpMethod.GET, RequestUri, RequestParameters);
+            var request = PrepareRestRequest(ApiRequestHttpMethod.GET, RequestUrl, RequestParameters);
 
-            StartApiTimer();
-            var response = _restClient.Execute<PagedResponse<TEntity>>(request);
-            StopApiTimer();
+            StartTimer();
+            var response = RestClient.Execute<PagedResponse<TEntity>>(request);
+            StopTimer();
 
             if (response.ErrorException != null)
                 throw new SDKException(response.Content, response.ErrorException);
@@ -81,11 +84,11 @@ namespace FacebookApi.ApiEngine
         /// <returns>Processed API response of type <see cref="IPagedResponse{TEntity}"/></returns>
         public async Task<IPagedResponse<TEntity>> ExecutePageAsync<TEntity>() where TEntity : class, new()
         {
-            var request = _prepareRestRequest(ApiRequestHttpMethod.GET, RequestUri, RequestParameters);
+            var request = PrepareRestRequest(ApiRequestHttpMethod.GET, RequestUrl, RequestParameters);
 
-            StartApiTimer();
-            var response = await _restClient.ExecuteTaskAsync<PagedResponse<TEntity>>(request);
-            StopApiTimer();
+            StartTimer();
+            var response = await RestClient.ExecuteTaskAsync<PagedResponse<TEntity>>(request);
+            StopTimer();
 
             if (response.ErrorException != null)
                 throw new SDKException(response.Content, response.ErrorException);

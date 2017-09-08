@@ -20,13 +20,13 @@ namespace FacebookApi.ApiEngine
         /// Initialize new instance of <see cref="ApiRequest"/> using given Request Url &amp; <see cref="ApiClient"/>
         /// </summary>
         /// <param name="requestUrl">Request Url</param>
-        /// <param name="apiClient"><see cref="ApiClient"/></param>
-        public ApiRequest(string requestUrl, ApiClient apiClient)
+        /// <param name="client"><see cref="ApiClient"/></param>
+        public ApiRequest(string requestUrl, ApiClient client)
         {
-            _restClient = new RestClient(FacebookApiRequestUrls.GRAPH_REQUEST_BASE_URL);
+            RestClient = new RestClient(FacebookApiRequestUrls.GRAPH_REQUEST_BASE_URL);
 
-            RequestUri = requestUrl;
-            ApiClient = apiClient;
+            RequestUrl = requestUrl;
+            Client = client;
         }
 
         /// <summary>
@@ -37,16 +37,16 @@ namespace FacebookApi.ApiEngine
         /// <returns><see cref="IApiResponse{TEntity}"/></returns>
         public IApiResponse<TEntity> Execute<TEntity>(ApiRequestHttpMethod method) where TEntity : class, new()
         {
-            var request = _prepareRestRequest(method, RequestUri, RequestParameters);
+            var request = PrepareRestRequest(method, RequestUrl, RequestParameters);
 
-            StartApiTimer();
-            var response = _restClient.Execute<TEntity>(request);
-            StopApiTimer();
+            StartTimer();
+            var response = RestClient.Execute<TEntity>(request);
+            StopTimer();
 
             if (response.ErrorException != null)
                 throw new SDKException(response.Content, response.ErrorException);
 
-            return new ApiResponse<TEntity>(response.Data, response.Headers, GetExceptionsFromApiResponse(response));
+            return new ApiResponse<TEntity>(response.Data, response.Headers, GetExceptionsFromResponse(response));
         }
 
         /// <summary>
@@ -58,16 +58,16 @@ namespace FacebookApi.ApiEngine
         public async Task<IApiResponse<TEntity>> ExecuteAsync<TEntity>(ApiRequestHttpMethod method)
             where TEntity : class, new()
         {
-            var request = _prepareRestRequest(method, RequestUri, RequestParameters);
+            var request = PrepareRestRequest(method, RequestUrl, RequestParameters);
 
-            StartApiTimer();
-            var response = await _restClient.ExecuteTaskAsync<TEntity>(request);
-            StopApiTimer();
+            StartTimer();
+            var response = await RestClient.ExecuteTaskAsync<TEntity>(request);
+            StopTimer();
 
             if (response.ErrorException != null)
                 throw new SDKException(response.Content, response.ErrorException);
 
-            return new ApiResponse<TEntity>(response.Data, response.Headers, GetExceptionsFromApiResponse(response));
+            return new ApiResponse<TEntity>(response.Data, response.Headers, GetExceptionsFromResponse(response));
         }
 
         /// <summary>
@@ -77,16 +77,16 @@ namespace FacebookApi.ApiEngine
         /// <returns>Returns API response as string</returns>
         public IApiResponse<string> Execute(ApiRequestHttpMethod method)
         {
-            var request = _prepareRestRequest(method, RequestUri, RequestParameters);
+            var request = PrepareRestRequest(method, RequestUrl, RequestParameters);
 
-            StartApiTimer();
-            var response = _restClient.Execute(request);
-            StartApiTimer();
+            StartTimer();
+            var response = RestClient.Execute(request);
+            StartTimer();
 
             if (response.ErrorException != null)
                 throw new SDKException(response.Content, response.ErrorException);
 
-            return new ApiResponse<string>(response.Content, response.Headers, GetExceptionsFromApiResponse(response));
+            return new ApiResponse<string>(response.Content, response.Headers, GetExceptionsFromResponse(response));
         }
     }
 }

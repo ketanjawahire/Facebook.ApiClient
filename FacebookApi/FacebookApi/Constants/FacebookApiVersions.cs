@@ -10,12 +10,12 @@ namespace FacebookApi.Constants
         /// <summary>
         /// Default facebook api version : v2.10
         /// </summary>
-        public static string DEFAULT = "v2.10";
+        public static readonly string DEFAULT = "v2.10";
 
         /// <summary>
         /// Facebook api version v2.9
         /// </summary>
-        public static string V2_9 = "v2.9";
+        public static readonly string V2_9 = "v2.9";
 
         /// <summary>
         /// Check if given version is a valid FB api version or not

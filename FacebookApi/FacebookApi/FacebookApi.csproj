@@ -36,6 +36,9 @@
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <DocumentationFile>bin\Release\FacebookApi.xml</DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -76,25 +79,18 @@
     <Compile Include="Exceptions\FacebookServerException.cs" />
     <Compile Include="Exceptions\FacebookThrottleException.cs" />
     <Compile Include="Exceptions\SDKException.cs" />
-    <Compile Include="Interfaces\IApiEngine\IApiRequestParameter.cs" />
-    <Compile Include="Interfaces\IApiEngine\IBatchRequest.cs" />
-    <Compile Include="Interfaces\IApiEngine\IBatchRequestBodyParameter.cs" />
-    <Compile Include="Interfaces\IApiEngine\IBatchRequestParameters.cs" />
-    <Compile Include="Interfaces\IApiEngine\IBatchRequestResponce.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ApiEngine\PagedResponse.cs" />
     <Compile Include="Constants\FacebookApiRequestParameters.cs" />
     <Compile Include="Constants\FacebookApiRequestUrls.cs" />
-    <Compile Include="Constants\FacebookApiResponceHeaders.cs" />
+    <Compile Include="Constants\FacebookApiResponseHeaders.cs" />
     <Compile Include="Constants\FacebookApiVersions.cs" />
     <Compile Include="Enumerations\ApiEngine\ApiRequestHttpMethod.cs" />
     <Compile Include="Enumerations\ApiEngine\ApiRequestParameterType.cs" />
     <Compile Include="Exceptions\FacebookOAuthException.cs" />
     <Compile Include="Exceptions\InvalidApiVersionException.cs" />
-    <Compile Include="Interfaces\IApiEngine\IApiClient.cs" />
     <Compile Include="Interfaces\IApiEngine\IApiResponse.cs" />
-    <Compile Include="Interfaces\IApiEngine\IBatchResponceHeader.cs" />
     <Compile Include="Interfaces\IApiEngine\IPagedResponse.cs" />
-    <Compile Include="Interfaces\IApiEngine\IPaging.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
