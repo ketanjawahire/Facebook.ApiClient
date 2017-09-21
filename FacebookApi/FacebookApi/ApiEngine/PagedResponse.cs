@@ -12,6 +12,7 @@ using RestSharp.Deserializers;
 
 namespace FacebookApi.ApiEngine
 {
+    /// <inheritdoc />
     /// <summary>
     /// Represents paged API response
     /// </summary>
@@ -27,7 +28,7 @@ namespace FacebookApi.ApiEngine
         /// Data from paged API response
         /// </summary>
         [DeserializeAs(Name = "data")]
-        public Collection<TApiEntity> Data { get; set; }
+        public List<TApiEntity> Data { get; set; }
 
         /// <summary>
         /// Paging information from API response
