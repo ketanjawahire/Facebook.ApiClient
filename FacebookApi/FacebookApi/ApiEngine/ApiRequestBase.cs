@@ -25,27 +25,9 @@ namespace FacebookApi.ApiEngine
     /// </summary>
     public class ApiRequestBase
     {
-        /// <summary>
-        /// Instance of <see cref="RestClient"/> for this request
-        /// </summary>
-        protected IRestClient RestClient { get; set; }
-
-        /// <summary>
-        /// Stopwatch timer to measure api call timings
-        /// </summary>
         private Stopwatch _apiTimer;
-
-        private ISerializer _jsonSerializer;
-
-        /// <summary>
-        /// API request uri
-        /// </summary>
-        public string RequestUrl { get; protected set; }
-
-        /// <summary>
-        /// Collection of request parameters
-        /// </summary>
-        public IList<ApiRequestParameter> RequestParameters { get; }
+        protected IRestClient RestClient { get; private set; }
+        protected IRestRequest RestRequest { get; private set; }
 
         /// <summary>
         /// <see cref="ApiEngine.ApiClient"/> to use to execute API request
@@ -53,158 +35,47 @@ namespace FacebookApi.ApiEngine
         public ApiClient Client { get; protected set; }
 
         /// <summary>
+        /// API request uri
+        /// </summary>
+        public string RequestUrl { get; protected set; }
+
+        /// <summary>
         /// Initialize instance of <see cref="ApiRequestBase"/>
         /// </summary>
-        protected ApiRequestBase()
+        protected ApiRequestBase(string requestUrl, ApiClient client, ApiRequestHttpMethod method)
         {
-            RequestParameters = new List<ApiRequestParameter>();
+            RequestUrl = requestUrl;
+            Client = client;
+
+            RestClient = new RestClient(FacebookApiRequestUrls.GRAPH_REQUEST_BASE_URL);
+            RestRequest = new RestRequest(requestUrl, (Method) method);
+
+            SetFBRequestParameters();
         }
 
-        private void _setJsonSerializer(IRestRequest restRequest)
+        #region Methods to add different request parameters
+
+        public void AddUrlSegment(string name, string value)
         {
-            restRequest.JsonSerializer = _getJsonSerializer();
+            RestRequest.AddUrlSegment(name, value);
         }
 
-        private ISerializer _getJsonSerializer()
+        public void AddHttpHeader(string name, string value)
         {
-            return _jsonSerializer ?? new NewtonsoftJsonSerializer();
+            RestRequest.AddHeader(name, value);
         }
 
-        /// <summary>
-        /// Set JSON serializer of type <see cref="NewtonsoftJsonSerializer"/>
-        /// </summary>
-        /// <param name="jsonSerializer">Object of type <see cref="NewtonsoftJsonSerializer "/></param>
-        internal void SetJsonSerializer(NewtonsoftJsonSerializer jsonSerializer)
+        public void AddCookie(string name, string value)
         {
-            _jsonSerializer = jsonSerializer;
+            RestRequest.AddCookie(name, value);
         }
 
-        private void _setFBRequestParameters(IRestRequest restRequest)
+        #endregion
+
+        private void SetFBRequestParameters()
         {
-            restRequest.AddParameter(FacebookApiRequestParameters.API_VERSION, Client.Version, ParameterType.UrlSegment);
-            restRequest.AddParameter(FacebookApiRequestParameters.ACCESS_TOKEN, Client.AccessToken, ParameterType.QueryString);
-        }
-
-        private IRestRequest _getRestRequest(ApiRequestHttpMethod requestMethod, Uri requestUri, IEnumerable<ApiRequestParameter> parameters)
-        {
-            var request = new RestRequest(requestUri, (Method)requestMethod);
-
-            if (parameters == null) return request;
-
-            foreach (var parameter in parameters)
-            {
-                request.AddParameter(parameter.Name, parameter.Value, (ParameterType)((int)parameter.ParameterType));
-            }
-
-            return request;
-        }
-
-        private IRestRequest _getRestRequest(ApiRequestHttpMethod requestMethod, string requestUri,
-            IEnumerable<ApiRequestParameter> parameters)
-        {
-            if (Uri.TryCreate(requestUri, UriKind.RelativeOrAbsolute, out Uri parsedUri))
-            {
-                return _getRestRequest(requestMethod, parsedUri, parameters);
-            }
-
-            throw new Exception($"Invalid Uri. {requestUri}");
-        }
-
-        /// <summary>
-        /// Prepare <see cref="RestRequest"/>
-        /// </summary>
-        /// <param name="requestMethod">One of <see cref="ApiRequestHttpMethod"/></param>
-        /// <param name="requestUri">Request Uri</param>
-        /// <param name="parameters">Collection of request parameters</param>
-        /// <returns></returns>
-        protected IRestRequest PrepareRestRequest(ApiRequestHttpMethod requestMethod, string requestUri,
-            IEnumerable<ApiRequestParameter> parameters = null)
-        {
-            var request = _getRestRequest(requestMethod, requestUri, parameters);
-
-            _setFBRequestParameters(request);
-            _setJsonSerializer(request);
-
-            return request;
-        }
-        
-        /// <summary>
-        /// Add request parameter of type <see cref="ApiRequestParameterType.GetOrPost"/>
-        /// </summary>
-        /// <param name="parameterName">Parameter name</param>
-        /// <param name="parameterValue">Parameter value</param>
-        public void AddGetOrPostParameter(string parameterName, string parameterValue)
-        {
-            RequestParameters.Add(new ApiRequestParameter()
-            {
-                Name = parameterName,
-                ParameterType = ApiRequestParameterType.GetOrPost,
-                Value = parameterValue
-            });
-        }
-
-        /// <summary>
-        /// Add request parameter of type <see cref="ApiRequestParameterType.UrlSegment"/>
-        /// </summary>
-        /// <param name="parameterName">Parameter name</param>
-        /// <param name="parameterValue">Parameter value</param>
-        public void AddUrlSegmentParameter(string parameterName, string parameterValue)
-        {
-            RequestParameters.Add(new ApiRequestParameter()
-            {
-                Name = parameterName,
-                ParameterType = ApiRequestParameterType.UrlSegment,
-                Value = parameterValue
-            });
-        }
-
-        /// <summary>
-        /// Add request parameter of type <see cref="ApiRequestParameterType.HttpHeader"/>
-        /// </summary>
-        /// <param name="parameterName">Parameter name</param>
-        /// <param name="parameterValue">Parameter value</param>
-        public void AddHttpHeader(string parameterName, string parameterValue)
-        {
-            RequestParameters.Add(new ApiRequestParameter()
-            {
-                Name = parameterName,
-                ParameterType = ApiRequestParameterType.HttpHeader,
-                Value = parameterValue
-            });
-        }
-
-        /// <summary>
-        /// Initialize &amp; start <see cref="_apiTimer"/>
-        /// </summary>
-        protected void StartTimer()
-        {
-            if(_apiTimer == null)
-                _apiTimer = new Stopwatch();
-
-            if (_apiTimer.IsRunning)
-            {
-                _apiTimer.Stop();
-                _apiTimer.Reset();
-            }
-
-            _apiTimer.Start();
-        }
-
-        /// <summary>
-        /// Stop <see cref="_apiTimer"/>
-        /// </summary>
-        protected void StopTimer()
-        {
-            _apiTimer.Stop();
-        }
-
-        /// <summary>
-        /// Get elapsed timespan from <see cref="_apiTimer"/>
-        /// </summary>
-        /// <returns></returns>
-        public TimeSpan GetElapsedTime()
-        {
-            return _apiTimer.Elapsed;
+            RestRequest.AddParameter(FacebookApiRequestParameters.API_VERSION, Client.Version, ParameterType.UrlSegment);
+            RestRequest.AddParameter(FacebookApiRequestParameters.ACCESS_TOKEN, Client.AccessToken, ParameterType.QueryString);
         }
 
         /// <summary>
@@ -250,6 +121,40 @@ namespace FacebookApi.ApiEngine
             });
 
             return exceptions;
+        }
+
+        /// <summary>
+        /// Initialize &amp; start <see cref="_apiTimer"/>
+        /// </summary>
+        protected void StartTimer()
+        {
+            if (_apiTimer == null)
+                _apiTimer = new Stopwatch();
+
+            if (_apiTimer.IsRunning)
+            {
+                _apiTimer.Stop();
+                _apiTimer.Reset();
+            }
+
+            _apiTimer.Start();
+        }
+
+        /// <summary>
+        /// Stop <see cref="_apiTimer"/>
+        /// </summary>
+        protected void StopTimer()
+        {
+            _apiTimer.Stop();
+        }
+
+        /// <summary>
+        /// Get elapsed timespan from <see cref="_apiTimer"/>
+        /// </summary>
+        /// <returns></returns>
+        public TimeSpan GetElapsedTime()
+        {
+            return _apiTimer.Elapsed;
         }
     }
 }

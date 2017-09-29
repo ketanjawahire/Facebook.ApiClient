@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using FacebookApi.Interfaces.IApiEngine;
 using RestSharp.Deserializers;
 
 namespace FacebookApi.Entities.ApiEngine

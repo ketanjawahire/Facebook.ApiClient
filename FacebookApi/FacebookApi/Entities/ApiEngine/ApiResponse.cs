@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using FacebookApi.Constants;
-using FacebookApi.Interfaces.IApiEngine;
+using FacebookApi.Interfaces;
 using RestSharp;
 
 namespace FacebookApi.Entities.ApiEngine

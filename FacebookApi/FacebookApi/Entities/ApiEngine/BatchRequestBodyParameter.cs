@@ -1,6 +1,4 @@
-﻿using FacebookApi.Interfaces.IApiEngine;
-
-namespace FacebookApi.Entities.ApiEngine
+﻿namespace FacebookApi.Entities.ApiEngine
 {
     /// <summary>
     /// Represents batch request body parameter

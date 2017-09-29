@@ -1,6 +1,4 @@
-﻿using System.Security.Permissions;
-
-namespace FacebookApi.Interfaces.IApiEngine
+﻿namespace FacebookApi.Interfaces
 {
     /// <summary>
     /// Represents response received from api

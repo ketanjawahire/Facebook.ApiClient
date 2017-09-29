@@ -1,6 +1,5 @@
 ﻿using FacebookApi.Constants;
 using FacebookApi.Exceptions;
-using FacebookApi.Interfaces.IApiEngine;
 
 namespace FacebookApi.ApiEngine
 {

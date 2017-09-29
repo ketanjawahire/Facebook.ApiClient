@@ -60,6 +60,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiEngine\ApiClient.cs" />
+    <Compile Include="ApiEngine\GetRequest.cs" />
+    <Compile Include="ApiEngine\PostRequest.cs" />
     <Compile Include="ApiEngine\ApiRequest.cs" />
     <Compile Include="ApiEngine\ApiRequestBase.cs" />
     <Compile Include="Entities\ApiEngine\ApiRequestParameter.cs" />
@@ -70,7 +72,7 @@
     <Compile Include="Entities\ApiEngine\BatchRequestResponce.cs" />
     <Compile Include="Entities\ApiEngine\BatchResponceHeader.cs" />
     <Compile Include="Entities\ApiEngine\Cursors.cs" />
-    <Compile Include="ApiEngine\PagedApiRequest.cs" />
+    <Compile Include="ApiEngine\PagedRequest.cs" />
     <Compile Include="Entities\ApiEngine\Paging.cs" />
     <Compile Include="Exceptions\FacebookAuthenticationException.cs" />
     <Compile Include="Exceptions\FacebookAuthorizationException.cs" />
@@ -89,8 +91,12 @@
     <Compile Include="Enumerations\ApiEngine\ApiRequestParameterType.cs" />
     <Compile Include="Exceptions\FacebookOAuthException.cs" />
     <Compile Include="Exceptions\InvalidApiVersionException.cs" />
-    <Compile Include="Interfaces\IApiEngine\IApiResponse.cs" />
-    <Compile Include="Interfaces\IApiEngine\IPagedResponse.cs" />
+    <Compile Include="Interfaces\IGetRequest.cs" />
+    <Compile Include="Interfaces\IPagedRequest.cs" />
+    <Compile Include="Interfaces\IPostRequest.cs" />
+    <Compile Include="Interfaces\IApiRequest.cs" />
+    <Compile Include="Interfaces\IApiResponse.cs" />
+    <Compile Include="Interfaces\IPagedResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
