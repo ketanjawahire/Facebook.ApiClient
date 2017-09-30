@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace FacebookApi.ApiEngine
 {
-    public class GetRequest : ApiRequestBase, IGetRequest
+    /// <inheritdoc cref="IGetRequest" />
+    public class GetRequest : ApiRequest, IGetRequest
     {
         internal GetRequest(string requestUrl, ApiClient client) : base(requestUrl, client, ApiRequestHttpMethod.GET)
         {
         }
 
+        /// <inheritdoc />
         public void AddQueryParameter(string name, string value)
         {
             RestRequest.AddQueryParameter(name, value);
@@ -21,8 +23,8 @@ namespace FacebookApi.ApiEngine
         /// Execute current API request.
         /// </summary>
         /// <typeparam name="TEntity">Entity class which can be used to represent received API response</typeparam>
-        /// <returns><see cref="IApiResponse{TEntity}"/></returns>
-        public IApiResponse<TEntity> Execute<TEntity>() where TEntity : class, new()
+        /// <returns><see cref="IResponse{TEntity}"/></returns>
+        public IResponse<TEntity> Execute<TEntity>() where TEntity : class, new()
         {
             StartTimer();
             var response = RestClient.Execute<TEntity>(RestRequest);
@@ -38,8 +40,8 @@ namespace FacebookApi.ApiEngine
         /// Execute current API request.
         /// </summary>
         /// <typeparam name="TEntity">Entity class which can be used to represent received API response</typeparam>
-        /// <returns><see cref="IApiResponse{TEntity}"/></returns>
-        public async Task<IApiResponse<TEntity>> ExecuteAsync<TEntity>()
+        /// <returns><see cref="IResponse{TEntity}"/></returns>
+        public async Task<IResponse<TEntity>> ExecuteAsync<TEntity>()
             where TEntity : class, new()
         {
             StartTimer();
@@ -56,7 +58,7 @@ namespace FacebookApi.ApiEngine
         /// Execute current API request.
         /// </summary>
         /// <returns>Returns API response as string</returns>
-        public IApiResponse<string> Execute()
+        public IResponse<string> Execute()
         {
             StartTimer();
             var response = RestClient.Execute(RestRequest);

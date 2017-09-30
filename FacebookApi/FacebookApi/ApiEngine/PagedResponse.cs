@@ -85,7 +85,7 @@ namespace FacebookApi.ApiEngine
         {
             if (string.IsNullOrEmpty(Paging.Next))
             {
-                throw new NullReferenceException("Next page link is empty.");
+                throw new UriFormatException("Next page link is empty.");
             }
 
             if (!Uri.TryCreate(Paging.Next, UriKind.Absolute, out Uri nextPageUri))
@@ -103,7 +103,7 @@ namespace FacebookApi.ApiEngine
         {
             if (string.IsNullOrEmpty(Paging.Previous))
             {
-                throw new NullReferenceException("Previous page link is empty.");
+                throw new UriFormatException("Previous page link is empty.");
             }
 
             if (!Uri.TryCreate(Paging.Previous, UriKind.Absolute, out Uri previousPageUri))

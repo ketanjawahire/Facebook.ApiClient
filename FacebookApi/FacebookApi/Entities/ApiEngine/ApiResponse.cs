@@ -11,7 +11,7 @@ namespace FacebookApi.Entities.ApiEngine
     /// Represents response received from api
     /// </summary>
     /// <typeparam name="TEntity">Entity class which can be used to represent received API response</typeparam>
-    public class ApiResponse<TEntity> : IApiResponse<TEntity> where TEntity : class
+    public class ApiResponse<TEntity> : IResponse<TEntity> where TEntity : class
     {
         /// <summary>
         /// Api result in format of TEntity 

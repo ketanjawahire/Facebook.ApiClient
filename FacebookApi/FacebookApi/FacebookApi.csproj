@@ -63,7 +63,6 @@
     <Compile Include="ApiEngine\GetRequest.cs" />
     <Compile Include="ApiEngine\PostRequest.cs" />
     <Compile Include="ApiEngine\ApiRequest.cs" />
-    <Compile Include="ApiEngine\ApiRequestBase.cs" />
     <Compile Include="Entities\ApiEngine\ApiRequestParameter.cs" />
     <Compile Include="Entities\ApiEngine\ApiResponse.cs" />
     <Compile Include="Entities\ApiEngine\BatchRequest.cs" />

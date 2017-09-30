@@ -10,30 +10,23 @@ using RestRequest = RestSharp.RestRequest;
 
 namespace FacebookApi.ApiEngine
 {
+    /// <inheritdoc cref="IPagedRequest" />
     /// <summary>
     /// Represents paged api request
     /// </summary>
-    public class PagedRequest  : ApiRequestBase, IPagedRequest
+    public class PagedRequest  : ApiRequest, IPagedRequest
     {
+        /// <inheritdoc />
         /// <summary>
-        /// Collection of request parameters
-        /// </summary>
-        public IList<ApiRequestParameter> RequestParameters { get; }
-
-        /// <summary>
-        /// Initialize new instance of <see cref="PagedRequest"/>
+        /// Initialize new instance of <see cref="T:FacebookApi.ApiEngine.PagedRequest" />
         /// </summary>
         /// <param name="requestUrl">Request Url</param>
-        /// <param name="client"><see cref="ApiClient"/> used to execute this request</param>
+        /// <param name="client"><see cref="T:FacebookApi.ApiEngine.ApiClient" /> used to execute this request</param>
         internal PagedRequest(string requestUrl, ApiClient client) : base(requestUrl, client, ApiRequestHttpMethod.GET)
         {
         }
 
-        /// <summary>
-        /// Execute paged API request
-        /// </summary>
-        /// <typeparam name="TEntity">Entity class which can be used to represent received API response</typeparam>
-        /// <returns>Processed API response of type <see cref="IPagedResponse{TEntity}"/></returns>
+        /// <inheritdoc />
         public IPagedResponse<TEntity> ExecutePage<TEntity>() where TEntity : class, new()
         {
             StartTimer();
@@ -46,11 +39,7 @@ namespace FacebookApi.ApiEngine
             return _processResponse(response);
         }
 
-        /// <summary>
-        /// Execute paged API request
-        /// </summary>
-        /// <typeparam name="TEntity">Entity class which can be used to represent received API response</typeparam>
-        /// <returns>Processed API response of type <see cref="IPagedResponse{TEntity}"/></returns>
+        /// <inheritdoc />
         public async Task<IPagedResponse<TEntity>> ExecutePageAsync<TEntity>() where TEntity : class, new()
         {
             StartTimer();
@@ -78,15 +67,13 @@ namespace FacebookApi.ApiEngine
             return result;
         }
 
+        /// <inheritdoc />
         public void AddQueryParameter(string name, string value)
         {
             RestRequest.AddQueryParameter(name, value);
         }
 
-        /// <summary>
-        /// Specify api response page limit
-        /// </summary>
-        /// <param name="limit">Page limit</param>
+        /// <inheritdoc />
         public void AddPageLimit(int limit)
         {
             AddQueryParameter("limit", limit.ToString(CultureInfo.CurrentCulture));
