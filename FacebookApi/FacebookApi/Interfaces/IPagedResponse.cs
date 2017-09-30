@@ -1,46 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using FacebookApi.ApiEngine;
 using FacebookApi.Entities.ApiEngine;
 
-namespace FacebookApi.Interfaces.IApiEngine
+namespace FacebookApi.Interfaces
 {
     /// <summary>
     /// Represents paged API response
     /// </summary>
-    /// <typeparam name="TApiEntity">Entity class which can be used to represent received API response</typeparam>
-    public interface IPagedResponse<TApiEntity> where TApiEntity : class, new()
+    /// <typeparam name="TEntity">Entity class which can be used to represent received API response</typeparam>
+    public interface IPagedResponse<TEntity> where TEntity : class, new()
     {
         /// <summary>
         /// Get next page data from API
         /// </summary>
         /// <returns>Next page data</returns>
-        IPagedResponse<TApiEntity> GetNextPageData();
+        IPagedResponse<TEntity> GetNextPageData();
 
         /// <summary>
         /// Get next page data from API
         /// </summary>
         /// <returns>Next page data</returns>
-        Task<IPagedResponse<TApiEntity>> GetNextPageDataAsync();
+        Task<IPagedResponse<TEntity>> GetNextPageDataAsync();
 
         /// <summary>
         /// Get previous page data from API
         /// </summary>
         /// <returns>Previous page data</returns>
-        IPagedResponse<TApiEntity> GetPreviousPageData();
+        IPagedResponse<TEntity> GetPreviousPageData();
 
         /// <summary>
         /// Get previous page data from API
         /// </summary>
         /// <returns>Previous page data</returns>
-        Task<IPagedResponse<TApiEntity>> GetPreviousPageDataAsync();
+        Task<IPagedResponse<TEntity>> GetPreviousPageDataAsync();
 
         /// <summary>
         /// Get API response data
         /// </summary>
         /// <returns>API response data</returns>
-        IEnumerable<TApiEntity> GetResultData();
+        IEnumerable<TEntity> GetResultData();
 
         /// <summary>
         /// Check if next page data is available or not

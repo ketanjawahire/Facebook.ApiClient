@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using FacebookApi.Constants;
 using FacebookApi.Entities.ApiEngine;
 using FacebookApi.Exceptions;
-using FacebookApi.Interfaces.IApiEngine;
+using FacebookApi.Interfaces;
 using RestSharp;
 using RestSharp.Deserializers;
 
@@ -20,7 +20,7 @@ namespace FacebookApi.ApiEngine
     public class PagedResponse<TApiEntity> : IPagedResponse<TApiEntity> where TApiEntity : class, new()
     {
         /// <summary>
-        /// <see cref="ApiClient"/> used to execute <see cref="PagedApiRequest"/>
+        /// <see cref="ApiClient"/> used to execute <see cref="PagedRequest"/>
         /// </summary>
         public ApiClient Client { get; private set; }
 
@@ -81,11 +81,11 @@ namespace FacebookApi.ApiEngine
             Client = apiClient;
         }
 
-        private PagedApiRequest _getNextPageRequest()
+        private IPagedRequest _getNextPageRequest()
         {
             if (string.IsNullOrEmpty(Paging.Next))
             {
-                throw new NullReferenceException("Next page link is empty.");
+                throw new UriFormatException("Next page link is empty.");
             }
 
             if (!Uri.TryCreate(Paging.Next, UriKind.Absolute, out Uri nextPageUri))
@@ -94,16 +94,16 @@ namespace FacebookApi.ApiEngine
             //stupid logic :(
             var url = $"{string.Join(string.Empty, nextPageUri.Segments.Skip(2))}{nextPageUri.Query}";
 
-            var nextPageRequest = new PagedApiRequest(url, Client);
+            var nextPageRequest = new PagedRequest(url, Client);
 
             return nextPageRequest;
         }
 
-        private PagedApiRequest _getPreviousPageRequest()
+        private IPagedRequest _getPreviousPageRequest()
         {
             if (string.IsNullOrEmpty(Paging.Previous))
             {
-                throw new NullReferenceException("Previous page link is empty.");
+                throw new UriFormatException("Previous page link is empty.");
             }
 
             if (!Uri.TryCreate(Paging.Previous, UriKind.Absolute, out Uri previousPageUri))
@@ -112,7 +112,7 @@ namespace FacebookApi.ApiEngine
             //stupid logic :(
             var url = $"{previousPageUri.Segments.Skip(0).Skip(1)}{previousPageUri.Query}";
 
-            var previousPageRequest = new PagedApiRequest(url, Client);
+            var previousPageRequest = new PagedRequest(url, Client);
             return previousPageRequest;
         }
 

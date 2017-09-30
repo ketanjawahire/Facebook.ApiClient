@@ -1,92 +1,207 @@
-﻿using System;
-using System.ComponentModel;
-using System.Dynamic;
+﻿using FacebookApi.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
+using System.Linq;
+using System.Net;
 using FacebookApi.Constants;
-using FacebookApi.Interfaces.IApiEngine;
-using RestSharp;
-using System.Threading.Tasks;
-using FacebookApi.Entities.ApiEngine;
 using FacebookApi.Enumerations.ApiEngine;
 using FacebookApi.Exceptions;
+using Newtonsoft.Json.Linq;
+using RestSharp;
 
 namespace FacebookApi.ApiEngine
 {
     /// <summary>
     /// Represents a Facebook API requests
     /// </summary>
-    public class ApiRequest : ApiRequestBase
+    public class ApiRequest : IApiRequest
     {
-        /// <summary>
-        /// Initialize new instance of <see cref="ApiRequest"/> using given Request Url &amp; <see cref="ApiClient"/>
-        /// </summary>
-        /// <param name="requestUrl">Request Url</param>
-        /// <param name="client"><see cref="ApiClient"/></param>
-        public ApiRequest(string requestUrl, ApiClient client)
-        {
-            RestClient = new RestClient(FacebookApiRequestUrls.GRAPH_REQUEST_BASE_URL);
+        private Stopwatch _apiTimer;
 
+        /// <summary>
+        /// Instance of RestClient 
+        /// </summary>
+        protected IRestClient RestClient { get; private set; }
+
+        /// <summary>
+        /// Instance of RestRequest
+        /// </summary>
+        protected IRestRequest RestRequest { get; private set; }
+
+        /// <summary>
+        /// <see cref="ApiEngine.ApiClient"/> to use to execute API request
+        /// </summary>
+        public ApiClient Client { get; protected set; }
+
+        /// <summary>
+        /// API request uri
+        /// </summary>
+        public string RequestUrl { get; protected set; }
+
+        
+        /// <summary>
+        /// Type of API request
+        /// </summary>
+        public enum RequestType
+        {
+            /// <summary>
+            /// GET API request
+            /// </summary>
+            Get,
+
+            /// <summary>
+            /// POST API request
+            /// </summary>
+            Post,
+
+            /// <summary>
+            /// Paged GET API request
+            /// </summary>
+            Paged,
+        }
+
+        /// <summary>
+        /// Initialize instance of <see cref="ApiRequest"/>
+        /// </summary>
+        protected ApiRequest(string requestUrl, ApiClient client, ApiRequestHttpMethod method)
+        {
             RequestUrl = requestUrl;
             Client = client;
+
+            RestClient = new RestClient(FacebookApiRequestUrls.GRAPH_REQUEST_BASE_URL);
+            RestRequest = new RestRequest(requestUrl, (Method)method);
+
+            SetFBRequestParameters();
         }
 
         /// <summary>
-        /// Execute current API request.
+        /// Create new api request of given type
         /// </summary>
-        /// <typeparam name="TEntity">Entity class which can be used to represent received API response</typeparam>
-        /// <param name="method"><see cref="ApiRequestHttpMethod"/></param>
-        /// <returns><see cref="IApiResponse{TEntity}"/></returns>
-        public IApiResponse<TEntity> Execute<TEntity>(ApiRequestHttpMethod method) where TEntity : class, new()
+        /// <param name="type">Type of the request</param>
+        /// <param name="url">Request url</param>
+        /// <param name="client">Instance of <see cref="ApiClient"/> for this request</param>
+        /// <returns>Instance of API request </returns>
+        public static IApiRequest Create(RequestType type, string url, ApiClient client)
         {
-            var request = PrepareRestRequest(method, RequestUrl, RequestParameters);
+            switch (type)
+            {
+                case RequestType.Get:
+                    return new GetRequest(url, client);
+                case RequestType.Post:
+                    return new PostRequest(url, client);
+                case RequestType.Paged:
+                    return new PagedRequest(url, client);
+            }
 
-            StartTimer();
-            var response = RestClient.Execute<TEntity>(request);
-            StopTimer();
+            throw new NotImplementedException();
+        }
 
-            if (response.ErrorException != null)
-                throw new SDKException(response.Content, response.ErrorException);
+        #region Methods to add different request parameters
 
-            return new ApiResponse<TEntity>(response.Data, response.Headers, GetExceptionsFromResponse(response));
+        /// <inheritdoc />
+        public void AddUrlSegment(string name, string value)
+        {
+            RestRequest.AddUrlSegment(name, value);
+        }
+
+        /// <inheritdoc />
+        public void AddHttpHeader(string name, string value)
+        {
+            RestRequest.AddHeader(name, value);
+        }
+
+        /// <inheritdoc />
+        public void AddCookie(string name, string value)
+        {
+            RestRequest.AddCookie(name, value);
+        }
+
+        #endregion
+
+        private void SetFBRequestParameters()
+        {
+            RestRequest.AddParameter(FacebookApiRequestParameters.API_VERSION, Client.Version, ParameterType.UrlSegment);
+            RestRequest.AddParameter(FacebookApiRequestParameters.ACCESS_TOKEN, Client.AccessToken, ParameterType.QueryString);
         }
 
         /// <summary>
-        /// Execute current API request.
+        /// Check if there is any api exception in received resonse. If yes then return list of api exceptions
         /// </summary>
-        /// <typeparam name="TEntity">Entity class which can be used to represent received API response</typeparam>
-        /// <param name="method"><see cref="ApiRequestHttpMethod"/></param>
-        /// <returns><see cref="IApiResponse{TEntity}"/></returns>
-        public async Task<IApiResponse<TEntity>> ExecuteAsync<TEntity>(ApiRequestHttpMethod method)
-            where TEntity : class, new()
+        /// <param name="response">Received api response</param>
+        /// <returns>List of api exceptions from received response</returns>
+        protected static IEnumerable<FacebookOAuthException> GetExceptionsFromResponse(IRestResponse response)
         {
-            var request = PrepareRestRequest(method, RequestUrl, RequestParameters);
+            IList<FacebookOAuthException> exceptions = new List<FacebookOAuthException>();
 
-            StartTimer();
-            var response = await RestClient.ExecuteTaskAsync<TEntity>(request);
-            StopTimer();
+            if (response.StatusCode != HttpStatusCode.BadRequest) return exceptions;
 
-            if (response.ErrorException != null)
-                throw new SDKException(response.Content, response.ErrorException);
+            var responseHeaders =
+                response.Headers.ToDictionary(e => e.Name);
 
-            return new ApiResponse<TEntity>(response.Data, response.Headers, GetExceptionsFromResponse(response));
+            var parsedException = JObject.Parse(response.Content);
+            var exceptionCode = parsedException["error"]?["code"] != null
+                ? int.Parse(parsedException["error"]["code"].ToString(), CultureInfo.CurrentCulture)
+                : 200;
+
+
+            exceptions.Add(new FacebookOAuthException(exceptionCode, parsedException["error"]?["message"].ToString())
+            {
+                FBTraceId =
+                    responseHeaders.ContainsKey(FacebookApiResponseHeaders.X_FB_TRACE_ID)
+                        ? responseHeaders[FacebookApiResponseHeaders.X_FB_TRACE_ID].Value.ToString()
+                        : string.Empty,
+                FBRev =
+                    responseHeaders.ContainsKey(FacebookApiResponseHeaders.X_FB_REV)
+                        ? responseHeaders[FacebookApiResponseHeaders.X_FB_REV].Value.ToString()
+                        : string.Empty,
+                FBDebug =
+                    responseHeaders.ContainsKey(FacebookApiResponseHeaders.X_FB_DEBUG)
+                        ? responseHeaders[FacebookApiResponseHeaders.X_FB_DEBUG].Value.ToString()
+                        : string.Empty,
+                RawExceptionString = response.Content,
+                ErrorUserMessage = parsedException["error"]?["error_user_message"]?.ToString(),
+                ErrorUserTitle = parsedException["error"]?["error_user_title"]?.ToString(),
+                SubCode = parsedException["error"]?["subcode"] != null
+                    ? int.Parse(parsedException["error"]["subcode"].ToString())
+                    : 0
+            });
+
+            return exceptions;
         }
 
         /// <summary>
-        /// Execute current API request.
+        /// Initialize &amp; start <see cref="_apiTimer"/>
         /// </summary>
-        /// <param name="method"><see cref="ApiRequestHttpMethod"/></param>
-        /// <returns>Returns API response as string</returns>
-        public IApiResponse<string> Execute(ApiRequestHttpMethod method)
+        protected void StartTimer()
         {
-            var request = PrepareRestRequest(method, RequestUrl, RequestParameters);
+            if (_apiTimer == null)
+                _apiTimer = new Stopwatch();
 
-            StartTimer();
-            var response = RestClient.Execute(request);
-            StartTimer();
+            if (_apiTimer.IsRunning)
+            {
+                _apiTimer.Stop();
+                _apiTimer.Reset();
+            }
 
-            if (response.ErrorException != null)
-                throw new SDKException(response.Content, response.ErrorException);
-
-            return new ApiResponse<string>(response.Content, response.Headers, GetExceptionsFromResponse(response));
+            _apiTimer.Start();
         }
+
+        /// <summary>
+        /// Stop <see cref="_apiTimer"/>
+        /// </summary>
+        protected void StopTimer()
+        {
+            _apiTimer.Stop();
+        }
+
+        /// <inheritdoc />
+        public TimeSpan GetElapsedTime()
+        {
+            return _apiTimer.Elapsed;
+        }
+
+
     }
 }

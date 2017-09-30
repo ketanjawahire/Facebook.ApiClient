@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using FacebookApi.Enumerations.ApiEngine;
-using FacebookApi.Interfaces.IApiEngine;
 
 namespace FacebookApi.Entities.ApiEngine
 {
