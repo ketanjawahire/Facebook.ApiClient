@@ -3,36 +3,63 @@ The Facebook SDK for .NET helps developers build applications interacting with F
 
 ## NuGet
 
-    Install-Package Facebook.ApiClient
+* API Engine
+```    
+	Install-Package Facebook.ApiClient
+```
+* API Entities
+```    
+	Install-Package Facebook.ApiClient.Entities
+```
 
 ## How to use it?
-* Single object request
 ```C#
-	var apiEngine1 = new ApiClient("<ACCESS_TOKEN_HERE>");
-	var testRequest1 = new ApiRequest("{id}/", apiEngine1);
-	testRequest1.AddUrlSegmentParameter("id", "<AD_OBJECT_ID_HERE>");
-	testRequest1.AddGetOrPostParameter("fields", string.Join(",", Ad.GetApiSelectors(true, false, false)));
-	var testRequest1Response = testRequest1.Execute<Ad>(ApiRequestHttpMethod.GET);
-```
-* Paged API request
-```C#
-	var apiEngine1 = new ApiClient("<ACCESS_TOKEN_HERE>");
-	var testRequest2 = new PagedApiRequest("{account_id}/ads", apiEngine1);
-	testRequest2.AddUrlSegmentParameter("account_id", "<ACCOUNT_ID_HERE>");
-	testRequest2.AddGetOrPostParameter("fields", string.Join(",", Ad.GetApiSelectors(true, true, true)));
-	testRequest2.AddPageLimit(25);
+var accessToken = "<ACCESS_TOKEN>";
+var apiClient = new ApiClient(accessToken);
 
-	var result = new List<Ad>();
-	var testRequest2Response = testRequest2.ExecutePage<Ad>();
 
-	result.AddRange(testRequest2Response.GetResultData());
+//GET API request 
+var getRequestUrl = "<GET_REQUEST_URL>";
+var getRequest = (IGetRequest) ApiRequest.Create(ApiRequest.RequestType.Get, getRequestUrl, apiClient);
+getRequest.AddQueryParameter("param1","value1");
+getRequest.AddQueryParameter("param2","value2");
 
-	while (testRequest2Response.IsNextPageDataAvailable())
+var getRequestResponse = getRequest.Execute();
+
+
+//POST API Request
+var postRequestUrl = "<POST_REQUEST_URL>";
+var postRequest = (IPostRequest) ApiRequest.Create(ApiRequest.RequestType.Post, postRequestUrl, apiClient);
+postRequest.AddParameter("param1","value1");
+postRequest.AddParameter("param2","value2");
+postRequest.AddFile("<filename>", <fileBytes>, <contentType>)
+
+var postRequestResponse = postRequest.Execute();
+
+
+//Paged API request
+var pagedRequestUrl = "<PAGED_REQUEST_URL>";
+var pagedRequest = (IPagedRequest) ApiRequest.Create(ApiRequest.RequestType.Paged, pagedRequestUrl, apiClient);
+pagedRequest.AddQueryParameter("param1", "value1");
+pagedRequest.AddUrlSegment("param2", "value2");
+pagedRequest.AddPageLimit(20);
+
+var result = new List<Class1>();
+var pagedRequestResponse = pagedRequest.ExecutePage<Class1>();
+
+if (pagedRequestResponse.IsDataAvailable())
+{
+	result.AddRange(pagedRequestResponse.GetResultData());
+
+	while (pagedRequestResponse.IsNextPageDataAvailable())
 	{
-		testRequest2Response = testRequest2Response.GetNextPageData();
-		result.AddRange(testRequest2Response.GetResultData());
+		pagedRequestResponse = pagedRequestResponse.GetNextPageData();
+		result.AddRange(pagedRequestResponse.GetResultData());
 	}
+}
 ```	
+
+
 
 ## Supported Platforms
 * .NET 4.5.2
