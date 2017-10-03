@@ -1,4 +1,7 @@
-﻿namespace FacebookApi.Interfaces
+﻿using System;
+using System.Collections.Generic;
+
+namespace FacebookApi.Interfaces
 {
     /// <summary>
     /// Represents response received from api
@@ -11,5 +14,11 @@
         /// </summary>
         /// <returns>Api result data</returns>
         TEntity GetResult();
+
+        /// <summary>
+        /// Get list of exceptions from API response.
+        /// </summary>
+        /// <returns>List of exceptions</returns>
+        IEnumerable<Exception> GetExceptions();
     }
 }
