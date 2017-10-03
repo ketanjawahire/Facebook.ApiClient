@@ -88,6 +88,7 @@
     <Compile Include="Api\AgencyClientDeclaration.cs" />
     <Compile Include="Api\AndroidAppLink.cs" />
     <Compile Include="Api\AppLinks.cs" />
+    <Compile Include="Api\AsyncJob.cs" />
     <Compile Include="Api\Business.cs" />
     <Compile Include="Api\Campaign.cs" />
     <Compile Include="Api\ConversionActionQuery.cs" />
