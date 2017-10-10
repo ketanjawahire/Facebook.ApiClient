@@ -45,12 +45,6 @@ namespace FacebookApi.Entities
         public int FeedCount { get; set; }
 
         /// <summary>
-        /// Catalog settings for a flight catalog.
-        /// </summary>
-        [DeserializeAs(Name = "flight_catalog_settings")]
-        public string FlightCatalogSettings { get; set; }
-
-        /// <summary>
         /// Flag to enable padding for images in a catalog when used in single image ads. The image will be padded to a 1.91:1 aspect ratio.
         /// </summary>
         [DeserializeAs(Name = "image_padding_landscape")]

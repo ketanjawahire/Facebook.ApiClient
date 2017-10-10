@@ -83,5 +83,11 @@ namespace FacebookApi.Entities.ApiEngine
         {
             return _result;
         }
+
+        /// <inheritdoc />
+        public IEnumerable<Exception> GetExceptions()
+        {
+            return Exceptions;
+        }
     }
 }
