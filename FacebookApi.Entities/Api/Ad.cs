@@ -149,7 +149,7 @@ namespace FacebookApi.Entities
         /// The configured status of the ad. The field returns the same value as 'configured_status', and is the suggested one to use.
         /// </summary>
         [DeserializeAs(Name = "status")]
-        public AdConfiguredStatus Status { get; set; }
+        public AdConfiguredStatus? Status { get; set; }
 
         /// <summary>
         /// Tracking specs

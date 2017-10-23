@@ -161,6 +161,9 @@
         /// </summary>
         APPLY_NOW,
 
-
+        /// <summary>
+        /// EVENT_RSVP
+        /// </summary>
+        EVENT_RSVP
     }
 }
