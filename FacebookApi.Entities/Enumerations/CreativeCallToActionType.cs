@@ -164,6 +164,16 @@
         /// <summary>
         /// EVENT_RSVP
         /// </summary>
-        EVENT_RSVP
+        EVENT_RSVP,
+
+        /// <summary>
+        /// SEE_MENU
+        /// </summary>
+        SEE_MENU,
+
+        /// <summary>
+        /// WATCH_VIDEO
+        /// </summary>
+        WATCH_VIDEO
     }
 }
