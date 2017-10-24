@@ -14,7 +14,7 @@ namespace FacebookApi.Entities
         /// The post ID
         /// </summary>
         [DeserializeAs(Name = "id")]
-        public long Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// ID of admin, app or business that created the post. Applies to pages only

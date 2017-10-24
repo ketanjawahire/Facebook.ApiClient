@@ -8,6 +8,12 @@ namespace FacebookApi.Entities
     public class ObjectStorySpec
     {
         /// <summary>
+        /// Object story id
+        /// </summary>
+        [DeserializeAs(Name = "id")]
+        public string Id { get; set; }
+
+        /// <summary>
         /// The Instagram user account that the story will be posted to
         /// </summary>
         [DeserializeAs(Name = "instagram_actor_id")]
