@@ -174,6 +174,11 @@
         /// <summary>
         /// WATCH_VIDEO
         /// </summary>
-        WATCH_VIDEO
+        WATCH_VIDEO,
+
+        /// <summary>
+        /// BUY_TICKETS
+        /// </summary>
+        BUY_TICKETS
     }
 }
