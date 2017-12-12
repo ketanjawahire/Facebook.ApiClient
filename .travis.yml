@@ -1,6 +1,4 @@
 language: csharp
-mono:
-  - latest
 solution: ./FacebookApi/FacebookApi.sln
 install:
   - nuget restore ./FacebookApi/FacebookApi.sln
