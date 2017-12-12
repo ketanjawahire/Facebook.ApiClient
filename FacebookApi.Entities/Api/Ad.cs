@@ -12,7 +12,7 @@ namespace FacebookApi.Entities
     /// An ad object contains the data necessary to visually display an ad and associate it with a corresponding ad set.
     /// <para>https://developers.facebook.com/docs/marketing-api/reference/adgroup</para>
     /// </summary>
-    public class Ad
+    public class Ad : BaseEntity
     {
         /// <summary>
         /// The ID of this ad.

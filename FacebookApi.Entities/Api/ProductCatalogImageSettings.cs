@@ -1,3 +1,4 @@
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -7,7 +8,7 @@ namespace FacebookApi.Entities
     /// Image transformation settings object to customize how items from the catalog would look like in different dynamic ad formats.
     /// <para>https://developers.facebook.com/docs/marketing-api/reference/product-catalog-image-settings/</para>
     /// </summary>
-    public class ProductCatalogImageSettings
+    public class ProductCatalogImageSettings : BaseEntity
     {
         /// <summary>
         /// Dynamic Ad display settings that would be applied to carousel ads.

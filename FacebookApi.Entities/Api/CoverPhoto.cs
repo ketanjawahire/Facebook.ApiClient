@@ -1,3 +1,4 @@
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -7,7 +8,7 @@ namespace FacebookApi.Entities
     /// A cover photo for objects in the Graph API. Cover photos are used with Events, Groups, Pages and People
     /// <para>https://developers.facebook.com/docs/graph-api/reference/cover-photo/</para>
     /// </summary>
-    public class CoverPhoto
+    public class CoverPhoto : BaseEntity
     {
         /// <summary>
         /// The ID of the cover photo

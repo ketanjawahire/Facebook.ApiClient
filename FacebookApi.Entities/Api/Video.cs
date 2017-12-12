@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -9,7 +10,7 @@ namespace FacebookApi.Entities
     /// Represents an individual video on Facebook.
     /// <para>https://developers.facebook.com/docs/graph-api/reference/video/</para>
     /// </summary>
-    public class Video
+    public class Video : BaseEntity
     {
         /// <summary>
         /// Accuracy of the backdated time.

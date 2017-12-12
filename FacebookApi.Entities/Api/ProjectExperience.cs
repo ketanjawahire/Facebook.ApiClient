@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -9,7 +10,7 @@ namespace FacebookApi.Entities
     /// Information about a project experience
     /// <para>https://developers.facebook.com/docs/graph-api/reference/project-experience/</para>
     /// </summary>
-    public class ProjectExperience
+    public class ProjectExperience : BaseEntity
     {
         /// <summary>
         /// ID

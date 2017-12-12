@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -9,7 +10,7 @@ namespace FacebookApi.Entities
     /// This represents a Facebook Page.
     /// <para>https://developers.facebook.com/docs/graph-api/reference/page/</para>
     /// </summary>
-    public class Page
+    public class Page : BaseEntity
     {
         /// <summary>
         /// Page ID. No access token is required to access this field

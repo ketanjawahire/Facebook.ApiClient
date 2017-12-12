@@ -1,3 +1,4 @@
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -7,7 +8,7 @@ namespace FacebookApi.Entities
     /// Parking options for a Page.
     /// <para>https://developers.facebook.com/docs/graph-api/reference/page-parking/</para>
     /// </summary>
-    public class PageParking
+    public class PageParking : BaseEntity
     {
         /// <summary>
         /// Whether lot parking is available

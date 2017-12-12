@@ -1,3 +1,4 @@
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -7,7 +8,7 @@ namespace FacebookApi.Entities
     /// An app link on the Windows Phone platform.
     /// <para>https://developers.facebook.com/docs/graph-api/reference/windows-phone-app-link/</para>
     /// </summary>
-    public class WindowsPhoneAppLink
+    public class WindowsPhoneAppLink : BaseEntity
     {
         /// <summary>
         /// The native apps id in the Windows Phone store.

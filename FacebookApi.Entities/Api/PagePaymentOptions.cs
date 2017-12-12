@@ -1,3 +1,4 @@
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -7,7 +8,7 @@ namespace FacebookApi.Entities
     /// Page payment options in the Graph API.
     /// <para>https://developers.facebook.com/docs/graph-api/reference/page-payment-options/</para>
     /// </summary>
-    public class PagePaymentOptions
+    public class PagePaymentOptions : BaseEntity
     {
         /// <summary>
         /// Whether the business accepts American Express as a payment option

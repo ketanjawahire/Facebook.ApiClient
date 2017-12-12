@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -8,7 +9,7 @@ namespace FacebookApi.Entities
     /// App Links is an open omni-channel solution for deep linking to content in your mobile app
     /// <para>https://developers.facebook.com/docs/graph-api/reference/app-links/</para>
     /// </summary>
-    public class AppLinks
+    public class AppLinks : BaseEntity
     {
         /// <summary>
         /// The source url of the app links object

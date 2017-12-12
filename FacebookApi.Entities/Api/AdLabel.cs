@@ -1,4 +1,5 @@
 using System;
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -8,7 +9,7 @@ namespace FacebookApi.Entities
     /// An AdLabel
     /// <para>https://developers.facebook.com/docs/marketing-api/reference/ad-label/</para>
     /// </summary>
-    public class AdLabel
+    public class AdLabel : BaseEntity
     {
         /// <summary>
         /// Ad Label ID

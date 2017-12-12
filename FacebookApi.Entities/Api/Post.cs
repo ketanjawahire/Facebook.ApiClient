@@ -1,4 +1,5 @@
 using System;
+using FacebookApi.Entities.Api;
 using FacebookApi.Entities.Enumerations;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
@@ -9,7 +10,7 @@ namespace FacebookApi.Entities
     /// An individual entry in a profile's feed. The profile could be a user, page, app, or group.
     /// <para>https://developers.facebook.com/docs/graph-api/reference/v2.5/post</para>
     /// </summary>
-    public class Post
+    public class Post : BaseEntity
     {
         /// <summary>
         /// The post ID

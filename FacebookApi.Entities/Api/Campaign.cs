@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FacebookApi.Entities.Api;
 using FacebookApi.Entities.Enumerations;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
@@ -11,7 +12,7 @@ namespace FacebookApi.Entities
     /// Ad Campaign
     /// <para>https://developers.facebook.com/docs/marketing-api/reference/ad-campaign-group</para>
     /// </summary>
-    public class Campaign
+    public class Campaign : BaseEntity
     {
         /// <summary>
         /// Campaign's ID

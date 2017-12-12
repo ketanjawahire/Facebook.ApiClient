@@ -1,3 +1,4 @@
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -7,7 +8,7 @@ namespace FacebookApi.Entities
     /// The web metadata for an app link
     /// <para>https://developers.facebook.com/docs/graph-api/reference/web-app-link/</para>
     /// </summary>
-    public class WebAppLink
+    public class WebAppLink : BaseEntity
     {
         /// <summary>
         /// Describes if the web link should be used if the native links don't work

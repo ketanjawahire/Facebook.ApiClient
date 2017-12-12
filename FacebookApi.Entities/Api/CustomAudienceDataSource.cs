@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -12,7 +13,7 @@ namespace FacebookApi.Entities
     /// JSON dictionary of type, sub_type to indicate by which method the custom audience was created.
     /// <para>https://developers.facebook.com/docs/marketing-api/reference/custom-audience-data-source/</para>
     /// </summary>
-    public class CustomAudienceDataSource
+    public class CustomAudienceDataSource : BaseEntity
     {
         /// <summary>
         /// Additional information on creation source

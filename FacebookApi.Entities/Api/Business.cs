@@ -1,4 +1,5 @@
 using System;
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -8,7 +9,7 @@ namespace FacebookApi.Entities
     /// Business Manager
     /// <para>https://developers.facebook.com/docs/marketing-api/businessmanager/</para>
     /// </summary>
-    public class Business
+    public class Business : BaseEntity
     {
         /// <summary>
         /// The Name of the Business

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -12,7 +13,7 @@ namespace FacebookApi.Entities
     /// Ad Action stats
     /// <para>https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/</para>
     /// </summary>
-    public class AdActionStats
+    public class AdActionStats : BaseEntity
     {
         /// <summary>
         /// Metric value of attribution window "1 day after clicking the ad"

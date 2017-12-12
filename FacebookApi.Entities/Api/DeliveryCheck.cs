@@ -1,3 +1,4 @@
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -7,7 +8,7 @@ namespace FacebookApi.Entities
     /// Delivery checks are a set of tests which can help find out potential issues related to ad delivery.
     /// <para>https://developers.facebook.com/docs/marketing-api/adgroup/deliverychecks/v2.5</para>
     /// </summary>
-    public class DeliveryCheck
+    public class DeliveryCheck : BaseEntity
     {
         /// <summary>
         /// The name of the failed check 

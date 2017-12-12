@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using FacebookApi.Entities.Api;
 using FacebookApi.Entities.Enumerations;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
@@ -9,7 +10,7 @@ namespace FacebookApi.Entities
     /// An ad account group allows managing user access to multiple Facebook ad accounts as a single unit.
     /// <para>https://developers.facebook.com/docs/marketing-api/reference/ad-account-group/</para>
     /// </summary>
-    public class AdAccountGroupResult
+    public class AdAccountGroupResult : BaseEntity
     {
         /// <summary>
         /// ID of this ad account group, it's the same as account_group_id

@@ -1,3 +1,4 @@
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -7,7 +8,7 @@ namespace FacebookApi.Entities
     /// JSON containing the call to action data.
     /// <para>https://developers.facebook.com/docs/marketing-api/reference/ad-creative-link-data-call-to-action-value/</para>
     /// </summary>
-    public class AdCreativeLinkDataCallToActionValue
+    public class AdCreativeLinkDataCallToActionValue : BaseEntity
     {
         /// <summary>
         /// The app destination type.

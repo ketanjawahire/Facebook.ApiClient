@@ -1,3 +1,4 @@
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -6,7 +7,7 @@ namespace FacebookApi.Entities
     /// <summary>
     /// Photo Data is one field within the creative that is used to create photo ads. 
     /// </summary>
-    public class AdCreativePhotoData
+    public class AdCreativePhotoData : BaseEntity
     {
         /// <summary>
         /// The branded content sponsor page ID. If your ad promotes branded content, you must use this to indicate the sponsor page

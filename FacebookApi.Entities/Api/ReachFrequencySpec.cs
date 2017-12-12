@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -8,7 +9,7 @@ namespace FacebookApi.Entities
     /// Reach and Frequency Spec
     /// <para>https://developers.facebook.com/docs/marketing-api/reachandfrequency/v2.5</para>
     /// </summary>
-    public class ReachFrequencySpec
+    public class ReachFrequencySpec : BaseEntity
     {
         /// <summary>
         /// List of currently supported countries for reach and frequency buying

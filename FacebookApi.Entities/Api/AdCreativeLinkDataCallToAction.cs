@@ -1,3 +1,4 @@
+using FacebookApi.Entities.Api;
 using FacebookApi.Entities.Enumerations;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
@@ -8,7 +9,7 @@ namespace FacebookApi.Entities
     /// Data defining the call to action for a link or video ad.
     /// <para>https://developers.facebook.com/docs/marketing-api/reference/ad-creative-link-data-call-to-action/</para>
     /// </summary>
-    public class AdCreativeLinkDataCallToAction
+    public class AdCreativeLinkDataCallToAction : BaseEntity
     {
         /// <summary>
         /// The type of the action. Not all types can be used for all ads

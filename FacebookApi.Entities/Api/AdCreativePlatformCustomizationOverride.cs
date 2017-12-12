@@ -1,3 +1,4 @@
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -6,7 +7,7 @@ namespace FacebookApi.Entities
     /// <summary>
     /// The media that is used on a Facebook placement. The media specified here replaces the media orginally defined in the ad creative when the ad displays in an associated placement.
     /// </summary>
-    public class AdCreativePlatformCustomizationOverride
+    public class AdCreativePlatformCustomizationOverride : BaseEntity
     {
         /// <summary>
         /// A JSON object defining crop dimensions for the image specified

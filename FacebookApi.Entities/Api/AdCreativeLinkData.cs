@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using FacebookApi.Entities.Api;
 using FacebookApi.Entities.Enumerations;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
@@ -9,7 +10,7 @@ namespace FacebookApi.Entities
     /// Link Data is one field within the creative that is used to create link ads.
     /// <para>https://developers.facebook.com/docs/marketing-api/reference/ad-creative-link-data/</para>
     /// </summary>
-    public class AdCreativeLinkData
+    public class AdCreativeLinkData : BaseEntity
     {
         /// <summary>
         /// The index (zero based) of the image from the additionalimages array to use as the ad image for a dynamic product ad

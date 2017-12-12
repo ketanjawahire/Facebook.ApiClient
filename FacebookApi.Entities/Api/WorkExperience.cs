@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -9,7 +10,7 @@ namespace FacebookApi.Entities
     /// Information about a user's work
     /// <para>https://developers.facebook.com/docs/graph-api/reference/work-experience/</para>
     /// </summary>
-    public class WorkExperience
+    public class WorkExperience : BaseEntity
     {
         /// <summary>
         /// Description

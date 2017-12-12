@@ -1,3 +1,4 @@
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -7,7 +8,7 @@ namespace FacebookApi.Entities
     /// Image crops specification, in the format of [[{left},{top}],[{right},{bottom}]]
     /// <para>https://developers.facebook.com/docs/marketing-api/reference/ads-image-crops/</para>
     /// </summary>
-    public class AdsImageCrops
+    public class AdsImageCrops : BaseEntity
     {
         /// <summary>
         /// Crop specification for 100x100

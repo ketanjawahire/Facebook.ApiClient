@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -12,7 +13,7 @@ namespace FacebookApi.Entities
     /// A Product Set is a set of products in a Product Catalog that you advertise in a dynamic ad
     /// <para>https://developers.facebook.com/docs/marketing-api/reference/product-set</para>
     /// </summary>
-    public class ProductSet
+    public class ProductSet : BaseEntity
     {
         /// <summary>
         /// ID of the product set

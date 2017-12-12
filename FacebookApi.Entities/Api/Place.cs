@@ -1,3 +1,4 @@
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -7,7 +8,7 @@ namespace FacebookApi.Entities
     /// Facebook place
     /// <para>https://developers.facebook.com/docs/graph-api/reference/place/</para>
     /// </summary>
-    public class Place
+    public class Place : BaseEntity
     {
         /// <summary>
         /// ID

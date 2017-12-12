@@ -1,3 +1,4 @@
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -7,7 +8,7 @@ namespace FacebookApi.Entities
     /// Information about a person's VOIP status
     /// <para>https://developers.facebook.com/docs/graph-api/reference/voip-info/</para>
     /// </summary>
-    public class VoipInfo
+    public class VoipInfo : BaseEntity
     {
         /// <summary>
         /// Does this user have a pushable mobile app install?

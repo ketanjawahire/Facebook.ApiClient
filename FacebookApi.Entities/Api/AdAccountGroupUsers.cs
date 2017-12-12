@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using FacebookApi.Entities.Api;
+using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
 namespace FacebookApi.Entities
@@ -7,7 +8,7 @@ namespace FacebookApi.Entities
     /// An User of an Ad Account Group
     /// <para>https://developers.facebook.com/docs/marketing-api/reference/ad-account-group-users/</para>
     /// </summary>
-    public class AdAccountGroupUsers
+    public class AdAccountGroupUsers : BaseEntity
     {
         /// <summary>
         /// The role of this user in the account group

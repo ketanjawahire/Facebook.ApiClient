@@ -11,7 +11,7 @@ namespace FacebookApi.Entities.Api
     /// <summary>
     /// Represents async job
     /// </summary>
-    public class AsyncJob
+    public class AsyncJob : BaseEntity
     {
         /// <summary>
         /// Async job id

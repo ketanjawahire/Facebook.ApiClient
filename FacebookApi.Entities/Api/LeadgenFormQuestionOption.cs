@@ -7,7 +7,7 @@ namespace FacebookApi.Entities.Api
     /// Represents leadgen form question options
     /// <para>https://developers.facebook.com/docs/graph-api/reference/page/leadgen_forms/</para>
     /// </summary>
-    public class LeadgenFormQuestionOption
+    public class LeadgenFormQuestionOption : BaseEntity
     {
         /// <summary>
         /// Key

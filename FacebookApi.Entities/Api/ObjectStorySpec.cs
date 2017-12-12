@@ -1,3 +1,4 @@
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -6,7 +7,7 @@ namespace FacebookApi.Entities
     /// <summary>
     /// The specifications of a creative containing the page id and other content to create a new unpublished page post specified using one of link_data, photo_data, video_data, offer_data , text_data or template_data.
     /// </summary>
-    public class ObjectStorySpec
+    public class ObjectStorySpec : BaseEntity
     {
         /// <summary>
         /// Object story id

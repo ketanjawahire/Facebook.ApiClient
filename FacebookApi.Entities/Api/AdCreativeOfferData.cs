@@ -1,3 +1,4 @@
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -6,7 +7,7 @@ namespace FacebookApi.Entities
     /// <summary>
     /// The specification for an offline offer ad.
     /// </summary>
-    public class AdCreativeOfferData
+    public class AdCreativeOfferData : BaseEntity
     {
         /// <summary>
         /// The maximum number of times the offer can be claimed

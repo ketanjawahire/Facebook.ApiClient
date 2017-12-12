@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -9,7 +10,7 @@ namespace FacebookApi.Entities
     /// A user represents a person on Facebook.
     /// <para>https://developers.facebook.com/docs/graph-api/reference/user/</para>
     /// </summary>
-    public class User
+    public class User : BaseEntity
     {
         /// <summary>
         /// The id of this person's user account. This ID is unique to each app and cannot be used across different apps.

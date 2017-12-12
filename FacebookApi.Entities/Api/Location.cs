@@ -1,3 +1,4 @@
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -7,7 +8,7 @@ namespace FacebookApi.Entities
     /// Location node used with other objects in the Graph API.
     /// <para>https://developers.facebook.com/docs/graph-api/reference/location/</para>
     /// </summary>
-    public class Location
+    public class Location : BaseEntity
     {
         /// <summary>
         /// City

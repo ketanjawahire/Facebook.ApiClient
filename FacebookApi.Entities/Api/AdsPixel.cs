@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -12,7 +13,7 @@ namespace FacebookApi.Entities
     /// A Facebook pixel is a small piece of JavaScript code that an advertiser places on every page of their website. 
     /// <para>https://developers.facebook.com/docs/marketing-api/reference/ads-pixel/</para>
     /// </summary>
-    public class AdsPixel
+    public class AdsPixel : BaseEntity
     {
         /// <summary>
         /// ID of the pixel

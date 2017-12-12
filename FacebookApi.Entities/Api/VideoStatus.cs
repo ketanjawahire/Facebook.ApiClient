@@ -1,3 +1,4 @@
+using FacebookApi.Entities.Api;
 using FacebookApi.Entities.Enumerations;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
@@ -8,7 +9,7 @@ namespace FacebookApi.Entities
     /// Status attributes of video
     /// <para>https://developers.facebook.com/docs/graph-api/reference/video-status/</para>
     /// </summary>
-    public class VideoStatus
+    public class VideoStatus : BaseEntity
     {
         /// <summary>
         /// Video processing progress in percent [int 0 to 100].

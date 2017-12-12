@@ -7,7 +7,7 @@ namespace FacebookApi.Entities.Api
     /// Represents leadgen form dependent conditional questions
     /// <para>https://developers.facebook.com/docs/graph-api/reference/page/leadgen_forms/</para>
     /// </summary>
-    public class LeadgenFormDependentConditionalQuestion
+    public class LeadgenFormDependentConditionalQuestion : BaseEntity
     {
         /// <summary>
         /// Name

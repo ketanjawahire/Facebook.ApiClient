@@ -1,3 +1,4 @@
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -7,7 +8,7 @@ namespace FacebookApi.Entities
     /// An app link on the Android platform.
     /// <para>https://developers.facebook.com/docs/graph-api/reference/android-app-link/</para>
     /// </summary>
-    public class AndroidAppLink
+    public class AndroidAppLink : BaseEntity
     {
         /// <summary>
         /// The native apps name in the Android store.

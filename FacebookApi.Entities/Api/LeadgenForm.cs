@@ -12,7 +12,7 @@ namespace FacebookApi.Entities.Api
     /// Represents page leadgen form
     /// <para>https://developers.facebook.com/docs/graph-api/reference/page/leadgen_forms/</para>
     /// </summary>
-    public class LeadgenForm
+    public class LeadgenForm : BaseEntity
     {
         /// <summary>
         /// Form id

@@ -1,3 +1,4 @@
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -7,7 +8,7 @@ namespace FacebookApi.Entities
     /// The Privacy node is returned as part of a number of different types of nodes as a privacy field.
     /// <para>https://developers.facebook.com/docs/graph-api/reference/privacy/</para>
     /// </summary>
-    public class Privacy
+    public class Privacy : BaseEntity
     {
         /// <summary>
         /// The IDs of the specific users or friend lists that can see the object (as a comma-separated string).

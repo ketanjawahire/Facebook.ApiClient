@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -8,7 +9,7 @@ namespace FacebookApi.Entities
     /// Native deeplink data for a link ad.
     /// <para>https://developers.facebook.com/docs/marketing-api/reference/ad-creative-link-data-app-link-spec/</para>
     /// </summary>
-    public class AdCreativeLinkDataAppLinkSpec
+    public class AdCreativeLinkDataAppLinkSpec : BaseEntity
     {
         /// <summary>
         /// Native deeplinks to use on Android

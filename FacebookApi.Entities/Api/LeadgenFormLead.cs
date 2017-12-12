@@ -6,7 +6,7 @@ namespace FacebookApi.Entities.Api
     /// <summary>
     /// Represents lead for leadgen form
     /// </summary>
-    public class LeadgenFormLead
+    public class LeadgenFormLead : BaseEntity
     {
         /// <summary>
         /// Ad name

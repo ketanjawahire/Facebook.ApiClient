@@ -1,3 +1,4 @@
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -7,7 +8,7 @@ namespace FacebookApi.Entities
     /// A category for a Facebook Page
     /// <para>https://developers.facebook.com/docs/graph-api/reference/page-category/</para>
     /// </summary>
-    public class PageCategory
+    public class PageCategory : BaseEntity
     {
         /// <summary>
         /// The id of the category

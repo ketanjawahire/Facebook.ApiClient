@@ -1,3 +1,4 @@
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -6,7 +7,7 @@ namespace FacebookApi.Entities
     /// <summary>
     /// Data defining a text page post used for an ad.
     /// </summary>
-    public class AdCreativeTextData
+    public class AdCreativeTextData : BaseEntity
     {
         /// <summary>
         /// The text of the page post.

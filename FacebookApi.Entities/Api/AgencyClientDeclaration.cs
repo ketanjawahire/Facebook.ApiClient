@@ -1,3 +1,4 @@
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -7,7 +8,7 @@ namespace FacebookApi.Entities
     /// Agency Client Declaration
     /// <para>https://developers.facebook.com/docs/marketing-api/reference/ad-account/agency-client-declaration/</para>
     /// </summary>
-    public class AgencyClientDeclaration
+    public class AgencyClientDeclaration : BaseEntity
     {
         /// <summary>
         /// Whether this account is for an agency representing a client

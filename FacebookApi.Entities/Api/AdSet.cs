@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FacebookApi.Entities.Api;
 using FacebookApi.Entities.Enumerations;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
@@ -12,7 +13,7 @@ namespace FacebookApi.Entities
     /// <para>Ad sets enable you to group ads according to your criteria, and you can retrieve the ad-related statistics that apply to a set. </para>
     /// <para>https://developers.facebook.com/docs/marketing-api/reference/ad-campaign</para>
     /// </summary>
-    public class AdSet
+    public class AdSet : BaseEntity
     {
         /// <summary>
         /// Ad set ID

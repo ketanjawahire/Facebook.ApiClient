@@ -1,3 +1,4 @@
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -7,7 +8,7 @@ namespace FacebookApi.Entities
     /// An app link on the iOS platform.
     /// <para>https://developers.facebook.com/docs/graph-api/reference/ios-app-link/</para>
     /// </summary>
-    public class IOSAppLink
+    public class IOSAppLink : BaseEntity
     {
         /// <summary>
         /// The native apps name in the iTunes store.

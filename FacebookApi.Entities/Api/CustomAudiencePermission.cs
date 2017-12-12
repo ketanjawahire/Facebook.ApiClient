@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -12,7 +13,7 @@ namespace FacebookApi.Entities
     /// Permissions for the custom audience based on viewer
     /// <para>https://developers.facebook.com/docs/marketing-api/reference/custom-audience-permission/</para>
     /// </summary>
-    public class CustomAudiencePermission
+    public class CustomAudiencePermission : BaseEntity
     {
         /// <summary>
         /// Permission to edit the audience

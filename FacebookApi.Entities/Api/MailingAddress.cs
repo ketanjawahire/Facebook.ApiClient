@@ -1,3 +1,4 @@
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -7,7 +8,7 @@ namespace FacebookApi.Entities
     /// A mailing address
     /// <para>https://developers.facebook.com/docs/graph-api/reference/mailing-address/</para>
     /// </summary>
-    public class MailingAddress
+    public class MailingAddress : BaseEntity
     {
         /// <summary>
         /// Id

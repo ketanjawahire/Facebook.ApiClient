@@ -1,3 +1,4 @@
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -6,7 +7,7 @@ namespace FacebookApi.Entities
     /// <summary>
     /// The call to action type used in any Page posts for mobile app engagement ads.
     /// </summary>
-    public class PostCallToAction
+    public class PostCallToAction : BaseEntity
     {
         /// <summary>
         /// Type

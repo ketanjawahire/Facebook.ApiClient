@@ -10,7 +10,7 @@ namespace FacebookApi.Entities
     /// Represents a catalog for your business you can use to deliver ads with Dynamic Ads.
     /// <para>https://developers.facebook.com/docs/marketing-api/reference/product-catalog/</para>
     /// </summary>
-    public class ProductCatalog
+    public class ProductCatalog : BaseEntity
     {
         /// <summary>
         /// ID of a catalog.
@@ -91,7 +91,7 @@ namespace FacebookApi.Entities
         [JsonProperty(PropertyName = "name", ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
             DefaultValueHandling = DefaultValueHandling.Ignore, NullValueHandling = NullValueHandling.Ignore,
             ObjectCreationHandling = ObjectCreationHandling.Auto)]
-        public string Name { get; set; }
+        public int Name { get; set; }
 
         /// <summary>
         /// The total number of products in a catalog.

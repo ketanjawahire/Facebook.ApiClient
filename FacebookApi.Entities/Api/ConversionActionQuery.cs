@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -8,7 +9,7 @@ namespace FacebookApi.Entities
     /// Conversion Action Query
     /// <para>https://developers.facebook.com/docs/marketing-api/reference/conversion-action-query/</para>
     /// </summary>
-    public class ConversionActionQuery
+    public class ConversionActionQuery : BaseEntity
     {
         /// <summary>
         /// Action type

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 using RestSharp.Serializers;
@@ -13,7 +14,7 @@ namespace FacebookApi.Entities
     /// The specification for Android template spec.
     /// <para>https://developers.facebook.com/docs/marketing-api/reference/ad-creative-android-data/</para>
     /// </summary>
-    public class AdCreativeAndroidData
+    public class AdCreativeAndroidData : BaseEntity
     {
         /// <summary>
         /// The name of the Android app, e.g. Electronic Example Android

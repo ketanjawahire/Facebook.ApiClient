@@ -1,3 +1,4 @@
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -6,7 +7,7 @@ namespace FacebookApi.Entities
     /// <summary>
     /// Video Data is one field within the creative that is used to create video ads. 
     /// </summary>
-    public class AdCreativeVideoData
+    public class AdCreativeVideoData : BaseEntity
     {
         /// <summary>
         /// The branded content sponsor page id.

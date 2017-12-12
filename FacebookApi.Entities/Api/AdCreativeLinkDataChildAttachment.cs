@@ -1,3 +1,4 @@
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -7,7 +8,7 @@ namespace FacebookApi.Entities
     /// Data defining a child attachment associated with a link ad, used for Carousel ads.
     /// <para>https://developers.facebook.com/docs/marketing-api/reference/ad-creative-link-data-child-attachment/</para>
     /// </summary>
-    public class AdCreativeLinkDataChildAttachment
+    public class AdCreativeLinkDataChildAttachment : BaseEntity
     {
         /// <summary>
         /// Call to action of this attachment

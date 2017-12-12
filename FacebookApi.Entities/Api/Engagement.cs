@@ -1,3 +1,4 @@
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -7,7 +8,7 @@ namespace FacebookApi.Entities
     /// This is an API that can deliver the same data as what's used to render social information contained in a like button
     /// <para>https://developers.facebook.com/docs/graph-api/reference/engagement/</para>
     /// </summary>
-    public class Engagement
+    public class Engagement : BaseEntity
     {
         /// <summary>
         /// Number of people who like this

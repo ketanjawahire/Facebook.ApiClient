@@ -1,5 +1,6 @@
 using RestSharp.Deserializers;
 using System.Collections.Generic;
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 
 namespace FacebookApi.Entities
@@ -8,7 +9,7 @@ namespace FacebookApi.Entities
     /// This insights edge provides a single, consistent interface to retrieve an ad's statistics.
     /// <para>https://developers.facebook.com/docs/marketing-api/insights/</para>
     /// </summary>
-    public class Insight
+    public class Insight : BaseEntity
     {
         /// <summary>
         /// The ID number of your ad account, which groups your advertising activity. Your ad account includes your campaigns, ads and billing.

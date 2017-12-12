@@ -1,3 +1,4 @@
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -7,7 +8,7 @@ namespace FacebookApi.Entities
     /// Funding Source Details
     /// <para>https://developers.facebook.com/docs/marketing-api/reference/ad-account/</para>
     /// </summary>
-    public class FundingSourceDetails
+    public class FundingSourceDetails : BaseEntity
     {
         /// <summary>
         /// ID of the payment method

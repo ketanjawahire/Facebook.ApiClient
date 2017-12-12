@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -12,7 +13,7 @@ namespace FacebookApi.Entities
     /// Lookalike spec and origin
     /// <para>https://developers.facebook.com/docs/marketing-api/reference/lookalike-spec/</para>
     /// </summary>
-    public class LookalikeSpec
+    public class LookalikeSpec : BaseEntity
     {
         /// <summary>
         /// Two letter country code. The country to find the lookalikes in.

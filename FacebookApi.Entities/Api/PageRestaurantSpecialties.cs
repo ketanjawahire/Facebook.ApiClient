@@ -1,3 +1,4 @@
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -7,7 +8,7 @@ namespace FacebookApi.Entities
     /// Specialties of a restaurant that is represented by a Facebook Page
     /// <para>https://developers.facebook.com/docs/graph-api/reference/page-restaurant-specialties/</para>
     /// </summary>
-    public class PageRestaurantSpecialties
+    public class PageRestaurantSpecialties : BaseEntity
     {
         /// <summary>
         /// Whether the restaurant serves breakfast

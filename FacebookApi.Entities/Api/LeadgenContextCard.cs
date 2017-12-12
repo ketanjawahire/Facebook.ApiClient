@@ -7,7 +7,7 @@ namespace FacebookApi.Entities.Api
     /// Leadgen form context card
     /// <para>https://developers.facebook.com/docs/graph-api/reference/page/leadgen_context_cards/</para>
     /// </summary>
-    public class LeadgenContextCard
+    public class LeadgenContextCard : BaseEntity
     {
         /// <summary>
         /// Text shown on the CTA button of sticky footer

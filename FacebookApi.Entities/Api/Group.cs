@@ -1,4 +1,5 @@
 using System;
+using FacebookApi.Entities.Api;
 using FacebookApi.Entities.Enumerations;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
@@ -9,7 +10,7 @@ namespace FacebookApi.Entities
     /// Represents a Facebook group. 
     /// <para>https://developers.facebook.com/docs/graph-api/reference/v2.5/group</para>
     /// </summary>
-    public class Group
+    public class Group : BaseEntity
     {
         /// <summary>
         /// The group ID

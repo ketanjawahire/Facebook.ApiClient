@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using FacebookApi.Entities.Api;
 using FacebookApi.Entities.Enumerations;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
@@ -10,7 +11,7 @@ namespace FacebookApi.Entities
     /// An account used to manage ads on Facebook.
     /// <para>https://developers.facebook.com/docs/marketing-api/reference/ad-account/</para>
     /// </summary>
-    public class AdAccount
+    public class AdAccount : BaseEntity
     {
         /// <summary>
         /// The string act_{ad_account_id}

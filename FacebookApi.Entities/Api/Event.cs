@@ -1,4 +1,5 @@
 using System;
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -8,7 +9,7 @@ namespace FacebookApi.Entities
     /// Represents a Facebook event.
     /// <para>https://developers.facebook.com/docs/graph-api/reference/event/</para>
     /// </summary>
-    public class Event
+    public class Event : BaseEntity
     {
         /// <summary>
         /// The event ID

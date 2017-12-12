@@ -1,3 +1,4 @@
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -7,7 +8,7 @@ namespace FacebookApi.Entities
     /// Date about when the entity represented by the Page was started
     /// <para>https://developers.facebook.com/docs/graph-api/reference/page-start-date/</para>
     /// </summary>
-    public class PageStartDate
+    public class PageStartDate : BaseEntity
     {
         /// <summary>
         /// The start day of the entity

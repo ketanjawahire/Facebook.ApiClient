@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -12,7 +13,7 @@ namespace FacebookApi.Entities
     /// The specification for Web template spec.
     /// <para>https://developers.facebook.com/docs/marketing-api/reference/ad-creative-web-data/</para>
     /// </summary>
-    public class AdCreativeWebData
+    public class AdCreativeWebData : BaseEntity
     {
         /// <summary>
         /// Indicates if the web url should be used as a fallback, defaults to true. If it is set to false, the content is meant to be viewed only on a native app.

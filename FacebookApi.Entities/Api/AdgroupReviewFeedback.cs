@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -8,7 +9,7 @@ namespace FacebookApi.Entities
     /// The review feedback for the ad after it is reviewed.
     /// <para>https://developers.facebook.com/docs/marketing-api/reference/adgroup-review-feedback/</para>
     /// </summary>
-    public class AdgroupReviewFeedback
+    public class AdgroupReviewFeedback : BaseEntity
     {
         /// <summary>
         /// Reasons for review disapproval across all platforms, such as facebook or instagram. 

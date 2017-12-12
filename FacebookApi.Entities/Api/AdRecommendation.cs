@@ -1,3 +1,4 @@
+using FacebookApi.Entities.Api;
 using FacebookApi.Entities.Enumerations;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
@@ -8,7 +9,7 @@ namespace FacebookApi.Entities
     /// A recommendation object that suggests potential improvements around the ad object's configuration.
     /// <para>https://developers.facebook.com/docs/marketing-api/reference/ad-recommendation/</para>
     /// </summary>
-    public class AdRecommendation
+    public class AdRecommendation : BaseEntity
     {
         /// <summary>
         /// Field to associate the recommendation with (optional)

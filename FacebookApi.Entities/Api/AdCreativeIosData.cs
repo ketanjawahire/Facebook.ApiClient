@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FacebookApi.Entities.Api;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -12,7 +13,7 @@ namespace FacebookApi.Entities
     /// The specification for iOS template spec.
     /// <para>https://developers.facebook.com/docs/marketing-api/reference/ad-creative-ios-data/</para>
     /// </summary>
-    public class AdCreativeIosData
+    public class AdCreativeIosData : BaseEntity
     {
         /// <summary>
         /// The name of the iOS app, suitable for display, e.g. Electronic Example iOS
