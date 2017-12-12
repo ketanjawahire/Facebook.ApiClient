@@ -1,4 +1,2 @@
 language: csharp
-solution: ./FacebookApi/FacebookApi.sln
-install:
-  - nuget restore ./FacebookApi/FacebookApi.sln
+solution: solution-name.sln
