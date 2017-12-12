@@ -19,6 +19,7 @@ namespace FacebookApi.Interfaces
         /// Get list of exceptions from API response.
         /// </summary>
         /// <returns>List of exceptions</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
         IEnumerable<Exception> GetExceptions();
     }
 }

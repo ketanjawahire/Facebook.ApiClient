@@ -19,6 +19,11 @@ namespace FacebookApi.Entities.ApiEngine
         private readonly TEntity _result;
 
         /// <summary>
+        /// List of exceptions from api response
+        /// </summary>
+        private readonly IEnumerable<Exception> _exceptions;
+
+        /// <summary>
         /// ETag response header value
         /// </summary>
         public string ETag { get; private set; }
@@ -26,22 +31,24 @@ namespace FacebookApi.Entities.ApiEngine
         /// <summary>
         /// FBTrace response header value
         /// </summary>
-        public string FBTraceId { get; private set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Fb")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "Fb")]
+        public string FbTraceId { get; private set; }
 
         /// <summary>
         /// FBApiVersion response header value
         /// </summary>
-        public string FBApiVersion { get; private set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Fb")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Api")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "Fb")]
+        public string FbApiVersion { get; private set; }
 
         /// <summary>
         /// FBDebug response header value
         /// </summary>
-        public string FBDebug { get; private set; }
-
-        /// <summary>
-        /// List of exceptions from api response
-        /// </summary>
-        public IEnumerable<Exception> Exceptions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Fb")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "Fb")]
+        public string FbDebug { get; private set; }
 
         /// <summary>
         /// Initialize instance of <see cref="ApiResponse{TEntity}"/>
@@ -52,7 +59,7 @@ namespace FacebookApi.Entities.ApiEngine
         public ApiResponse(TEntity response, IList<Parameter> headerParameters, IEnumerable<Exception> exceptions)
         {
             _result = response;
-            Exceptions = exceptions;
+            _exceptions = exceptions;
             SetValuesFromResponceHeaders(headerParameters);
         }
 
@@ -60,25 +67,22 @@ namespace FacebookApi.Entities.ApiEngine
         {
             var tempParameter = headerParameters.FirstOrDefault(e => e.Name.Equals(FacebookApiResponseHeaders.X_FB_TRACE_ID));
             if (tempParameter != null)
-                FBTraceId = tempParameter.Value.ToString();
+                FbTraceId = tempParameter.Value.ToString();
 
             tempParameter = headerParameters.FirstOrDefault(e => e.Name.Equals(FacebookApiResponseHeaders.FACEBOOK_API_VERSION));
             if (tempParameter != null)
-                FBApiVersion = tempParameter.Value.ToString();
+                FbApiVersion = tempParameter.Value.ToString();
 
             tempParameter = headerParameters.FirstOrDefault(e => e.Name.Equals(FacebookApiResponseHeaders.X_FB_DEBUG));
             if (tempParameter != null)
-                FBDebug = tempParameter.Value.ToString();
+                FbDebug = tempParameter.Value.ToString();
 
             tempParameter = headerParameters.FirstOrDefault(e => e.Name.Equals(FacebookApiResponseHeaders.ETAG));
             if (tempParameter != null)
                 ETag = tempParameter.Value.ToString();
         }
 
-        /// <summary>
-        /// Returns <see cref="_result"/>
-        /// </summary>
-        /// <returns><see cref="_result"/></returns>
+        /// <inheritdoc />
         public TEntity GetResult()
         {
             return _result;
@@ -87,7 +91,7 @@ namespace FacebookApi.Entities.ApiEngine
         /// <inheritdoc />
         public IEnumerable<Exception> GetExceptions()
         {
-            return Exceptions;
+            return _exceptions;
         }
     }
 }
