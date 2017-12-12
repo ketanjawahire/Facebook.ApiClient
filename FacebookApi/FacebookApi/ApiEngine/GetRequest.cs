@@ -1,8 +1,14 @@
-﻿using FacebookApi.Entities.ApiEngine;
+﻿using System;
+using System.Diagnostics;
+using FacebookApi.Entities.ApiEngine;
 using FacebookApi.Enumerations.ApiEngine;
 using FacebookApi.Exceptions;
 using FacebookApi.Interfaces;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
+using RestSharp.Serializers.Newtonsoft.Json;
 
 namespace FacebookApi.ApiEngine
 {
@@ -26,14 +32,20 @@ namespace FacebookApi.ApiEngine
         /// <returns><see cref="IResponse{TEntity}"/></returns>
         public IResponse<TEntity> Execute<TEntity>() where TEntity : class, new()
         {
+            var jsonSerializer = GetJsonSerializer();
+
             StartTimer();
-            var response = RestClient.Execute<TEntity>(RestRequest);
+
+            var response = RestClient.Execute(RestRequest);
+            var result = jsonSerializer.Deserialize<TEntity>(new JTokenReader(JToken.Parse(response.Content)));
+
             StopTimer();
 
             if (response.ErrorException != null)
                 throw new SDKException(response.Content, response.ErrorException);
 
-            return new ApiResponse<TEntity>(response.Data, response.Headers, GetExceptionsFromResponse(response));
+            //return new ApiResponse<TEntity>(response.Data, response.Headers, GetExceptionsFromResponse(response));
+            return new ApiResponse<TEntity>(result, response.Headers, GetExceptionsFromResponse(response));
         }
 
         /// <summary>

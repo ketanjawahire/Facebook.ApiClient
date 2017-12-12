@@ -73,7 +73,7 @@ namespace FacebookApi.ApiEngine
             RestClient = new RestClient(FacebookApiRequestUrls.GRAPH_REQUEST_BASE_URL);
             RestRequest = new RestRequest(requestUrl, (Method)method);
 
-            SetFBRequestParameters();
+            SetFacebookRequestParameters();
         }
 
         /// <summary>
@@ -120,10 +120,29 @@ namespace FacebookApi.ApiEngine
 
         #endregion
 
-        private void SetFBRequestParameters()
+        private void SetFacebookRequestParameters()
         {
             RestRequest.AddParameter(FacebookApiRequestParameters.API_VERSION, Client.Version, ParameterType.UrlSegment);
             RestRequest.AddParameter(FacebookApiRequestParameters.ACCESS_TOKEN, Client.AccessToken, ParameterType.QueryString);
+        }
+
+        /// <summary>
+        /// Get instance of Newtonsoft.JsonSerializer with correct settings
+        /// </summary>
+        /// <returns>Object of type Newtonsoft.JsonSerializer</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
+        protected JsonSerializer GetJsonSerializer()
+        {
+            var jsonSerializer = new JsonSerializer
+            {
+                CheckAdditionalContent = true,
+                MissingMemberHandling = MissingMemberHandling.Ignore,
+                ConstructorHandling = ConstructorHandling.Default,
+                ObjectCreationHandling = ObjectCreationHandling.Auto
+            };
+
+            return jsonSerializer;
         }
 
         /// <summary>
