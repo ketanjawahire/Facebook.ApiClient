@@ -4,5 +4,3 @@ mono:
 solution: ./FacebookApi/FacebookApi.sln
 install:
   - nuget restore ./FacebookApi/FacebookApi.sln
-script:
-  - grep "Test Results" build.log
