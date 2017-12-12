@@ -1,6 +1,6 @@
 language: csharp
-solution: "./FacebookApi/FacebookApi.sln"
+solution: "./SampleConsoleApplication/SampleConsoleApplication.sln"
 install:
-- travis_retry nuget restore -source "https://www.nuget.org/api/v2" ./FacebookApi/FacebookApi.sln
+- travis_retry nuget restore -source "https://www.nuget.org/api/v2" ./SampleConsoleApplication/SampleConsoleApplication.sln
 script:
-- xbuild ./FacebookApi/FacebookApi.sln
+- xbuild ./SampleConsoleApplication/SampleConsoleApplication.sln
