@@ -1,4 +1,5 @@
-﻿using RestSharp.Deserializers;
+using Newtonsoft.Json;
+using RestSharp.Deserializers;
 
 namespace FacebookApi.Entities
 {
@@ -12,12 +13,14 @@ namespace FacebookApi.Entities
         /// Dynamic Ad display settings that would be applied to carousel ads.
         /// </summary>
         [DeserializeAs(Name = "carousel_ad")]
+        [JsonProperty(PropertyName = "carousel_ad", ReferenceLoopHandling = ReferenceLoopHandling.Serialize, DefaultValueHandling = DefaultValueHandling.Ignore, NullValueHandling = NullValueHandling.Ignore, ObjectCreationHandling = ObjectCreationHandling.Auto)]
         public ProductCatalogImageSettingsOperation CarouselAd { get; set; }
 
         /// <summary>
         /// Dynamic Ad display settings that would be applied to single item ads.
         /// </summary>
         [DeserializeAs(Name = "single_ad")]
+        [JsonProperty(PropertyName = "single_ad", ReferenceLoopHandling = ReferenceLoopHandling.Serialize, DefaultValueHandling = DefaultValueHandling.Ignore, NullValueHandling = NullValueHandling.Ignore, ObjectCreationHandling = ObjectCreationHandling.Auto)]
         public ProductCatalogImageSettingsOperation SingleAd { get; set; }
     }
 }

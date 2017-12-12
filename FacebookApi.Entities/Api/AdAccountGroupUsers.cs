@@ -1,4 +1,5 @@
-﻿using RestSharp.Deserializers;
+﻿using Newtonsoft.Json;
+using RestSharp.Deserializers;
 
 namespace FacebookApi.Entities
 {
@@ -12,12 +13,18 @@ namespace FacebookApi.Entities
         /// The role of this user in the account group
         /// </summary>
         [DeserializeAs(Name = "role")]
+        [JsonProperty(PropertyName = "role", ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+            DefaultValueHandling = DefaultValueHandling.Ignore, NullValueHandling = NullValueHandling.Ignore,
+            ObjectCreationHandling = ObjectCreationHandling.Auto)]
         public int Role { get; set; }
 
         /// <summary>
         /// The ID of this user 
         /// </summary>
         [DeserializeAs(Name = "uid")]
+        [JsonProperty(PropertyName = "uid", ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+            DefaultValueHandling = DefaultValueHandling.Ignore, NullValueHandling = NullValueHandling.Ignore,
+            ObjectCreationHandling = ObjectCreationHandling.Auto)]
         public long UId { get; set; }
     }
 }

@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
 namespace FacebookApi.Entities
@@ -17,12 +18,14 @@ namespace FacebookApi.Entities
         /// Status code
         /// </summary>
         [DeserializeAs(Name = "code")]
-        public long?  Code { get; set; }
+        [JsonProperty(PropertyName = "code", ReferenceLoopHandling = ReferenceLoopHandling.Serialize, DefaultValueHandling = DefaultValueHandling.Ignore, NullValueHandling = NullValueHandling.Ignore, ObjectCreationHandling = ObjectCreationHandling.Auto)]
+        public long? Code { get; set; }
 
         /// <summary>
         /// Status description
         /// </summary>
         [DeserializeAs(Name = "description")]
+        [JsonProperty(PropertyName = "description", ReferenceLoopHandling = ReferenceLoopHandling.Serialize, DefaultValueHandling = DefaultValueHandling.Ignore, NullValueHandling = NullValueHandling.Ignore, ObjectCreationHandling = ObjectCreationHandling.Auto)]
         public string Description { get; set; }
     }
 }

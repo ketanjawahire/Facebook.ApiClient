@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
 namespace FacebookApi.Entities
@@ -13,12 +14,14 @@ namespace FacebookApi.Entities
         /// Reasons for disapproval on "FACEBOOK".
         /// </summary>
         [DeserializeAs(Name = "facebook")]
-        public IDictionary<string,string> Facebook { get; set; }
+        [JsonProperty(PropertyName = "facebook", ReferenceLoopHandling = ReferenceLoopHandling.Serialize, DefaultValueHandling = DefaultValueHandling.Ignore, NullValueHandling = NullValueHandling.Ignore, ObjectCreationHandling = ObjectCreationHandling.Auto)]
+        public IDictionary<string, string> Facebook { get; set; }
 
         /// <summary>
         /// Reasons for disapproval on "INSTAGRAM". 
         /// </summary>
         [DeserializeAs(Name = "instagram")]
+        [JsonProperty(PropertyName = "instagram", ReferenceLoopHandling = ReferenceLoopHandling.Serialize, DefaultValueHandling = DefaultValueHandling.Ignore, NullValueHandling = NullValueHandling.Ignore, ObjectCreationHandling = ObjectCreationHandling.Auto)]
         public IDictionary<string, string> Instagram { get; set; }
     }
 }

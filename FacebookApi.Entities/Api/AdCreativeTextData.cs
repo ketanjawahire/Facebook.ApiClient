@@ -1,4 +1,5 @@
-﻿using RestSharp.Deserializers;
+using Newtonsoft.Json;
+using RestSharp.Deserializers;
 
 namespace FacebookApi.Entities
 {
@@ -11,6 +12,7 @@ namespace FacebookApi.Entities
         /// The text of the page post.
         /// </summary>
         [DeserializeAs(Name = "message")]
+        [JsonProperty(PropertyName = "message", ReferenceLoopHandling = ReferenceLoopHandling.Serialize, DefaultValueHandling = DefaultValueHandling.Ignore, NullValueHandling = NullValueHandling.Ignore, ObjectCreationHandling = ObjectCreationHandling.Auto)]
         public string Message { get; set; }
     }
 }

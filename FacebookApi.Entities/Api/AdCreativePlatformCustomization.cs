@@ -1,4 +1,5 @@
-﻿using RestSharp.Deserializers;
+using Newtonsoft.Json;
+using RestSharp.Deserializers;
 
 namespace FacebookApi.Entities
 {
@@ -11,6 +12,7 @@ namespace FacebookApi.Entities
         /// Media used on Instagram
         /// </summary>
         [DeserializeAs(Name = "instagram")]
+        [JsonProperty(PropertyName = "instagram", ReferenceLoopHandling = ReferenceLoopHandling.Serialize, DefaultValueHandling = DefaultValueHandling.Ignore, NullValueHandling = NullValueHandling.Ignore, ObjectCreationHandling = ObjectCreationHandling.Auto)]
         public AdCreativePlatformCustomizationOverride Instagram { get; set; }
     }
 }

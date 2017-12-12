@@ -1,4 +1,5 @@
-﻿using RestSharp.Deserializers;
+using Newtonsoft.Json;
+using RestSharp.Deserializers;
 
 namespace FacebookApi.Entities
 {
@@ -12,18 +13,21 @@ namespace FacebookApi.Entities
         /// The native apps id in the Windows Phone store.
         /// </summary>
         [DeserializeAs(Name = "app_id")]
+        [JsonProperty(PropertyName = "app_id", ReferenceLoopHandling = ReferenceLoopHandling.Serialize, DefaultValueHandling = DefaultValueHandling.Ignore, NullValueHandling = NullValueHandling.Ignore, ObjectCreationHandling = ObjectCreationHandling.Auto)]
         public string AppId { get; set; }
 
         /// <summary>
         /// The native apps name in the Windows Phone store.
         /// </summary>
         [DeserializeAs(Name = "app_name")]
+        [JsonProperty(PropertyName = "app_name", ReferenceLoopHandling = ReferenceLoopHandling.Serialize, DefaultValueHandling = DefaultValueHandling.Ignore, NullValueHandling = NullValueHandling.Ignore, ObjectCreationHandling = ObjectCreationHandling.Auto)]
         public string AppName { get; set; }
 
         /// <summary>
         /// The native Windows Phone URL that will be navigated to.
         /// </summary>
         [DeserializeAs(Name = "url")]
+        [JsonProperty(PropertyName = "url", ReferenceLoopHandling = ReferenceLoopHandling.Serialize, DefaultValueHandling = DefaultValueHandling.Ignore, NullValueHandling = NullValueHandling.Ignore, ObjectCreationHandling = ObjectCreationHandling.Auto)]
         public string URL { get; set; }
     }
 }

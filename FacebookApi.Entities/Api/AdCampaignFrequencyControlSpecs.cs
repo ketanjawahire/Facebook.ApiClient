@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
 namespace FacebookApi.Entities
@@ -17,18 +18,27 @@ namespace FacebookApi.Entities
         /// Event name, only IMPRESSIONS currently.
         /// </summary>
         [DeserializeAs(Name = "enum")]
+        [JsonProperty(PropertyName = "enum", ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+            DefaultValueHandling = DefaultValueHandling.Ignore, NullValueHandling = NullValueHandling.Ignore,
+            ObjectCreationHandling = ObjectCreationHandling.Auto)]
         public string Enum { get; set; }
 
         /// <summary>
         /// Interval period in days, between 1 and 90 (inclusive)
         /// </summary>
         [DeserializeAs(Name = "interval_days")]
+        [JsonProperty(PropertyName = "interval_days", ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+            DefaultValueHandling = DefaultValueHandling.Ignore, NullValueHandling = NullValueHandling.Ignore,
+            ObjectCreationHandling = ObjectCreationHandling.Auto)]
         public int? IntervalDays { get; set; }
 
         /// <summary>
         /// The maximum frequency, between 1 and 90 (inclusive)
         /// </summary>
         [DeserializeAs(Name = "max_frequency")]
+        [JsonProperty(PropertyName = "max_frequency", ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+            DefaultValueHandling = DefaultValueHandling.Ignore, NullValueHandling = NullValueHandling.Ignore,
+            ObjectCreationHandling = ObjectCreationHandling.Auto)]
         public int? MaxFrequency { get; set; }
     }
 }

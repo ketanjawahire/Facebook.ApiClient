@@ -1,4 +1,5 @@
-﻿using RestSharp.Deserializers;
+using Newtonsoft.Json;
+using RestSharp.Deserializers;
 
 namespace FacebookApi.Entities
 {
@@ -12,18 +13,21 @@ namespace FacebookApi.Entities
         /// The start day of the entity
         /// </summary>
         [DeserializeAs(Name = "day")]
+        [JsonProperty(PropertyName = "day", ReferenceLoopHandling = ReferenceLoopHandling.Serialize, DefaultValueHandling = DefaultValueHandling.Ignore, NullValueHandling = NullValueHandling.Ignore, ObjectCreationHandling = ObjectCreationHandling.Auto)]
         public int Day { get; set; }
 
         /// <summary>
         /// The start month of the entity
         /// </summary>
         [DeserializeAs(Name = "month")]
+        [JsonProperty(PropertyName = "month", ReferenceLoopHandling = ReferenceLoopHandling.Serialize, DefaultValueHandling = DefaultValueHandling.Ignore, NullValueHandling = NullValueHandling.Ignore, ObjectCreationHandling = ObjectCreationHandling.Auto)]
         public int Month { get; set; }
 
         /// <summary>
         /// The start year of the entity
         /// </summary>
         [DeserializeAs(Name = "year")]
+        [JsonProperty(PropertyName = "year", ReferenceLoopHandling = ReferenceLoopHandling.Serialize, DefaultValueHandling = DefaultValueHandling.Ignore, NullValueHandling = NullValueHandling.Ignore, ObjectCreationHandling = ObjectCreationHandling.Auto)]
         public int Year { get; set; }
     }
 }
