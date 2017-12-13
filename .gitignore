@@ -3,3 +3,13 @@ FacebookApi/packages/
 FacebookApi/FacebookApi/bin/
 FacebookApi/FacebookApi/obj/
 *.user
+SampleConsoleApplication/packages/
+SampleConsoleApplication/SampleConsoleApplication/obj/
+SampleConsoleApplication/SampleConsoleApplication/bin/
+FacebookApi.Entities/bin/
+FacebookApi.Entities/obj/
+*.nupkg
+*.nuspec
+SampleConsoleApplication/_ReSharper.Caches/
+*.ide
+SampleConsoleApplication/.vs/

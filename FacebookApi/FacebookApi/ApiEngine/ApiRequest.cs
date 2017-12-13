@@ -8,11 +8,15 @@ using System.Net;
 using FacebookApi.Constants;
 using FacebookApi.Enumerations.ApiEngine;
 using FacebookApi.Exceptions;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
 using RestSharp;
+using RestRequest = RestSharp.RestRequest;
 
 namespace FacebookApi.ApiEngine
 {
+    /// <inheritdoc />
     /// <summary>
     /// Represents a Facebook API requests
     /// </summary>
@@ -40,7 +44,7 @@ namespace FacebookApi.ApiEngine
         /// </summary>
         public string RequestUrl { get; protected set; }
 
-        
+
         /// <summary>
         /// Type of API request
         /// </summary>
