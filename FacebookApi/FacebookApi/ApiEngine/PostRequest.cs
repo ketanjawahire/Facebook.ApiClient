@@ -13,7 +13,6 @@ using FacebookApi.Exceptions;
 using FacebookApi.Interfaces;
 using Newtonsoft.Json.Linq;
 using RestSharp;
-using RestSharp.Newtonsoft.Json;
 using RestSharp.Serializers;
 using RestRequest = RestSharp.RestRequest;
 
