@@ -179,6 +179,11 @@
         /// <summary>
         /// BUY_TICKETS
         /// </summary>
-        BUY_TICKETS
+        BUY_TICKETS,
+
+        /// <summary>
+        /// VIEW_INSTAGRAM_PROFILE
+        /// </summary>
+        VIEW_INSTAGRAM_PROFILE
     }
 }
