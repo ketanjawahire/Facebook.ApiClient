@@ -32,6 +32,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Facebook.ApiClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Facebook.ApiClient.2.0.0\lib\net452\Facebook.ApiClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Facebook.ApiClient.Entities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Facebook.ApiClient.Entities.1.1.2\lib\net452\Facebook.ApiClient.Entities.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -60,17 +66,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Facebook.ApiClient.Entities\Facebook.ApiClient.Entities\Facebook.ApiClient.Entities.csproj">
-      <Project>{425a39d8-7089-4e67-be42-5bbc55afb544}</Project>
-      <Name>Facebook.ApiClient.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Facebook.ApiClient\Facebook.ApiClient\Facebook.ApiClient.csproj">
-      <Project>{3bf1c23b-f25b-4bcb-a2a5-09a069e09990}</Project>
-      <Name>Facebook.ApiClient</Name>
-    </ProjectReference>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
