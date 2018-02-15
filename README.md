@@ -1,19 +1,15 @@
 # Facebook.ApiClient [![Build Status](https://travis-ci.org/ketanjawahire/Facebook.ApiClient.svg?branch=master)](https://travis-ci.org/ketanjawahire/FacebookClient)
 
-# C# SDK for Facebook Marketing API
-The Facebook SDK for .NET helps developers build applications interacting with Facebook Marketing API.
+A C# SDK for Facebook Marketing API. The Facebook SDK for .NET helps developers build applications interacting with Facebook Marketing API. This project aims to help developers working with Facebook marketing API. Facebook supports REST API endpoints to interact with core object models. This SDK will help you in doing various API calls & converting API response into structured response.
+For Facebook entity classes you can refer to [Facebook.ApiClient.Entities](https://github.com/ketanjawahire/Facebook.ApiClient.Entities) project.
+
+Currently SDK supports GET, POST & Paged API requests. Batch API request support is planned in future release.
 
 ## Nuget [![NuGet](https://img.shields.io/nuget/v/Facebook.ApiClient.svg?maxAge=25000)](http://www.nuget.org/packages/Facebook.ApiClient/) [![Nuget](https://img.shields.io/nuget/dt/Facebook.ApiClient.svg?maxAge=25000)](https://www.nuget.org/packages/Facebook.ApiClient/)
 
 ```    
 	Install-Package Facebook.ApiClient
 ```
-
-## 
-This project aims to help developers working with Facebook marketing API. Facebook supports REST API endpoints to interact with core object models. This SDK will help you in doing various API calls & converting API response into structured response.
-For Facebook entity classes you can refer to [Facebook.ApiClient.Entities](https://github.com/ketanjawahire/Facebook.ApiClient.Entities) project.
-
-Currently SDK supports GET, POST & Paged API requests. Batch API request support is planned in future release.
 
 ## Code Example
 Here is a short version of how to use this SDK. For more details check SampleApplication.
