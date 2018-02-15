@@ -1,6 +1,9 @@
 language: csharp
-solution: "./SampleConsoleApplication/SampleConsoleApplication.sln"
-install:
-- travis_retry nuget restore -source "https://www.nuget.org/api/v2" ./SampleConsoleApplication/SampleConsoleApplication.sln
+solution: "./Facebook.ApiClient/Facebook.ApiClient.sln"
+dist: trusty
+sudo: required
+mono: none
+dotnet: 2.0.0 
 script:
-- msbuild ./SampleConsoleApplication/SampleConsoleApplication.sln /t:Rebuild /p:Configuration=Release /detailedsummary /v:n
+- dotnet restore ./Facebook.ApiClient/Facebook.ApiClient/Facebook.ApiClient.csproj
+- dotnet build ./Facebook.ApiClient/Facebook.ApiClient/Facebook.ApiClient.csproj -c Release -v normal -f netstandard2.0 --force
