@@ -1,4 +1,4 @@
-# Facebook.ApiClient [![Build Status](https://travis-ci.org/ketanjawahire/FacebookClient.svg?branch=master)](https://travis-ci.org/ketanjawahire/FacebookClient)
+# Facebook.ApiClient [![Build Status](https://travis-ci.org/ketanjawahire/Facebook.ApiClient.svg?branch=master)](https://travis-ci.org/ketanjawahire/FacebookClient)
 
 # C# SDK for Facebook Marketing API
 The Facebook SDK for .NET helps developers build applications interacting with Facebook Marketing API.
