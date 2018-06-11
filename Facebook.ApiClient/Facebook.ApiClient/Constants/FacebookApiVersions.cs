@@ -8,14 +8,19 @@ namespace Facebook.ApiClient.Constants
     public static class FacebookApiVersions
     {
         /// <summary>
-        /// Default facebook api version : v2.10
+        /// Default facebook api version : v2.12
         /// </summary>
-        public static readonly string DEFAULT = "v2.10";
+        public static readonly string DEFAULT = "v2.12";
 
         /// <summary>
-        /// Facebook api version v2.9
+        /// Facebook api version v2.12
         /// </summary>
-        public static readonly string V2_10 = "v2.10";
+        public static readonly string V2_12 = "v2.12";
+
+        /// <summary>
+        ///  Facebook api version v3.0
+        /// </summary>
+        public static readonly string V3_0 = "v3.0";
 
         /// <summary>
         /// Check if given version is a valid FB api version or not
@@ -24,7 +29,7 @@ namespace Facebook.ApiClient.Constants
         /// <returns>True if api version is valid</returns>
         public static bool IsValidVersion(string version)
         {
-            var validVersions = new List<string>() {"v2.10"};
+            var validVersions = new List<string>() { V2_12, V3_0 };
             return validVersions.Contains(version);
         }
     }
