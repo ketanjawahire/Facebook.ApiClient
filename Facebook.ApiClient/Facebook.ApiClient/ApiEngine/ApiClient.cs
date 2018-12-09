@@ -29,16 +29,6 @@ namespace Facebook.ApiClient.ApiEngine
         public string AppSecret { get; private set; }
 
         /// <summary>
-        /// Create new instance of <see cref="ApiClient"/> using given <see cref="AccessToken"/>
-        /// </summary>
-        /// <param name="accessToken">Access token</param>
-        public ApiClient(string accessToken)
-        {
-            _setAccessToken(accessToken);
-            _setApiVersion(FacebookApiVersions.DEFAULT);
-        }
-
-        /// <summary>
         /// Create new instance of <see cref="ApiClient"/> using given <see cref="AccessToken"/> &amp; <see cref="Version"/>
         /// </summary>
         /// <param name="accessToken"><see cref="AccessToken"/></param>
@@ -47,19 +37,6 @@ namespace Facebook.ApiClient.ApiEngine
         {
             _setApiVersion(version);
             _setAccessToken(accessToken);
-        }
-
-        /// <summary>
-        /// Create new instance of <see cref="ApiClient"/> using given <see cref="AppId"/>, <see cref="AppSecret"/>, <see cref="AccessToken"/>
-        /// </summary>
-        /// <param name="appId"><see cref="AppId"/></param>
-        /// <param name="appSecret"><see cref="AppSecret"/></param>
-        /// <param name="accessToken"><see cref="AccessToken"/></param>
-        public ApiClient(string appId, string appSecret, string accessToken)
-        {
-            _setApiVersion(FacebookApiVersions.DEFAULT);
-            _setAccessToken(accessToken);
-            _setAppId(appId, appSecret);
         }
 
         /// <summary>
@@ -78,14 +55,7 @@ namespace Facebook.ApiClient.ApiEngine
 
         private void _setApiVersion(string version)
         {
-            if (FacebookApiVersions.IsValidVersion(version))
-            {
-                Version = version;
-            }
-            else
-            {
-                throw new InvalidApiVersionException();
-            }
+            Version = version;
         }
 
         private void _setAccessToken(string accessToken)
