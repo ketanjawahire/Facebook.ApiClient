@@ -50,12 +50,61 @@ namespace Facebook.ApiClient.ApiEngine
         }
 
         /// <summary>
+        /// Execute nested paged API request
+        /// </summary>
+        /// <typeparam name="TEntity">Entity class which can be used to represent received API response</typeparam>
+        /// <returns>Processed API response of type <see cref="IPagedResponse{TEntity}"/></returns>
+        public IPagedResponse<TEntity> ExecuteNestedPage<TEntity>() where TEntity : class, new()
+        {
+            StartTimer();
+            var response = RestClient.Execute<NestedPagedResponse<TEntity>>(RestRequest);
+            StopTimer();
+
+            if (response.ErrorException != null)
+                throw new SDKException(response.Content, response.ErrorException);
+
+            return _processNestedResponse(response);
+        }
+
+        /// <summary>
+        /// Execute nested paged API request
+        /// </summary>
+        /// <typeparam name="TEntity">Entity class which can be used to represent received API response</typeparam>
+        /// <returns>Processed API response of type <see cref="IPagedResponse{TEntity}"/></returns>
+        public async Task<IPagedResponse<TEntity>> ExecuteNestedPageAsync<TEntity>() where TEntity : class, new()
+        {
+            StartTimer();
+            var response = await RestClient.ExecuteTaskAsync<NestedPagedResponse<TEntity>>(RestRequest);
+            StopTimer();
+
+            if (response.ErrorException != null)
+                throw new SDKException(response.Content, response.ErrorException);
+
+            return _processNestedResponse(response);
+        }
+
+        /// <summary>
         /// Process <see cref="IRestResponse{TEntity}"/>
         /// </summary>
         /// <typeparam name="TEntity">Entity class which can be used to represent received API response</typeparam>
         /// <param name="response">Input <see cref="IRestResponse{TEntity}"/></param>
         /// <returns>Processed response of type <see cref="PagedResponse{TApiEntity}"/></returns>
         private PagedResponse<TEntity> _processResponse<TEntity>(IRestResponse<PagedResponse<TEntity>> response) where TEntity : class, new()
+        {
+            var result = response.Data;
+            result.SetApiClient(Client);
+            result.SetResponseHeaders(response.Headers);
+            result.SetResponseExceptions(GetExceptionsFromResponse(response));
+            return result;
+        }
+
+        /// <summary>
+        /// Process nested <see cref="IRestResponse{TEntity}"/>
+        /// </summary>
+        /// <typeparam name="TEntity">Entity class which can be used to represent received API response</typeparam>
+        /// <param name="response">Input <see cref="IRestResponse{TEntity}"/></param>
+        /// <returns>Processed response of type <see cref="PagedResponse{TApiEntity}"/></returns>
+        private NestedPagedResponse<TEntity> _processNestedResponse<TEntity>(IRestResponse<NestedPagedResponse<TEntity>> response) where TEntity : class, new()
         {
             var result = response.Data;
             result.SetApiClient(Client);

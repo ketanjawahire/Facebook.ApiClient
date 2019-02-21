@@ -23,6 +23,20 @@ namespace Facebook.ApiClient.Interfaces
         Task<IPagedResponse<TEntity>> ExecutePageAsync<TEntity>() where TEntity : class, new();
 
         /// <summary>
+        /// Execute paged API request
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <returns>Processed API response of the type <see cref="IPagedResponse{TEntity}"/>></returns>
+        IPagedResponse<TEntity> ExecuteNestedPage<TEntity>() where TEntity : class, new();
+
+        /// <summary>
+        /// Execute paged API request
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <returns>Processed API response of the type <see cref="IPagedResponse{TEntity}"/>></returns>
+        Task<IPagedResponse<TEntity>> ExecuteNestedPageAsync<TEntity>() where TEntity : class, new();
+
+        /// <summary>
         /// Add query string parameter
         /// </summary>
         /// <param name="name">Parameter name</param>
