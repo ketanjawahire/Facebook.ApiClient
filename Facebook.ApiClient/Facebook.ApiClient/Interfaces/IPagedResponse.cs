@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Facebook.ApiClient.Entities.Api;
 using Facebook.ApiClient.Entities.ApiEngine;
 
 namespace Facebook.ApiClient.Interfaces
@@ -9,7 +10,7 @@ namespace Facebook.ApiClient.Interfaces
     /// Represents paged API response
     /// </summary>
     /// <typeparam name="TEntity">Entity class which can be used to represent received API response</typeparam>
-    public interface IPagedResponse<TEntity> where TEntity : class, new()
+    public interface IPagedResponse<TEntity> where TEntity : BaseEntity, new()
     {
         /// <summary>
         /// Get next page data from API

@@ -51,6 +51,10 @@ namespace Facebook.ApiClient.Exceptions
         /// </summary>
         public string RawExceptionString { get; set; }
 
+        public string RequestUri { get; set; }
+
+        public string ResponseBody { get; set; }
+        
         /// <summary>
         /// Initialize new instance of <see cref="FacebookOAuthException"/>
         /// </summary>

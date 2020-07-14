@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Facebook.ApiClient.Entities.Api;
 
 namespace Facebook.ApiClient.Interfaces
 {
@@ -13,28 +14,28 @@ namespace Facebook.ApiClient.Interfaces
         /// </summary>
         /// <typeparam name="TEntity">Entity class which can be used to represent received API response</typeparam>
         /// <returns>Processed API response of type <see cref="IPagedResponse{TEntity}"/></returns>
-        IPagedResponse<TEntity> ExecutePage<TEntity>() where TEntity : class, new();
+        IPagedResponse<TEntity> ExecutePage<TEntity>() where TEntity : BaseEntity, new();
 
         /// <summary>
         /// Execute paged API request
         /// </summary>
         /// <typeparam name="TEntity">Entity class which can be used to represent received API response</typeparam>
         /// <returns>Processed API response of type <see cref="IPagedResponse{TEntity}"/></returns>
-        Task<IPagedResponse<TEntity>> ExecutePageAsync<TEntity>() where TEntity : class, new();
+        Task<IPagedResponse<TEntity>> ExecutePageAsync<TEntity>() where TEntity : BaseEntity, new();
 
         /// <summary>
         /// Execute paged API request
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <returns>Processed API response of the type <see cref="IPagedResponse{TEntity}"/>></returns>
-        IPagedResponse<TEntity> ExecuteNestedPage<TEntity>() where TEntity : class, new();
+        IPagedResponse<TEntity> ExecuteNestedPage<TEntity>() where TEntity : BaseEntity, new();
 
         /// <summary>
         /// Execute paged API request
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <returns>Processed API response of the type <see cref="IPagedResponse{TEntity}"/>></returns>
-        Task<IPagedResponse<TEntity>> ExecuteNestedPageAsync<TEntity>() where TEntity : class, new();
+        Task<IPagedResponse<TEntity>> ExecuteNestedPageAsync<TEntity>() where TEntity : BaseEntity, new();
 
         /// <summary>
         /// Add query string parameter

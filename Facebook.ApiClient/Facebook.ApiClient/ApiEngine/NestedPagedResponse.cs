@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Facebook.ApiClient.Entities.Api;
 using Facebook.ApiClient.Entities.ApiEngine;
 using Facebook.ApiClient.Exceptions;
 using Facebook.ApiClient.Interfaces;
@@ -15,7 +16,7 @@ namespace Facebook.ApiClient.ApiEngine
     /// Represents nested paged API response
     /// </summary>
     /// <typeparam name="TApiEntity">Entity class which can be used to represent received API response</typeparam
-    public class NestedPagedResponse<TApiEntity> : IPagedResponse<TApiEntity> where TApiEntity : class, new()
+    public class NestedPagedResponse<TApiEntity> : IPagedResponse<TApiEntity> where TApiEntity : BaseEntity, new()
     {
         /// <summary>
         /// <see cref="ApiClient"/> used to execute <see cref="NestedPageRequest"/>
@@ -23,16 +24,16 @@ namespace Facebook.ApiClient.ApiEngine
         public ApiClient Client { get; private set; }
 
         /// <summary>
-        /// Data from nested paged API response
+        /// Data from nested page api response
         /// </summary>
         [DeserializeAs(Name = "data")]
-        public Dictionary<string ,List<TApiEntity>> Data { get; set; }
+        public List<TApiEntity> Data { get; set; }
 
         /// <summary>
         /// Paging information from API response
         /// </summary>
         [DeserializeAs(Name = "paging")]
-        public Dictionary<string, Paging> Paging { get; set; }
+        public Paging Paging { get; set; }
 
         /// <summary>
         /// API response headers collection
@@ -67,15 +68,14 @@ namespace Facebook.ApiClient.ApiEngine
         {
             Client = apiClient;
         }
-
         private IPagedRequest _getNextPageRequest()
         {
-            if (string.IsNullOrEmpty(Paging.Values.FirstOrDefault()?.Next))
+            if (string.IsNullOrEmpty(Paging.Next))
             {
                 throw new UriFormatException("Next page link is empty.");
             }
 
-            if (!Uri.TryCreate(Paging.Values.FirstOrDefault()?.Next, UriKind.Absolute, out Uri nextPageUri))
+            if (!Uri.TryCreate(Paging.Next, UriKind.Absolute, out Uri nextPageUri))
                 throw new UriFormatException("Next page uri is invalid.");
 
             //stupid logic :(
@@ -88,12 +88,12 @@ namespace Facebook.ApiClient.ApiEngine
 
         private IPagedRequest _getPreviousPageRequest()
         {
-            if (string.IsNullOrEmpty(Paging.Values.FirstOrDefault()?.Previous))
+            if (string.IsNullOrEmpty(Paging.Previous))
             {
                 throw new UriFormatException("Previous page link is empty.");
             }
 
-            if (!Uri.TryCreate(Paging.Values.FirstOrDefault()?.Previous, UriKind.Absolute, out Uri previousPageUri))
+            if (!Uri.TryCreate(Paging.Previous, UriKind.Absolute, out Uri previousPageUri))
                 throw new UriFormatException("Previous page uri is invalid.");
 
             //stupid logic :(
@@ -102,6 +102,7 @@ namespace Facebook.ApiClient.ApiEngine
             var previousPageRequest = new PagedRequest(url, Client);
             return previousPageRequest;
         }
+
 
         /// <summary>
         /// Get next page data from API
@@ -149,7 +150,7 @@ namespace Facebook.ApiClient.ApiEngine
         /// <returns></returns>
         public IEnumerable<TApiEntity> GetResultData()
         {
-            return this.Data.Values.FirstOrDefault();
+            return this.Data;
         }
 
         /// <summary>
@@ -158,7 +159,7 @@ namespace Facebook.ApiClient.ApiEngine
         /// <returns>True of <see cref="Paging.Next"/> is not null</returns>
         public bool IsNextPageDataAvailable()
         {
-            return !string.IsNullOrEmpty(Paging.Values.FirstOrDefault()?.Next);
+            return !string.IsNullOrEmpty(Paging?.Next);
         }
 
         /// <summary>
@@ -167,7 +168,7 @@ namespace Facebook.ApiClient.ApiEngine
         /// <returns>True of <see cref="Paging.Previous"/> is not null</returns>
         public bool IsPreviousPageDataAvailable()
         {
-            return !string.IsNullOrEmpty(Paging.Values.FirstOrDefault()?.Previous);
+            return !string.IsNullOrEmpty(Paging?.Previous);
         }
 
         /// <summary>
@@ -176,7 +177,7 @@ namespace Facebook.ApiClient.ApiEngine
         /// <returns>Next data page url</returns>
         public string GetNextPageUrl()
         {
-            return this.Paging.Values.FirstOrDefault()?.Next;
+            return this.Paging?.Next;
         }
 
         /// <summary>

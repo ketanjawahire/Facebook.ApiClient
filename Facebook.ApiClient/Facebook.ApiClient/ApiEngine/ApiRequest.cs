@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using Facebook.ApiClient.Constants;
+using Facebook.ApiClient.Entities.ApiEngine;
 using Facebook.ApiClient.Enumerations.ApiEngine;
 using Facebook.ApiClient.Exceptions;
 using Facebook.ApiClient.Interfaces;
@@ -73,7 +74,8 @@ namespace Facebook.ApiClient.ApiEngine
             RequestUrl = requestUrl;
             Client = client;
 
-            RestClient = new RestClient(FacebookApiRequestUrls.GRAPH_REQUEST_BASE_URL);
+            RestClient =
+                new RestClient(FacebookApiRequestUrls.GRAPH_REQUEST_BASE_URL).UseSerializer(new JsonNetSerializer());
             RestRequest = new RestRequest(requestUrl, (Method)method);
 
             SetFacebookRequestParameters();
@@ -167,8 +169,7 @@ namespace Facebook.ApiClient.ApiEngine
                 ? int.Parse(parsedException["error"]["code"].ToString(), CultureInfo.CurrentCulture)
                 : 200;
 
-
-            exceptions.Add(new FacebookOAuthException(exceptionCode, parsedException["error"]?["message"].ToString())
+            var exception = new FacebookOAuthException(exceptionCode, parsedException["error"]?["message"].ToString())
             {
                 FBTraceId =
                     responseHeaders.ContainsKey(FacebookApiResponseHeaders.X_FB_TRACE_ID)
@@ -187,8 +188,12 @@ namespace Facebook.ApiClient.ApiEngine
                 ErrorUserTitle = parsedException["error"]?["error_user_title"]?.ToString(),
                 SubCode = parsedException["error"]?["subcode"] != null
                     ? int.Parse(parsedException["error"]["subcode"].ToString())
-                    : 0
-            });
+                    : 0,
+                RequestUri = response.ResponseUri.ToString(),
+                ResponseBody = parsedException.ToString(Formatting.Indented)
+            };
+
+            exceptions.Add(exception);
 
             return exceptions;
         }

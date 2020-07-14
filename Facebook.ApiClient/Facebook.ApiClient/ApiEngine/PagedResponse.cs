@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Facebook.ApiClient.Entities.Api;
 using Facebook.ApiClient.Entities.ApiEngine;
 using Facebook.ApiClient.Exceptions;
 using Facebook.ApiClient.Interfaces;
@@ -15,7 +16,7 @@ namespace Facebook.ApiClient.ApiEngine
     /// Represents paged API response
     /// </summary>
     /// <typeparam name="TApiEntity">Entity class which can be used to represent received API response</typeparam>
-    public class PagedResponse<TApiEntity> : IPagedResponse<TApiEntity> where TApiEntity : class, new()
+    public class PagedResponse<TApiEntity> : IPagedResponse<TApiEntity> where TApiEntity : BaseEntity, new()
     {
         /// <summary>
         /// <see cref="ApiClient"/> used to execute <see cref="PagedRequest"/>
@@ -89,8 +90,10 @@ namespace Facebook.ApiClient.ApiEngine
             if (!Uri.TryCreate(Paging.Next, UriKind.Absolute, out Uri nextPageUri))
                 throw new UriFormatException("Next page uri is invalid.");
 
+            var decodedUri = Uri.UnescapeDataString(nextPageUri.Query);
+
             //stupid logic :(
-            var url = $"{string.Join(string.Empty, nextPageUri.Segments.Skip(2))}{nextPageUri.Query}";
+            var url = $"{string.Join(string.Empty, nextPageUri.Segments.Skip(2))}{decodedUri}";
 
             var nextPageRequest = new PagedRequest(url, Client);
 

@@ -14,9 +14,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ApiEngine\NestedPagedResponse.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Facebook.ApiClient.Entities" Version="1.1.8-biotrust" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
-    <PackageReference Include="RestSharp" Version="106.2.1" />
-    <PackageReference Include="RestSharp.Newtonsoft.Json" Version="1.4.0" />
+    <PackageReference Include="RestSharp" Version="106.6.7" />
   </ItemGroup>
 
 </Project>

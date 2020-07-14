@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facebook.ApiClient", "Facebook.ApiClient\Facebook.ApiClient.csproj", "{47F42BE0-C950-4039-B06B-184C4606E20A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Facebook.ApiClient", "Facebook.ApiClient\Facebook.ApiClient.csproj", "{47F42BE0-C950-4039-B06B-184C4606E20A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facebook.ApiClient.Test", "Facebook.ApiClient.Test\Facebook.ApiClient.Test.csproj", "{29338516-F62E-4EEE-B45B-664FBAAE77F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{47F42BE0-C950-4039-B06B-184C4606E20A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47F42BE0-C950-4039-B06B-184C4606E20A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47F42BE0-C950-4039-B06B-184C4606E20A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29338516-F62E-4EEE-B45B-664FBAAE77F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29338516-F62E-4EEE-B45B-664FBAAE77F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29338516-F62E-4EEE-B45B-664FBAAE77F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29338516-F62E-4EEE-B45B-664FBAAE77F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
